@@ -16,7 +16,7 @@ import GoogleLogo from "../../assets/icons/google.svg";
 
 export default function LoginScreen(props) {
     return (
-        <KeyboardAvoidingView behavior="height"><ScrollView><View style={styles.screen}>
+        <KeyboardAvoidingView><ScrollView><View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="light-content" translucent={true} />
             <BiWavesWithLogo />
 
@@ -41,7 +41,7 @@ export default function LoginScreen(props) {
                             onPress={() => {}}
                             style={styles.forgotPasswordLink}
                         />
-                        
+
                         <MainButton
                             caption={Strings.logIn}
                             onPress={() => {}}
