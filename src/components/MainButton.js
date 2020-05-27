@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.reddishPurple,
         paddingVertical: Dimens.mainButtonPaddingVertical,
         paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
+        alignItems: "center",
         ...Dimens.mainButtonBoxShadow
     },
 
