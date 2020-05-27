@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from "react-native";
 
-export default function SemiBoldText(props) {
+export default function MediumText(props) {
     return (
         <Text {...props}
             style={{

@@ -6,5 +6,7 @@ export default {
     introDescription2: "Feeling generous? Browse through blood requests and start donating.\n\nNeed blood? Make a request and near users will be notified.",
     introDescription3: "BloodConnect aims to find blood donors fast in cases of emergency and ensure healthy supply of blood in blood banks.",
 
-    startConnecting: "Start connecting"
+    startConnecting: "Start connecting",
+
+    logIntoYourAccount: "Log into your account"
 };

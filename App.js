@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import IntroScreen from './src/screens/IntroScreen';
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
+import LoginScreen from './src/screens/LoginScreen';
 
 const fetchFonts = () => {
     return Font.loadAsync({
@@ -22,7 +23,7 @@ export default function App() {
     }
 
     return (
-        <IntroScreen />
+        <LoginScreen />
     );
 }
 
