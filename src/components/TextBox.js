@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, TextInput, View } from "react-native";
 
 import Colors from '../constants/colors';
+import Dimens from '../constants/dimens';
 
 export default function TextBox(props) {
     return (
@@ -18,11 +19,11 @@ export default function TextBox(props) {
 const styles = StyleSheet.create({
     textInput: {
         fontFamily: "inter-medium",
-        fontSize: 17,
+        fontSize: Dimens.textBoxTextSize,
         color: Colors.darkBlue,
         backgroundColor: Colors.lightGrey,
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderRadius: 10
+        paddingVertical: Dimens.textBoxPaddingVertical,
+        paddingHorizontal: Dimens.textBoxPaddingHorizontal,
+        borderRadius: Dimens.textBoxBorderRadius
     }
 });

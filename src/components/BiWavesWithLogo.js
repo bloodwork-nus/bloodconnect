@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Image, StatusBar, SafeAreaView } from "react-native";
+import { View, StyleSheet, Image, StatusBar, SafeAreaView, Dimensions } from "react-native";
 
+import Dimens from "../constants/dimens";
 import BiWaves from "../../assets/biwaves.svg";
 import WhiteLogo from "../../assets/logo-white.svg";
 
@@ -20,8 +21,8 @@ const styles = StyleSheet.create({
     header: {
         position: "absolute",
         width: "100%",
-        height: "39.5%",
-        minHeight: 300
+        height: Dimens.biWavesHeightPercentage,
+        minHeight: Dimens.biWavesMinimumHeight
     },
 
     biwaves: {
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     logo: {
         width: "50%",
         flex: 0.2,
-        marginTop: StatusBar.currentHeight ? StatusBar.currentHeight + 5 : 0,
-        marginLeft: 35
+        marginTop: StatusBar.currentHeight ? StatusBar.currentHeight + Dimens.headingNudgeHorizontal : 0,
+        marginLeft: Dimens.biWavesLogoMarginLeft
     }
 });

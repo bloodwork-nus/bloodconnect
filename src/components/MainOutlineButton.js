@@ -32,9 +32,9 @@ export default function MainOutlineButton(props) {
                     }
                 }}
             >
-                {props.imageLeft ? <View style={{...styles.image, marginRight: 10}}>{props.imageLeft}</View> : <View />}
+                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : <View />}
                 <SemiBoldText color={Colors.darkBlue} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
-                {props.imageRight ? <View style={{...styles.image, marginLeft: 10}}>{props.imageRight}</View> : <View />}
+                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : <View />}
             </View>
         </TouchableHighlight>
     );

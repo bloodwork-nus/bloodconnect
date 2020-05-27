@@ -32,9 +32,9 @@ export default function MainButton(props) {
                 }}
                 onLayout={event => setHeight(event.nativeEvent.layout.height)}
             >
-                {props.imageLeft ? <View style={{...styles.image, marginRight: 10}}>{props.imageLeft}</View> : <View />}
+                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : <View />}
                 <SemiBoldText color={Colors.white} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
-                {props.imageRight ? <View style={{...styles.image, marginLeft: 10}}>{props.imageRight}</View> : <View />}
+                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : <View />}
             </LinearGradient>
         </TouchableHighlight>
     );
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
 
     buttonPressed: {
-        top: 4
+        top: Dimens.mainButtonPressedNudgeDistance
     },
     
     image: {

@@ -30,8 +30,8 @@ export default function IntroScreen(props) {
                 keyExtractor={item => item.key.toString()}
                 renderItem={renderItem}
                 data={slides}
-                activeDotStyle={{backgroundColor: Colors.blue, marginHorizontal: 13}}
-                dotStyle={{backgroundColor: Colors.grey1, marginHorizontal: 13}}
+                activeDotStyle={{backgroundColor: Colors.blue, marginHorizontal: Dimens.slideDotMarginHorizontal}}
+                dotStyle={{backgroundColor: Colors.grey1, marginHorizontal: Dimens.slideDotMarginHorizontal}}
                 showDoneButton={false}
                 showNextButton={false}
             /></View>

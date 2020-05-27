@@ -22,33 +22,43 @@ export default function LoginScreen(props) {
 
             <View style={styles.contents}>
                 <View style={styles.topControls}>
-                    <SemiBoldText style={styles.heading} color={Colors.darkBlue} size={25}>{Strings.logIntoYourAccount}</SemiBoldText>
+                    <SemiBoldText style={styles.heading} color={Colors.darkBlue} size={Dimens.heading1}>{Strings.logIntoYourAccount}</SemiBoldText>
                     <TextBox
-                        placeholder="Email"
+                        placeholder={Strings.email}
                         autoCompleteType="email"
                         keyboardType="email-address"
                         autoCorrect={false}
                         autoCapitalize="none"
-                        style={{marginBottom: 15}}
+                        style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
                     />
                     <PasswordTextBox />
 
                     <View style={styles.loginControls}>
-                        <Link caption="Forgot password?" size={15} onPress={() => {}} style={styles.forgotPasswordLink}/>
-                        <MainButton caption="Log in" onPress={() => {}} imageRight={<Icon name="arrow-forward" color={Colors.white} size={30} />}/>
+                        <Link 
+                            caption={Strings.forgotPassword}
+                            size={Dimens.linkTextSize}
+                            onPress={() => {}}
+                            style={styles.forgotPasswordLink}
+                        />
+                        
+                        <MainButton
+                            caption={Strings.logIn}
+                            onPress={() => {}}
+                            imageRight={<Icon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} />}
+                        />
                     </View>
                 </View>
 
                 <View style={styles.bottomControls}>
                     <MainOutlineButton
-                        caption="Sign in with Google"
+                        caption={Strings.signInWithGoogle}
                         onPress={() => {}}
-                        buttonStyle={{marginBottom: 15}}
+                        buttonStyle={{marginBottom: Dimens.bodyMarginVertical}}
                         imageLeft={<GoogleLogo width={"100%"} height={"100%"} />}
                     />
                     
-                    <MainOutlineButton caption="Create a new account" onPress={() => {}} />
+                    <MainOutlineButton caption={Strings.createANewAccount} onPress={() => {}} />
                 </View>
             </View>
         </View></ScrollView></KeyboardAvoidingView>
@@ -58,34 +68,34 @@ export default function LoginScreen(props) {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        height: Dimensions.get("screen").height
+        height: Dimensions.get("window").height
     },
 
     contents: {
         flex: 1,
-        paddingHorizontal: 30,
+        paddingHorizontal: Dimens.screenPaddingHorizontal,
         flexDirection: "column",
     },
 
     heading: {
-        marginHorizontal: 5,
-        marginBottom: 15
+        marginHorizontal: Dimens.headingNudgeHorizontal,
+        marginBottom: Dimens.bodyMarginVertical
     },
 
     topControls: {
-        paddingTop: "70%",
+        paddingTop: Dimens.biWavesMarginCompensation,
         flex: 1
     },
 
     loginControls: {
-        marginTop: 15,
+        marginTop: Dimens.bodyMarginVertical,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center"
     },
 
     forgotPasswordLink: {
-        marginHorizontal: 5,
+        marginHorizontal: Dimens.headingNudgeHorizontal,
     },
 
     bottomControls: {
@@ -93,6 +103,6 @@ const styles = StyleSheet.create({
         width: "100%",
         flexDirection: "column",
         justifyContent: "flex-end",
-        paddingBottom: 30
+        paddingBottom: Dimens.screenBottomPadding
     }
 });
