@@ -29,7 +29,7 @@ export default function LoginScreen(props) {
                         keyboardType="email-address"
                         autoCorrect={false}
                         autoCapitalize="none"
-                        fieldStyle={{marginBottom: 15}}
+                        style={{marginBottom: 15}}
                         returnKeyType="next"
                     />
                     <TextBoxWithButton

@@ -5,29 +5,24 @@ import Colors from '../constants/colors';
 
 export default function TextBox(props) {
     return (
-        <View style={{...styles.textbox, ...props.fieldStyle}}>
-            <TextInput
-                style={styles.textInput}
-                placeholderTextColor={Colors.grey2}
-                multiline={false}
-                selectionColor={Colors.grey1}
-                {...props}
-            />
-        </View>
+        <TextInput
+            placeholderTextColor={Colors.grey2}
+            multiline={false}
+            selectionColor={Colors.grey1}
+            {...props}
+            style={{...styles.textInput, ...props.style}}
+        />
     );
 }
 
 const styles = StyleSheet.create({
-    textbox: {
+    textInput: {
+        fontFamily: "inter-medium",
+        fontSize: 17,
+        color: Colors.darkBlue,
         backgroundColor: Colors.lightGrey,
         paddingVertical: 12,
         paddingHorizontal: 20,
         borderRadius: 10
-    },
-
-    textInput: {
-        fontFamily: "inter-medium",
-        fontSize: 17,
-        color: Colors.darkBlue
     }
 });
