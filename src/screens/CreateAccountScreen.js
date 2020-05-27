@@ -11,7 +11,6 @@ import TextBox from '../components/TextBox';
 import PasswordTextBox from '../components/PasswordTextBox';
 import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
-import GoogleLogo from "../../assets/icons/google.svg";
 
 export default function CreateAccountScreen(props) {
     return (
@@ -25,7 +24,6 @@ export default function CreateAccountScreen(props) {
                     <TextBox
                         placeholder={Strings.fullName}
                         autoCompleteType="name"
-                        keyboardType="default"
                         autoCapitalize="words"
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
@@ -51,7 +49,10 @@ export default function CreateAccountScreen(props) {
                 </View>
 
                 <View style={styles.bottomControls}>                    
-                    <MainOutlineButton caption={Strings.logIntoYourAccount} onPress={() => {}} imageLeft={<Icon name="arrow-back" color={Colors.darkBlue} size={Dimens.glyphSize} />} />
+                    <MainOutlineButton
+                        caption={Strings.logIntoYourAccount} onPress={() => {}}
+                        imageLeft={<Icon name="arrow-back" color={Colors.darkBlue} size={Dimens.glyphSize} />}
+                    />
                 </View>
             </View>
         </View></ScrollView></KeyboardAvoidingView>
