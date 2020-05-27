@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 
 import SemiBoldText from './SemiBoldText';
@@ -7,8 +7,6 @@ import Dimens from '../constants/dimens';
 
 export default function MainOutlineButton(props) {
     const [pressed, setPressed] = useState(false);
-    const [isObjectCreated, setIsObjectCreated] = useState(false);
-    const height = useRef(0);
 
     return (
         <TouchableHighlight
@@ -22,14 +20,7 @@ export default function MainOutlineButton(props) {
             <View
                 style={{
                     ...styles.button,
-                    ...pressed ? styles.buttonPressed : styles.buttonNotPressed,
-                    borderRadius: height.current === 0 ? Dimens.mainButtonBorderRadius : (height.current / 2)
-                }}
-                onLayout={event => {
-                    if (!isObjectCreated) {
-                        setIsObjectCreated(true);
-                        height.current = event.nativeEvent.layout.height;
-                    }
+                    ...(pressed ? styles.buttonPressed : styles.buttonNotPressed)
                 }}
             >
                 {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : <View />}
@@ -48,6 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderColor: Colors.darkBlue,
         borderWidth: Dimens.mainOutlinedButtonBorderWidth,
+        borderRadius: Dimens.mainButtonHeight / 2,
         height: Dimens.mainButtonHeight,
         paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
         paddingVertical: Dimens.mainButtonPaddingVertical
