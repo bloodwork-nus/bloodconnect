@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, StyleSheet, Image, StatusBar } from "react-native";
+import { View, StyleSheet, Image, StatusBar, SafeAreaView } from "react-native";
 
 import BiWaves from "../../assets/biwaves.svg";
 import WhiteLogo from "../../assets/logo-white.svg";
 
 export default function LoginScreen(props) {
     return (
-        <View {...props} style={{...styles.header, ...props.style}}>
+        <SafeAreaView {...props} style={{...styles.header, ...props.style}}>
             <Image source={require("../../assets/biwaves.png")} style={styles.biwaves} />
             
             <View style={styles.logo}><WhiteLogo width={"100%"} height={"100%"} /></View>
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     logo: {
         width: "50%",
         flex: 0.2,
-        marginTop: StatusBar.currentHeight + 5,
+        marginTop: StatusBar.currentHeight ? StatusBar.currentHeight + 5 : 0,
         marginLeft: 35
     }
 });
