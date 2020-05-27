@@ -51,7 +51,7 @@ export default function CreateAccountScreen(props) {
                 </View>
 
                 <View style={styles.bottomControls}>                    
-                    <MainOutlineButton caption={Strings.logIntoYourAccount} onPress={() => {}} />
+                    <MainOutlineButton caption={Strings.logIntoYourAccount} onPress={() => {}} imageLeft={<Icon name="arrow-back" color={Colors.darkBlue} size={Dimens.glyphSize} />} />
                 </View>
             </View>
         </View></ScrollView></KeyboardAvoidingView>
