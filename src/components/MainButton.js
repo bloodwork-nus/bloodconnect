@@ -29,9 +29,9 @@ export default function MainButton(props) {
                     ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow)
                 }}
             >
-                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : <View />}
+                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : null}
                 <SemiBoldText color={Colors.white} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
-                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : <View />}
+                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : null}
             </LinearGradient>
         </TouchableHighlight>
     );

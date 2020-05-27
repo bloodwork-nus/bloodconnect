@@ -23,9 +23,9 @@ export default function MainOutlineButton(props) {
                     ...(pressed ? styles.buttonPressed : styles.buttonNotPressed)
                 }}
             >
-                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : <View />}
+                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : null}
                 <SemiBoldText color={Colors.darkBlue} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
-                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : <View />}
+                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : null}
             </View>
         </TouchableHighlight>
     );
