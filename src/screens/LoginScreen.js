@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, StatusBar, Dimensions } from "react-native";
+import { View, StyleSheet, StatusBar, Dimensions, KeyboardAvoidingView, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import Strings from "../constants/strings";
@@ -16,7 +16,7 @@ import GoogleLogo from "../../assets/icons/google.svg";
 
 export default function LoginScreen(props) {
     return (
-        <View style={styles.screen}>
+        <KeyboardAvoidingView behavior="height"><ScrollView><View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="light-content" translucent={true} />
             <BiWavesWithLogo />
 
@@ -56,13 +56,14 @@ export default function LoginScreen(props) {
                     <MainOutlineButton caption="Create a new account" onPress={() => {}} />
                 </View>
             </View>
-        </View>
+        </View></ScrollView></KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1
+        flex: 1,
+        height: Dimensions.get("screen").height
     },
 
     contents: {
