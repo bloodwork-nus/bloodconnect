@@ -8,7 +8,6 @@ import Dimens from '../constants/dimens';
 export default function MainOutlineButton(props) {
     const [pressed, setPressed] = useState(false);
     const [isObjectCreated, setIsObjectCreated] = useState(false);
-    const width = useRef(0);
     const height = useRef(0);
 
     return (
@@ -24,13 +23,11 @@ export default function MainOutlineButton(props) {
                 style={{
                     ...styles.button,
                     ...pressed ? styles.buttonPressed : styles.buttonNotPressed,
-                    width: width.current - (Dimens.mainOutlinedButtonBorderWidth * 2),
                     borderRadius: height.current === 0 ? Dimens.mainButtonBorderRadius : (height.current / 2)
                 }}
                 onLayout={event => {
                     if (!isObjectCreated) {
                         setIsObjectCreated(true);
-                        width.current = event.nativeEvent.layout.width;
                         height.current = event.nativeEvent.layout.height;
                     }
                 }}
