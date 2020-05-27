@@ -51,12 +51,11 @@ const styles = StyleSheet.create({
 
     textInput: {
         flex: 1,
-        fontFamily: "monospaced",
+        fontFamily: "inter-medium",
         fontSize: Dimens.textBoxTextSize,
         color: Colors.darkBlue,
         paddingVertical: Dimens.textBoxPaddingVertical,
         paddingLeft: Dimens.textBoxPaddingHorizontal,
         paddingRight: Dimens.textBoxButtonImageMargin
-        
     }
 });
