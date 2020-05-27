@@ -8,6 +8,7 @@ import Dimens from '../constants/dimens';
 
 export default function MainButton(props) {
     const [pressed, setPressed] = useState(false);
+    const [height, setHeight] = useState(0);
 
     return (
         <TouchableHighlight
@@ -26,8 +27,10 @@ export default function MainButton(props) {
                 colors={[Colors.pink, Colors.reddishPurple]}
                 style={{
                     ...styles.button,
-                    ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow)
+                    ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow),
+                    borderRadius: height === 0 ? Dimens.mainButtonBorderRadius : (height / 2)
                 }}
+                onLayout={event => setHeight(event.nativeEvent.layout.height)}
             >
                 <SemiBoldText color={Colors.white} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
             </LinearGradient>
@@ -40,7 +43,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.reddishPurple,
         paddingVertical: Dimens.mainButtonPaddingVertical,
         paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
-        borderRadius: Dimens.mainButtonBorderRadius,
         ...Dimens.mainButtonBoxShadow
     },
 
