@@ -10,7 +10,8 @@ const fetchFonts = () => {
         "inter": require("./assets/fonts/Inter-Regular.otf"),
         "inter-bold": require("./assets/fonts/Inter-Bold.otf"),
         "inter-semibold": require("./assets/fonts/Inter-SemiBold.otf"),
-        "inter-medium": require("./assets/fonts/Inter-Medium.otf")
+        "inter-medium": require("./assets/fonts/Inter-Medium.otf"),
+        "monospaced": require("./assets/fonts/FiraCode-Regular.ttf")
     });
 };
 

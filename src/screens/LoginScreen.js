@@ -8,7 +8,7 @@ import Dimens from "../constants/dimens";
 import BiWavesWithLogo from "../components/BiWavesWithLogo";
 import SemiBoldText from '../components/SemiBoldText';
 import TextBox from '../components/TextBox';
-import TextBoxWithButton from '../components/TextBoxWithButton';
+import PasswordTextBox from '../components/PasswordTextBox';
 import Link from '../components/Link';
 import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
@@ -32,12 +32,7 @@ export default function LoginScreen(props) {
                         style={{marginBottom: 15}}
                         returnKeyType="next"
                     />
-                    <TextBoxWithButton
-                        placeholder="Password"
-                        autoCompleteType="password"
-                        secureTextEntry={true}
-                        autoCorrect={false}
-                    />
+                    <PasswordTextBox />
 
                     <View style={styles.loginControls}>
                         <Link caption="Forgot password?" size={15} onPress={() => {}} style={styles.forgotPasswordLink}/>
