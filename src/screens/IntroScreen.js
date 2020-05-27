@@ -11,6 +11,7 @@ import GirlDonatingImage from "../../assets/images/bc-girl-donating.svg";
 import SemiBoldText from "../components/SemiBoldText";
 import MediumText from "../components/MediumText";
 import MainButton from '../components/MainButton';
+import MainOutlineButton from '../components/MainOutlineButton';
 
 export default function IntroScreen(props) {
     const renderItem = ({ item }) => {
@@ -35,6 +36,7 @@ export default function IntroScreen(props) {
                 showNextButton={false}
             /></View>
         
+            <MainOutlineButton caption={Strings.startConnecting} onPress={() => {}} />
             <MainButton caption={Strings.startConnecting} onPress={() => {}} />
         </View>
     );

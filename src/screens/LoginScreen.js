@@ -52,6 +52,7 @@ export default function LoginScreen(props) {
                         buttonStyle={{marginBottom: 15}}
                         imageLeft={<GoogleLogo width={"100%"} height={"100%"} />}
                     />
+                    
                     <MainOutlineButton caption="Create a new account" onPress={() => {}} />
                 </View>
             </View>

@@ -8,6 +8,7 @@ import Dimens from '../constants/dimens';
 export default function MainOutlineButton(props) {
     const [pressed, setPressed] = useState(false);
     const [isObjectCreated, setIsObjectCreated] = useState(false);
+    const width = useRef(0);
     const height = useRef(0);
 
     return (
@@ -23,12 +24,13 @@ export default function MainOutlineButton(props) {
                 style={{
                     ...styles.button,
                     ...pressed ? styles.buttonPressed : styles.buttonNotPressed,
-                    height: height.current - (Dimens.mainOutlinedButtonBorderWidth * 2),
-                    borderRadius: height.current === 0 ? Dimens.mainButtonBorderRadius : ((height.current - (Dimens.mainOutlinedButtonBorderWidth * 2)) / 2)
+                    width: width.current - (Dimens.mainOutlinedButtonBorderWidth * 2),
+                    borderRadius: height.current === 0 ? Dimens.mainButtonBorderRadius : (height.current / 2)
                 }}
                 onLayout={event => {
                     if (!isObjectCreated) {
                         setIsObjectCreated(true);
+                        width.current = event.nativeEvent.layout.width;
                         height.current = event.nativeEvent.layout.height;
                     }
                 }}
@@ -45,12 +47,13 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: "row",
         backgroundColor: "rgba(0,0,0,0)",
-        paddingVertical: Dimens.mainButtonPaddingVertical,
-        paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
         alignItems: "center",
         justifyContent: "center",
         borderColor: Colors.darkBlue,
-        borderWidth: Dimens.mainOutlinedButtonBorderWidth
+        borderWidth: Dimens.mainOutlinedButtonBorderWidth,
+        height: Dimens.mainButtonHeight,
+        paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
+        paddingVertical: Dimens.mainButtonPaddingVertical
     },
 
     buttonNotPressed: {

@@ -9,6 +9,7 @@ export default {
     imageMarginBottom: 20,
     screenPaddingVertical: 40,
 
+    mainButtonHeight: 45,
     mainButtonTextSize: 16,
     mainButtonImageSize: 25,
     mainButtonPaddingVertical: 10,
