@@ -20,7 +20,6 @@ export default {
     mainButtonImageSize: 25,
     mainButtonPaddingVertical: 10,
     mainButtonPaddingHorizontal: 25,
-    mainButtonBorderRadius: 20,
     mainButtonBoxShadow: {
         shadowColor: "#000",
         shadowOffset: {

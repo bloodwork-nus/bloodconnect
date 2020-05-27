@@ -8,11 +8,13 @@ export default {
 
     startConnecting: "Start connecting",
 
-    logIntoYourAccount: "Log into your account", 
+    logIntoYourAccount: "Log into your account",
+    fullName: "Full Name",
     email: "Email",
     password: "Password",
     forgotPassword: "Forgot password?",
     logIn: "Log in",
     signInWithGoogle: "Sign in with Google",
-    createANewAccount: "Create a new account"
+    createANewAccount: "Create a new account",
+    joinUs: "Join us"
 };
