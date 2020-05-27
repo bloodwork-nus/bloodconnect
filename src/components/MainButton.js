@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TouchableHighlight } from "react-native";
+import { StyleSheet, TouchableHighlight, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 import SemiBoldText from './SemiBoldText';
@@ -32,7 +32,9 @@ export default function MainButton(props) {
                 }}
                 onLayout={event => setHeight(event.nativeEvent.layout.height)}
             >
+                {props.imageLeft ? <View style={{...styles.image, marginRight: 10}}>{props.imageLeft}</View> : <View />}
                 <SemiBoldText color={Colors.white} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
+                {props.imageRight ? <View style={{...styles.image, marginLeft: 10}}>{props.imageRight}</View> : <View />}
             </LinearGradient>
         </TouchableHighlight>
     );
@@ -40,6 +42,7 @@ export default function MainButton(props) {
 
 const styles = StyleSheet.create({
     button: {
+        flexDirection: "row",
         backgroundColor: Colors.reddishPurple,
         paddingVertical: Dimens.mainButtonPaddingVertical,
         paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
@@ -54,5 +57,12 @@ const styles = StyleSheet.create({
 
     buttonPressed: {
         top: 4
+    },
+    
+    image: {
+        width: Dimens.mainButtonImageSize,
+        height: Dimens.mainButtonImageSize,
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
