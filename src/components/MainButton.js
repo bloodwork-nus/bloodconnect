@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         paddingVertical: Dimens.mainButtonPaddingVertical,
         paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
         alignItems: "center",
+        justifyContent: "center",
         ...Dimens.mainButtonBoxShadow
     },
 
