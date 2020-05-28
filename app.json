@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "bloodconnect",
+    "name": "BloodConnect",
     "slug": "bloodconnect",
     "platforms": [
       "ios",
@@ -22,7 +22,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "sg.bloodwork.bloodconnect",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "sg.bloodwork.bloodconnect",
+      "versionCode": 1
     },
     "packagerOpts": {
       "config": "metro.config.js",
