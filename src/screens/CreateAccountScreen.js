@@ -14,7 +14,7 @@ import MainOutlineButton from '../components/MainOutlineButton';
 
 export default function CreateAccountScreen(props) {
     return (
-        <KeyboardAvoidingView><ScrollView><View style={styles.screen}>
+        <KeyboardAvoidingView><ScrollView bounces={false}><View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="light-content" translucent={true} />
             <BiWavesWithLogo />
 
