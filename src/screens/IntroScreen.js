@@ -36,7 +36,6 @@ export default function IntroScreen(props) {
                 showNextButton={false}
             /></View>
         
-            <MainOutlineButton caption={Strings.startConnecting} onPress={() => {}} />
             <MainButton caption={Strings.startConnecting} onPress={() => {}} />
         </View>
     );
