@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
         height: Dimens.bottomBarHeight,
         justifyContent: "center",
         position: "absolute",
-        bottom: 0
+        bottom: 0,
+        zIndex: 999
     },
 
     backgroundGreyContainer: {
