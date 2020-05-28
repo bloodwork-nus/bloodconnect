@@ -16,5 +16,8 @@ export default {
     logIn: "Log in",
     signInWithGoogle: "Sign in with Google",
     createANewAccount: "Create a new account",
-    joinUs: "Join us"
+    joinUs: "Join us",
+
+    explore: "Explore",
+    requests: "Requests"
 };

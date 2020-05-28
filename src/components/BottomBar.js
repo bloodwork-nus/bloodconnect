@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
 import RoundButton from './RoundButton';
+import Strings from '../constants/strings';
+import BottomBarButton from './BottomBarButton';
 
 export default function BottomBar(props) {
     return (
@@ -19,11 +21,21 @@ export default function BottomBar(props) {
 
             <View style={styles.contentsContainer}>
                 <View style={{...styles.contents, justifyContent: "flex-start"}}>
-                    <Text>Suka suka</Text>
+                    <BottomBarButton
+                        image={<Icon name="location-on" color={Colors.darkBlue} size={Dimens.glyphSize} style={{marginLeft: -5}}/>}
+                        caption={Strings.explore}
+                        isOnPage={true}
+                        onPress={() => {}}
+                    />
                 </View>
 
                 <View style={{...styles.contents, justifyContent: "flex-end"}}>
-                    <Text>Suka suka</Text>
+                    <BottomBarButton
+                        image={<Icon name="format-list-bulleted" color={Colors.darkBlue} size={Dimens.glyphSize} />}
+                        caption={Strings.requests}
+                        isOnPage={false}
+                        onPress={() => {}}
+                    />
                 </View>
             </View>
 
