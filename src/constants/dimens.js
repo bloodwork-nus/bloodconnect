@@ -58,5 +58,13 @@ export default {
     biWavesMarginCompensation: "70%",
     biWavesLogoMarginLeft: 35,
     biWavesMinimumHeight: 300,
-    biWavesHeightPercentage: "39.5%"
+    biWavesHeightPercentage: "39.5%",
+
+    roundButtonSize: 60,
+    roundButtonImageSize: 35,
+
+    bottomBarHeight: 65,
+    bottomBarPaddingHorizontal: 20,
+    bottomBarPaddingVertical: 10,
+    bottomBarPrimaryButtonMarginBottom: 36
 };
