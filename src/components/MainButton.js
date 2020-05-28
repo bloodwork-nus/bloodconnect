@@ -11,9 +11,10 @@ export default function MainButton(props) {
 
     return (
         <TouchableHighlight
-            style={
-                pressed ? styles.buttonPressed : styles.buttonNotPressed
-            }
+            style={{
+                ...(pressed ? styles.buttonPressed : styles.buttonNotPressed),
+                ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow)
+            }}
             activeOpacity={1}
             underlayColor={"rgba(0,0,0,0)"}
             onShowUnderlay={() => setPressed(true)}
@@ -40,14 +41,12 @@ export default function MainButton(props) {
 const styles = StyleSheet.create({
     button: {
         flexDirection: "row",
-        backgroundColor: Colors.reddishPurple,
         paddingVertical: Dimens.mainButtonPaddingVertical,
         paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
         alignItems: "center",
         justifyContent: "center",
         height: Dimens.mainButtonHeight,
-        borderRadius: Dimens.mainButtonHeight / 2,
-        ...Dimens.mainButtonBoxShadow
+        borderRadius: Dimens.mainButtonHeight / 2
     },
 
     buttonNotPressed: {
