@@ -71,6 +71,9 @@ export default function ExploreScreen(props) {
             case "institution":
                 venueTypeIcon = <CommunityIcon name="office-building" color={Colors.grey4} size={Dimens.glyphSize} />
                 break;
+            case "event":
+                venueTypeIcon = <Icon name="event" color={Colors.yellow} size={Dimens.glyphSize} />
+                break;
         };
 
         let distance;
