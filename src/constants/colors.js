@@ -5,8 +5,11 @@ export default {
     grey1: "#B7B7B7",
     grey2: "#727272",
     grey3: "#E0E0E0",
+    grey4: "#949494",
     lightGrey: "#EEEEEE",
     lightGrey2: "#EFEFEF",
+    lightGrey3: "#9D9D9D",
     reddishPurple: "#C70063",
-    pink: "#FF4E60"
+    pink: "#FF4E60",
+    red: "#F31E1E"
 };
