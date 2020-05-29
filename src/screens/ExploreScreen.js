@@ -114,7 +114,7 @@ export default function ExploreScreen(props) {
                     renderItem={renderListItem}
                     data={sampleRequests}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
-                    bounces={false}
+                    bounces={true}
                     ListEmptyComponent={<MediumText style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</MediumText>}
                     ListFooterComponent={<View />}
                     ListFooterComponentStyle={{height: Dimens.bottomBarHeight + 50}}
