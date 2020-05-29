@@ -18,41 +18,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import MediumText from '../components/MediumText';
 import RegularText from '../components/RegularText';
 
-const sampleRequests = [
-    {
-        key: 1,
-        venue: "Alexandria Hospital",
-        address: "25 Upper Hill Rd, City Hall, Singapore 100101",
-        venueType: "hospital",
-        bloodType: "B+",
-        isEmergency: true,
-        time: "9:41",
-        description: "Requires blood transfusion fast. Can fetch if willing to donate.",
-        distance: "5m" // to be removed
-    },
-    {
-        key: 2,
-        venue: "Kambing Blood Bank Eunos",
-        address: "5 Westlands Ave, Eunos Industrial Park, Singapore 144194",
-        venueType: "bloodbank",
-        bloodType: "A",
-        isEmergency: false,
-        time: "19:55",
-        description: "Blood bank is in need of type A blood. Supplies are running low.",
-        distance: "10km" // to be removed
-    },
-    {
-        key: 3,
-        venue: "National Centre for Infectious Diseases",
-        address: "12 Imagination Rd, Infectionopolis Central, Singapore 231121",
-        venueType: "institution",
-        bloodType: "O",
-        isEmergency: false,
-        time: "14:24",
-        description: "Requiring O blood type from recovered COVID-19 patients.",
-        distance: "205km" // to be removed
-    },
-];
+import sampleRequests from "../constants/sampleRequests";
 
 const sampleUserName = "Phillmont";
 
