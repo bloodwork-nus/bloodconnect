@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Dimensions } from "react-native";
 import ShadowView from "react-native-shadow-view";
 import MapView from "react-native-maps";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 import BottomBar from '../components/BottomBar';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -9,18 +10,26 @@ import Dimens from '../constants/dimens';
 import TextBox from "../components/TextBox";
 import Strings from '../constants/strings';
 import Colors from "../constants/colors";
-import RoundButton from "../components/RoundButton";
+import RoundWhiteButton from "../components/RoundWhiteButton";
 
 export default function ExploreScreen(props) {
     const renderHeader = () => {
         return (
-            <ShadowView style={styles.shadow}><View style={styles.bottomSheetHeader}>
-                <View style={styles.bottomSheetHandle} />
-                <TextBox
-                    placeholder={Strings.searchAnythingHere}
-                    style={{width: "100%"}}
+            <View style={{alignItems: "flex-end"}}>
+                <RoundWhiteButton
+                    style={styles.myLocationButton}
+                    image={<Icon name="my-location" color={Colors.darkBlue} size={Dimens.glyphSize} />}
+                    onPress={() => {}}
                 />
-            </View></ShadowView>
+
+                <ShadowView style={styles.shadow}><View style={styles.bottomSheetHeader}>
+                    <View style={styles.bottomSheetHandle} />
+                    <TextBox
+                        placeholder={Strings.searchAnythingHere}
+                        style={{width: "100%"}}
+                    />
+                </View></ShadowView>
+            </View>
         );
     };
 
@@ -34,13 +43,21 @@ export default function ExploreScreen(props) {
 
     return (
         <View style={styles.screen}>
-            
+            <MapView
+                style={styles.map}
+                initialRegion={{
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+                }}
+            />
 
             <BottomSheet
                 snapPoints={[
-                    "100%", 
-                    Dimens.bottomBarHeight + 200, 
-                    Dimens.bottomBarHeight + Dimens.bottomSheetHeaderHeight
+                    Dimensions.get("window").height + Dimens.roundButtonSize + Dimens.bottomSheetPaddingHorizontal, 
+                    Dimens.bottomBarHeight + 200 + Dimens.roundButtonSize + Dimens.bottomSheetPaddingHorizontal, 
+                    Dimens.bottomBarHeight + Dimens.bottomSheetHeaderHeight + Dimens.roundButtonSize + Dimens.bottomSheetPaddingHorizontal
                 ]}
                 initialSnap={1}
                 renderHeader={renderHeader}
@@ -88,5 +105,10 @@ const styles = StyleSheet.create({
 
     map: {
         height: "100%"
+    },
+
+    myLocationButton: {
+        marginBottom: Dimens.bottomSheetPaddingHorizontal,
+        marginRight: Dimens.bottomSheetPaddingHorizontal
     }
 });
