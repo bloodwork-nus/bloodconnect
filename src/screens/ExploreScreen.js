@@ -73,6 +73,14 @@ export default function ExploreScreen(props) {
                 break;
         };
 
+        let distance;
+
+        if (item.distance > 1000) {
+            distance = (item.distance / 1000) + "km";
+        } else {
+            distance = item.distance + "m";
+        }
+
         return (
             <TouchableOpacity onPress={() => alert(item.address)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
@@ -81,7 +89,7 @@ export default function ExploreScreen(props) {
 
                 <View style={styles.requestItemDetails}>
                     <MediumText color={Colors.darkBlue} size={16} numberOfLines={1} >{item.venue}</MediumText>
-                    <RegularText color={Colors.lightGrey3} size={14}>{item.distance}</RegularText>
+                    <RegularText color={Colors.lightGrey3} size={14}>{distance}</RegularText>
                 </View>
 
                 <View style={styles.requestItemIcons}>
