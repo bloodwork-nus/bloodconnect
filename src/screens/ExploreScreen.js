@@ -105,6 +105,8 @@ export default function ExploreScreen(props) {
     };
 
     const renderContent = () => {
+        sampleRequests.sort((a, b) => a.distance - b.distance);
+
         return (
             <View style={styles.bottomSheetContent}>
                 <FlatList
