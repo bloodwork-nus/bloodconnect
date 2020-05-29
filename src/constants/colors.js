@@ -11,5 +11,6 @@ export default {
     lightGrey3: "#9D9D9D",
     reddishPurple: "#C70063",
     pink: "#FF4E60",
-    red: "#F31E1E"
+    red: "#F31E1E",
+    yellow: "#FEC200"
 };
