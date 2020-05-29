@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
 
-export default function MainButton(props) {
+export default function RoundButton(props) {
     const [pressed, setPressed] = useState(false);
 
     return (
