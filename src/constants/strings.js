@@ -19,5 +19,6 @@ export default {
     joinUs: "Join us",
 
     explore: "Explore",
-    requests: "Requests"
+    requests: "Requests",
+    searchAnythingHere: "Search anything here"
 };

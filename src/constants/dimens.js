@@ -66,5 +66,18 @@ export default {
     bottomBarHeight: 65,
     bottomBarPaddingHorizontal: 20,
     bottomBarPaddingVertical: 10,
-    bottomBarPrimaryButtonMarginBottom: 36
+    bottomBarPrimaryButtonMarginBottom: 36,
+
+    bottomSheetBorderRadius: 40,
+    bottomSheetPaddingHorizontal: 25,
+    bottomSheetHeaderHeight: 100,
+    bottomSheetHeaderShadowStyle: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: -7,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 3.84
+    }
 };
