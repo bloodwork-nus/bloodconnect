@@ -115,6 +115,7 @@ export default function ExploreScreen(props) {
                     data={sampleRequests}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
                     bounces={false}
+                    ListEmptyComponent={<MediumText style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</MediumText>}
                 />
             </View>
         );

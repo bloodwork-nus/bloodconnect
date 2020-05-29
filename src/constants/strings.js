@@ -20,5 +20,6 @@ export default {
 
     explore: "Explore",
     requests: "Requests",
-    searchAnythingHere: "Search anything here"
+    searchAnythingHere: "Search anything here",
+    noRequests: "There are currently no requests."
 };
