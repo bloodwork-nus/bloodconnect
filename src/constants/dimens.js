@@ -26,7 +26,7 @@ export default {
             width: 0,
             height: 4,
         },
-        shadowOpacity: 0.32,
+        shadowOpacity: 0.2,
         shadowRadius: 5.46,
         elevation: 9
     },
