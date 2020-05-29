@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar } from "react-native";
 import ShadowView from "react-native-shadow-view";
 import MapView from "react-native-maps";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -11,6 +11,7 @@ import TextBox from "../components/TextBox";
 import Strings from '../constants/strings';
 import Colors from "../constants/colors";
 import RoundWhiteButton from "../components/RoundWhiteButton";
+import MainWhiteButton from "../components/MainWhiteButton";
 
 export default function ExploreScreen(props) {
     const renderHeader = () => {
@@ -52,6 +53,18 @@ export default function ExploreScreen(props) {
                 longitudeDelta: 0.0421,
                 }}
             />
+
+            <SafeAreaView><View style={styles.mapOverlayContents}>
+                <View style={styles.userButtonContainer}>
+                    <MainWhiteButton
+                        caption="Phillmont"
+                        style={styles.userButton}
+                        buttonStyle={styles.userButton}
+                        imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}
+                        onPress={() => {}}
+                    />
+                </View>
+            </View></SafeAreaView>
 
             <BottomSheet
                 snapPoints={[
@@ -104,11 +117,30 @@ const styles = StyleSheet.create({
     },
 
     map: {
-        height: "100%"
+        width: "100%",
+        height: "100%",
+        position: "absolute"
     },
 
     myLocationButton: {
         marginBottom: Dimens.bottomSheetPaddingHorizontal,
         marginRight: Dimens.bottomSheetPaddingHorizontal
+    },
+
+    userButton: {
+        width: 140,
+        height: 40
+    },
+
+    userButtonContainer: {
+        flexDirection: "row",
+        justifyContent: "flex-end",
+        marginTop: 10
+    },
+
+    mapOverlayContents: {
+        flex: 1,
+        paddingTop: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
+        paddingHorizontal: Dimens.bottomSheetPaddingHorizontal
     }
 });
