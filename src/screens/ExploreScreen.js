@@ -87,6 +87,6 @@ const styles = StyleSheet.create({
     },
 
     map: {
-        height: Dimensions.get("window").height - Dimens.bottomBarHeight - Dimens.bottomSheetHeaderHeight + Dimens.bottomSheetBorderRadius
+        height: "100%"
     }
 });
