@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar } from "react-native";
+import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, Text } from "react-native";
 import ShadowView from "react-native-shadow-view";
 import MapView from "react-native-maps";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -16,28 +16,20 @@ import MainWhiteButton from "../components/MainWhiteButton";
 export default function ExploreScreen(props) {
     const renderHeader = () => {
         return (
-            <View style={{alignItems: "flex-end"}}>
-                <RoundWhiteButton
-                    style={styles.myLocationButton}
-                    image={<Icon name="my-location" color={Colors.darkBlue} size={Dimens.glyphSize} />}
-                    onPress={() => {}}
+            <View style={styles.bottomSheetHeader}>
+                <View style={styles.bottomSheetHandle} />
+                <TextBox
+                    placeholder={Strings.searchAnythingHere}
+                    style={{width: "100%"}}
                 />
-
-                <ShadowView style={styles.shadow}><View style={styles.bottomSheetHeader}>
-                    <View style={styles.bottomSheetHandle} />
-                    <TextBox
-                        placeholder={Strings.searchAnythingHere}
-                        style={{width: "100%"}}
-                    />
-                </View></ShadowView>
             </View>
         );
     };
 
     const renderContent = () => {
         return (
-            <View style={{backgroundColor: Colors.white, height: "100%"}}>
-
+            <View style={styles.bottomSheetContent}>
+                
             </View>
         );
     };
@@ -54,8 +46,14 @@ export default function ExploreScreen(props) {
                 }}
             />
 
-            <SafeAreaView><View style={styles.mapOverlayContents}>
+            <View style={styles.mapOverlayContents}><SafeAreaView>
                 <View style={styles.userButtonContainer}>
+                    <RoundWhiteButton
+                        style={styles.myLocationButton}
+                        image={<Icon name="my-location" color={Colors.darkBlue} size={Dimens.glyphSize} />}
+                        onPress={() => alert("hello")}
+                    />
+
                     <MainWhiteButton
                         caption="Phillmont"
                         style={styles.userButton}
@@ -64,19 +62,20 @@ export default function ExploreScreen(props) {
                         onPress={() => {}}
                     />
                 </View>
-            </View></SafeAreaView>
+            </SafeAreaView></View>
 
             <BottomSheet
                 snapPoints={[
-                    Dimensions.get("window").height + Dimens.roundButtonSize + Dimens.bottomSheetPaddingHorizontal, 
-                    Dimens.bottomBarHeight + 200 + Dimens.roundButtonSize + Dimens.bottomSheetPaddingHorizontal, 
-                    Dimens.bottomBarHeight + Dimens.bottomSheetHeaderHeight + Dimens.roundButtonSize + Dimens.bottomSheetPaddingHorizontal
+                    Dimensions.get("window").height, 
+                    Dimens.bottomBarHeight + 200, 
+                    Dimens.bottomBarHeight + Dimens.bottomSheetHeaderHeight
                 ]}
                 initialSnap={1}
                 renderHeader={renderHeader}
                 renderContent={renderContent}
+                enabledContentTapInteraction={true}
             />
-
+            
             <BottomBar />
         </View>
     );
@@ -134,7 +133,7 @@ const styles = StyleSheet.create({
 
     userButtonContainer: {
         flexDirection: "row",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         marginTop: 10
     },
 
@@ -142,5 +141,12 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: StatusBar.currentHeight ? StatusBar.currentHeight : 0,
         paddingHorizontal: Dimens.bottomSheetPaddingHorizontal
+    },
+
+    bottomSheetContent: {
+        height: "100%",
+        backgroundColor: Colors.white,
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
