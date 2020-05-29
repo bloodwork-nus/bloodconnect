@@ -12,7 +12,8 @@ export default function RoundButton(props) {
         <TouchableHighlight
             style={{
                 ...(pressed ? styles.buttonPressed : styles.buttonNotPressed),
-                ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow)
+                ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow),
+                ...(props.style)
             }}
             activeOpacity={1}
             underlayColor={"rgba(0,0,0,0)"}
