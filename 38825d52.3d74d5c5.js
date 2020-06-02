@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[16],{150:function(n){n.exports=JSON.parse('{"allTagsPath":"/bloodconnect/blog/tags","slug":"netlify","name":"netlify","count":1,"permalink":"/bloodconnect/blog/tags/netlify"}')}}]);
