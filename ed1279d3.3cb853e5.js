@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[29],{128:function(o){o.exports=JSON.parse('{"allTagsPath":"/bloodconnect/blog/tags","slug":"hello","name":"hello","count":2,"permalink":"/bloodconnect/blog/tags/hello"}')}}]);
