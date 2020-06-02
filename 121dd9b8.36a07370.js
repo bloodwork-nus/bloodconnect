@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{138:function(o){o.exports=JSON.parse('{"allTagsPath":"/bloodconnect/blog/tags","slug":"docusaurus","name":"docusaurus","count":2,"permalink":"/bloodconnect/blog/tags/docusaurus"}')}}]);
