@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, StatusBar, Dimensions, KeyboardAvoidingView, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -13,8 +13,19 @@ import Link from '../components/Link';
 import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
 import GoogleLogo from "../../assets/icons/google.svg";
+import firebase from "../../utils/firebase";
 
 export default function LoginScreen(props) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleLogin = () => {
+        firebase.auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(user => props.navigation.navigate("Explore", { userName: user.user.displayName, isVerified: user.user.emailVerified }))
+            .catch(error => alert(`LoginScreen.js: ${error}`));
+    };
+
     return (
         <KeyboardAvoidingView><ScrollView bounces={false}><View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="light-content" translucent={true} />
@@ -31,8 +42,11 @@ export default function LoginScreen(props) {
                         autoCapitalize="none"
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
+                        onChangeText={emailInput => setEmail(emailInput)}
                     />
-                    <PasswordTextBox />
+                    <PasswordTextBox
+                        onChangeText={passwordInput => setPassword(passwordInput)}
+                    />
 
                     <View style={styles.loginControls}>
                         <Link 
@@ -44,7 +58,7 @@ export default function LoginScreen(props) {
 
                         <MainButton
                             caption={Strings.logIn}
-                            onPress={() => props.navigation.navigate("Explore")}
+                            onPress={handleLogin}
                             imageRight={<Icon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} />}
                         />
                     </View>
