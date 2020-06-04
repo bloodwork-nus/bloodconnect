@@ -9,6 +9,8 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+node_modules_bak
+package-lock.json.bak
 
 # macOS
 .DS_Store
