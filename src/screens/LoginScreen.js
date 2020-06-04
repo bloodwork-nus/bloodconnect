@@ -44,7 +44,7 @@ export default function LoginScreen(props) {
 
                         <MainButton
                             caption={Strings.logIn}
-                            onPress={() => {}}
+                            onPress={() => props.navigation.navigate("Explore")}
                             imageRight={<Icon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} />}
                         />
                     </View>
@@ -58,7 +58,7 @@ export default function LoginScreen(props) {
                         imageLeft={<GoogleLogo width={"100%"} height={"100%"} />}
                     />
                     
-                    <MainOutlineButton caption={Strings.createANewAccount} onPress={() => {}} />
+                    <MainOutlineButton caption={Strings.createANewAccount} onPress={() => props.navigation.navigate("CreateAccount")} />
                 </View>
             </View>
         </View></ScrollView></KeyboardAvoidingView>

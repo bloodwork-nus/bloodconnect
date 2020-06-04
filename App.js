@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import IntroScreen from './src/screens/IntroScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
+
+import IntroScreen from './src/screens/IntroScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import CreateAccountScreen from './src/screens/CreateAccountScreen';
+import ExploreScreen from './src/screens/ExploreScreen';
 
 const fetchFonts = () => {
     return Font.loadAsync({
@@ -15,6 +19,8 @@ const fetchFonts = () => {
     });
 };
 
+const Stack = createStackNavigator();
+
 export default function App() {
     const [assetsLoaded, setAssetsLoaded] = useState(false);
 
@@ -24,7 +30,14 @@ export default function App() {
     }
 
     return (
-        <CreateAccountScreen />
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Intro" headerMode="none">
+                <Stack.Screen name="Intro" component={IntroScreen} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
+                <Stack.Screen name="Explore" component={ExploreScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, StatusBar } from "react-native";
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 import Strings from "../constants/strings";
@@ -26,6 +26,8 @@ export default function IntroScreen(props) {
 
     return (
         <View style={styles.screen}>
+            <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="dark-content" translucent={true} />
+
             <View style={styles.introSlider}><AppIntroSlider
                 keyExtractor={item => item.key.toString()}
                 renderItem={renderItem}
@@ -36,7 +38,7 @@ export default function IntroScreen(props) {
                 showNextButton={false}
             /></View>
         
-            <MainButton caption={Strings.startConnecting} onPress={() => {}} />
+            <MainButton caption={Strings.startConnecting} onPress={() => props.navigation.navigate("Login")} />
         </View>
     );
 }

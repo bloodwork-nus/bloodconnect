@@ -102,13 +102,15 @@ export default function ExploreScreen(props) {
 
     return (
         <View style={styles.screen}>
+            <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="dark-content" translucent={true} />
+            
             <MapView
                 style={styles.map}
                 initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                    latitude: 1.297532,
+                    longitude: 103.777176,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
                 }}
             />
 
@@ -132,7 +134,7 @@ export default function ExploreScreen(props) {
             <BottomSheet
                 snapPoints={[
                     Dimensions.get("window").height, 
-                    Dimens.bottomBarHeight + 200, 
+                    Dimens.bottomBarHeight + 240, 
                     Dimens.bottomBarHeight + Dimens.bottomSheetHeaderHeight
                 ]}
                 initialSnap={1}
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
     },
 
     userButton: {
-        width: 140,
+        maxWidth: 140,
         height: 40
     },
 

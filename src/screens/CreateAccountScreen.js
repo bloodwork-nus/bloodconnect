@@ -42,7 +42,7 @@ export default function CreateAccountScreen(props) {
                     <View style={styles.inputControls}>                        
                         <MainButton
                             caption={Strings.joinUs}
-                            onPress={() => {}}
+                            onPress={() => props.navigation.navigate("Explore")}
                             imageRight={<Icon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} />}
                         />
                     </View>
@@ -50,7 +50,7 @@ export default function CreateAccountScreen(props) {
 
                 <View style={styles.bottomControls}>                    
                     <MainOutlineButton
-                        caption={Strings.logIntoYourAccount} onPress={() => {}}
+                        caption={Strings.logIntoYourAccount} onPress={() => props.navigation.navigate("Login")}
                         imageLeft={<Icon name="arrow-back" color={Colors.darkBlue} size={Dimens.glyphSize} />}
                     />
                 </View>
