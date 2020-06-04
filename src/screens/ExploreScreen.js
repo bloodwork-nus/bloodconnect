@@ -17,12 +17,22 @@ import MainWhiteButton from "../components/MainWhiteButton";
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import MediumText from '../components/MediumText';
 import RegularText from '../components/RegularText';
+import firebase from "../../utils/firebase";
 
 import sampleRequests from "../constants/sampleRequests";
 
-const sampleUserName = "Phillmont";
-
 export default function ExploreScreen(props) {
+    const { userName, isVerified } = props.route.params;
+
+    if (!isVerified) {
+        alert("You are not verified! Please verify your email address.");
+    }
+
+    const handleLogout = () => {
+        firebase.auth().signOut();
+        props.navigation.navigate("Login");
+    };
+
     const renderListItem = ({ item, index, separators }) => {
         let emergency = item.isEmergency ? <Icon name="priority-high" color={Colors.red} size={Dimens.glyphSize} /> : null;
         let venueTypeIcon;
@@ -123,11 +133,11 @@ export default function ExploreScreen(props) {
 
             <SafeAreaView style={{...styles.mapTopOverlay, right: Dimens.bottomSheetPaddingHorizontal}}>
                 <MainWhiteButton
-                    caption={sampleUserName}
+                    caption={userName}
                     style={styles.userButton}
                     buttonStyle={styles.userButton}
                     imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}
-                    onPress={() => {}}
+                    onPress={handleLogout}
                 />
             </SafeAreaView>
 
