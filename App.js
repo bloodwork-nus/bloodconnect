@@ -9,6 +9,7 @@ import IntroScreen from './src/screens/IntroScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import CreateAccountScreen from './src/screens/CreateAccountScreen';
 import ExploreScreen from './src/screens/ExploreScreen';
+import firebase from "./utils/firebase";
 
 const fetchFonts = () => {
     return Font.loadAsync({
