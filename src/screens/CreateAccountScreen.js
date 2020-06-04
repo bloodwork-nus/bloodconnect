@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, StatusBar, Dimensions, KeyboardAvoidingView, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -11,8 +11,30 @@ import TextBox from '../components/TextBox';
 import PasswordTextBox from '../components/PasswordTextBox';
 import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
+import firebase from "../../utils/firebase";
 
 export default function CreateAccountScreen(props) {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSignUp = () => {
+        firebase.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .catch(error => alert(`CreateAccountScreen.js: ${error}`));
+
+        firebase.auth()
+            .onAuthStateChanged(user => {
+                if (user) {
+                    user.updateProfile({ displayName: name })
+                        .then(() => {
+                            user.sendEmailVerification();
+                            props.navigation.navigate("Explore", { userName: user.displayName, isVerified: user.emailVerified });
+                        });
+                }
+            }, error => alert(`CreateAccountScreen.js: ${error}`));
+    };
+
     return (
         <KeyboardAvoidingView><ScrollView bounces={false}><View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="light-content" translucent={true} />
@@ -27,6 +49,7 @@ export default function CreateAccountScreen(props) {
                         autoCapitalize="words"
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
+                        onChangeText={nameInput => setName(nameInput)}
                     />
                     <TextBox
                         placeholder={Strings.email}
@@ -36,13 +59,16 @@ export default function CreateAccountScreen(props) {
                         autoCapitalize="none"
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
+                        onChangeText={emailInput => setEmail(emailInput)}
                     />
-                    <PasswordTextBox />
+                    <PasswordTextBox
+                        onChangeText={passwordInput => setPassword(passwordInput)}
+                    />
 
                     <View style={styles.inputControls}>                        
                         <MainButton
                             caption={Strings.joinUs}
-                            onPress={() => props.navigation.navigate("Explore")}
+                            onPress={handleSignUp}
                             imageRight={<Icon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} />}
                         />
                     </View>
