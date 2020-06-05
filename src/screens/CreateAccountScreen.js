@@ -21,10 +21,7 @@ export default function CreateAccountScreen(props) {
     const handleSignUp = () => {
         firebase.auth()
             .createUserWithEmailAndPassword(email, password)
-            .catch(error => alert(`CreateAccountScreen.js: ${error}`));
-
-        firebase.auth()
-            .onAuthStateChanged(user => {
+            .then(({ user }) => {
                 if (user) {
                     user.updateProfile({ displayName: name })
                         .then(() => {
@@ -32,7 +29,8 @@ export default function CreateAccountScreen(props) {
                             props.navigation.navigate("Explore", { userName: user.displayName, isVerified: user.emailVerified });
                         });
                 }
-            }, error => alert(`CreateAccountScreen.js: ${error}`));
+            })
+            .catch(error => alert(`CreateAccountScreen.js: ${error}`));
     };
 
     return (
