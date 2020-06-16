@@ -1,57 +1,36 @@
-import React, { useState } from 'react';
-import { StyleSheet, TouchableHighlight, View } from "react-native";
+import React from 'react';
+import { StyleSheet, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
 
-export default function RoundButton(props) {
-    const [pressed, setPressed] = useState(false);
+import Button from "./Button";
 
+export default function RoundButton(props) {
     return (
-        <TouchableHighlight
-            style={{
-                ...(pressed ? styles.buttonPressed : styles.buttonNotPressed),
-                ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow),
-                ...(props.style)
-            }}
-            activeOpacity={1}
-            underlayColor={"rgba(0,0,0,0)"}
-            onShowUnderlay={() => setPressed(true)}
-            onHideUnderlay={() => setPressed(false)}
-            onPress={props.onPress}
-        >
-            <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={[Colors.pink, Colors.reddishPurple]}
-                style={{
-                    ...styles.button,
-                    ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow)
-                }}
-            >
-                <View style={styles.image}>{props.image}</View>
-            </LinearGradient>
-        </TouchableHighlight>
+        <Button
+            shadow={true}
+            height={Dimens.roundButtonSize}
+            borderRadius={Dimens.roundButtonSize / 2}
+            onPress={() => {}}
+            image={<View style={styles.image}>{props.image}</View>}
+            renderContainer={() => (
+                <LinearGradient
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 1}}
+                    colors={[Colors.pink, Colors.reddishPurple]}
+                    style={styles.button}
+                />
+            )}
+        />
     );
 }
 
 const styles = StyleSheet.create({
     button: {
         flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        width: Dimens.roundButtonSize,
-        height: Dimens.roundButtonSize,
-        borderRadius: Dimens.roundButtonSize / 2
-    },
-
-    buttonNotPressed: {
-        top: 0
-    },
-
-    buttonPressed: {
-        top: Dimens.mainButtonPressedNudgeDistance
+        width: Dimens.roundButtonSize
     },
     
     image: {

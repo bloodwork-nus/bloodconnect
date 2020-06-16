@@ -1,65 +1,35 @@
-import React, { useState } from 'react';
-import { StyleSheet, TouchableHighlight, View } from "react-native";
+import React from 'react';
+import { StyleSheet, View } from "react-native";
 
-import SemiBoldText from './SemiBoldText';
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
 
-export default function MainWhiteButton(props) {
-    const [pressed, setPressed] = useState(false);
+import Button from "./Button";
 
+export default function MainWhiteButton(props) {
     return (
-        <TouchableHighlight
-            style={{
-                ...(pressed ? styles.buttonPressed : styles.buttonNotPressed),
-                ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow),
-                ...props.style
+        <Button
+            shadow={true}
+            textColor={Colors.darkBlue}
+            textSize={Dimens.mainButtonTextSize}
+            caption={props.caption}
+            onPress={() => {}}
+            imageLeft={props.imageLeft}
+            imageRight={props.imageRight}
+            renderContainer={() => (
+                <View style={{...styles.button, ...props.style}} />
+            )}
+            touchableProps={{
+                style: props.style
             }}
-            activeOpacity={1}
-            underlayColor={"rgba(0,0,0,0)"}
-            onShowUnderlay={() => setPressed(true)}
-            onHideUnderlay={() => setPressed(false)}
-            onPress={props.onPress}
-        >
-            <View
-                style={{
-                    ...styles.button,
-                    ...(pressed ? Dimens.mainButtonBoxShadowPressed : Dimens.mainButtonBoxShadow),
-                    ...props.buttonStyle
-                }}
-            >
-                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : null}
-                <SemiBoldText color={Colors.darkBlue} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
-                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : null}
-            </View>
-        </TouchableHighlight>
+            height={props.height}
+            borderRadius={props.height / 2}
+        />
     );
 }
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: Colors.white,
-        flexDirection: "row",
-        paddingVertical: Dimens.mainButtonPaddingVertical,
-        paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
-        alignItems: "center",
-        justifyContent: "center",
-        height: Dimens.mainButtonHeight,
-        borderRadius: Dimens.mainButtonHeight / 2
-    },
-
-    buttonNotPressed: {
-        top: 0
-    },
-
-    buttonPressed: {
-        top: Dimens.mainButtonPressedNudgeDistance
-    },
-    
-    image: {
-        width: Dimens.mainButtonImageSize,
-        height: Dimens.mainButtonImageSize,
-        justifyContent: "center",
-        alignItems: "center"
+        backgroundColor: Colors.white
     }
 });
