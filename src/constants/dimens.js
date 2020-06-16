@@ -19,7 +19,7 @@ export default {
     mainButtonTextSize: 16,
     mainButtonImageSize: 25,
     mainButtonPaddingVertical: 10,
-    mainButtonPaddingHorizontal: 25,
+    mainButtonPaddingHorizontal: 20,
     mainButtonImageMargin: 10,
     mainButtonPressedNudgeDistance: 4,
 
