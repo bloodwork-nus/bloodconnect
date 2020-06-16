@@ -5,14 +5,16 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Strings from "../constants/strings";
 import Colors from "../constants/colors";
 import Dimens from "../constants/dimens";
+
 import BiWavesWithLogo from "../components/BiWavesWithLogo";
-import SemiBoldText from '../components/SemiBoldText';
+import FontText from '../components/FontText';
 import TextBox from '../components/TextBox';
 import PasswordTextBox from '../components/PasswordTextBox';
 import Link from '../components/Link';
 import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
 import GoogleLogo from "../../assets/icons/google.svg";
+
 import firebase from "../../utils/firebase";
 
 export default function LoginScreen(props) {
@@ -33,7 +35,7 @@ export default function LoginScreen(props) {
 
             <View style={styles.contents}>
                 <View style={styles.topControls}>
-                    <SemiBoldText style={styles.heading} color={Colors.darkBlue} size={Dimens.heading1}>{Strings.logIntoYourAccount}</SemiBoldText>
+                    <FontText flavor="semibold" style={styles.heading} color={Colors.darkBlue} size={Dimens.heading1}>{Strings.logIntoYourAccount}</FontText>
                     <TextBox
                         placeholder={Strings.email}
                         autoCompleteType="email"
@@ -68,7 +70,7 @@ export default function LoginScreen(props) {
                     <MainOutlineButton
                         caption={Strings.signInWithGoogle}
                         onPress={() => {}}
-                        buttonStyle={{marginBottom: Dimens.bodyMarginVertical}}
+                        style={{marginBottom: Dimens.bodyMarginVertical}}
                         imageLeft={<GoogleLogo width={"100%"} height={"100%"} />}
                     />
                     
