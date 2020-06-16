@@ -1,62 +1,36 @@
-import React, { useState } from 'react';
-import { StyleSheet, TouchableHighlight, View } from "react-native";
+import React from 'react';
+import { View, StyleSheet } from "react-native";
 
-import SemiBoldText from './SemiBoldText';
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
 
-export default function MainOutlineButton(props) {
-    const [pressed, setPressed] = useState(false);
+import Button from "./Button";
 
+export default function MainOutlineButton(props) {
     return (
-        <TouchableHighlight
-            style={props.buttonStyle}
-            activeOpacity={1}
-            underlayColor={"rgba(0,0,0,0)"}
-            onShowUnderlay={() => setPressed(true)}
-            onHideUnderlay={() => setPressed(false)}
-            onPress={props.onPress}
-        >
-            <View
-                style={{
-                    ...styles.button,
-                    ...(pressed ? styles.buttonPressed : styles.buttonNotPressed)
-                }}
-            >
-                {props.imageLeft ? <View style={{...styles.image, marginRight: Dimens.mainButtonImageMargin}}>{props.imageLeft}</View> : null}
-                <SemiBoldText color={Colors.darkBlue} size={Dimens.mainButtonTextSize}>{props.caption}</SemiBoldText>
-                {props.imageRight ? <View style={{...styles.image, marginLeft: Dimens.mainButtonImageMargin}}>{props.imageRight}</View> : null}
-            </View>
-        </TouchableHighlight>
+        <Button
+            textColor={Colors.darkBlue}
+            textSize={Dimens.mainButtonTextSize}
+            caption={props.caption}
+            onPress={() => {}}
+            imageLeft={props.imageLeft}
+            imageRight={props.imageRight}
+            renderContainer={() => (
+                <View style={styles.button} />)
+            }
+            touchableProps={{
+                underlayColor: "rgba(0,0,0,0)"
+            }}
+            pressedStyle={{backgroundColor: "rgba(0,0,0,0.1)"}}
+            notPressedStyle={{backgroundColor: "rgba(0,0,0,0)"}}
+        />
     );
 }
 
 const styles = StyleSheet.create({
     button: {
-        flexDirection: "row",
         backgroundColor: "rgba(0,0,0,0)",
-        alignItems: "center",
-        justifyContent: "center",
         borderColor: Colors.darkBlue,
-        borderWidth: Dimens.mainOutlinedButtonBorderWidth,
-        borderRadius: Dimens.mainButtonHeight / 2,
-        height: Dimens.mainButtonHeight,
-        paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
-        paddingVertical: Dimens.mainButtonPaddingVertical
-    },
-
-    buttonNotPressed: {
-        backgroundColor: "rgba(0,0,0,0)"
-    },
-
-    buttonPressed: {
-        backgroundColor: "rgba(0,0,0,0.1)"
-    },
-    
-    image: {
-        width: Dimens.mainButtonImageSize,
-        height: Dimens.mainButtonImageSize,
-        justifyContent: "center",
-        alignItems: "center"
+        borderWidth: Dimens.mainOutlinedButtonBorderWidth
     }
 });
