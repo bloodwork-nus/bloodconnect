@@ -10,7 +10,7 @@ export default (props) => {
             textAlign: props.align,
             fontFamily: font + (props.flavor ? `-${props.flavor}` : ""),
             fontSize: props.size,
-            fontStyle: props.style
+            fontStyle: props.fontStyle
         }
     });
 
