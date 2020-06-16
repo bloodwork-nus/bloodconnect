@@ -20,26 +20,6 @@ export default {
     mainButtonImageSize: 25,
     mainButtonPaddingVertical: 10,
     mainButtonPaddingHorizontal: 25,
-    mainButtonBoxShadow: {
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 5.46,
-        elevation: 9
-    },
-    mainButtonBoxShadowPressed: {
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5
-    },
     mainButtonImageMargin: 10,
     mainButtonPressedNudgeDistance: 4,
 
