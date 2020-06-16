@@ -13,7 +13,7 @@ export default function MainButton(props) {
             textColor={Colors.white}
             textSize={Dimens.mainButtonTextSize}
             caption={props.caption}
-            onPress={() => {}}
+            onPress={props.onPress}
             imageLeft={props.imageLeft}
             imageRight={props.imageRight}
             renderContainer={() => (
@@ -23,6 +23,9 @@ export default function MainButton(props) {
                     colors={[Colors.pink, Colors.reddishPurple]}
                 />
             )}
+            touchableProps={{
+                style: props.style
+            }}
         />
     );
 }
