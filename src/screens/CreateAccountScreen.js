@@ -86,7 +86,8 @@ export default function CreateAccountScreen(props) {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        height: Dimensions.get("window").height
+        height: Dimensions.get("window").height,
+        backgroundColor: Colors.white
     },
 
     contents: {

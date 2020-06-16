@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "space-between",
-        paddingVertical: Dimens.screenPaddingVertical
+        paddingVertical: Dimens.screenPaddingVertical,
+        backgroundColor: Colors.white
     },
 
     slide: {

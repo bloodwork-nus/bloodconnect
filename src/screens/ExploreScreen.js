@@ -161,7 +161,7 @@ export default function ExploreScreen(props) {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: "white"
+        backgroundColor: Colors.white
     },
 
     bottomSheetHeader: {
