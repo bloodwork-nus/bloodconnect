@@ -11,13 +11,16 @@ export default (props) => {
         caption,
         textColor,
         textSize,
+        image,
         imageLeft,
         imageRight,
         onPress,
         shadow,
         pressedStyle,
         notPressedStyle,
-        touchableProps
+        touchableProps,
+        height,
+        borderRadius
     } = props;
 
     const [pressed, setPressed] = useState(false);
@@ -37,6 +40,8 @@ export default (props) => {
         const clonedProps = {
             style: {
                 ...styles.button,
+                height,
+                borderRadius,
                 ...container.props.style,
                 ...(pressed ? pressedStyle : notPressedStyle),
             }
@@ -45,9 +50,9 @@ export default (props) => {
         return React.cloneElement(container, clonedProps, <>
             {imageLeft ? renderButtonImage(imageLeft, "left") : null}
     
-            <FontText flavor="semibold" color={textColor} size={textSize}>
-                {caption}
-            </FontText>
+            {caption ? <FontText flavor="semibold" color={textColor} size={textSize}>{caption}</FontText> : null}
+
+            {image ? image : null}
 
             {imageRight ? renderButtonImage(imageRight, "right") : null}
         </>);
@@ -55,7 +60,8 @@ export default (props) => {
 
     const styleProps = {
         ...(shadow ? (pressed ? styles.buttonPressed : styles.buttonNotPressed) : null),
-        ...styles.touchable,
+        height,
+        borderRadius,
         ...(touchableProps && touchableProps.style ? touchableProps.style : null)
     };
 
@@ -82,15 +88,10 @@ const styles = StyleSheet.create({
 
     button: {
         flexDirection: "row",
-        height: Dimens.mainButtonHeight,
         justifyContent: "center",
         alignItems: "center",
         paddingHorizontal: Dimens.mainButtonPaddingHorizontal,
-        borderRadius: Dimens.mainButtonHeight / 2
-    },
-
-    touchable: {
-        borderRadius: Dimens.mainButtonHeight / 2
+        
     },
 
     buttonNotPressed: {

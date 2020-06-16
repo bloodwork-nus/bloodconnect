@@ -12,6 +12,8 @@ export default function MainButton(props) {
             shadow={true}
             textColor={Colors.white}
             textSize={Dimens.mainButtonTextSize}
+            height={Dimens.mainButtonHeight}
+            borderRadius={Dimens.mainButtonHeight / 2}
             caption={props.caption}
             onPress={props.onPress}
             imageLeft={props.imageLeft}
