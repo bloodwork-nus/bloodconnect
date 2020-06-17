@@ -13,7 +13,7 @@ export default function MainWhiteButton(props) {
             textColor={Colors.darkBlue}
             textSize={Dimens.mainButtonTextSize}
             caption={props.caption}
-            onPress={() => {}}
+            onPress={props.onPress}
             imageLeft={props.imageLeft}
             imageRight={props.imageRight}
             renderContainer={() => (

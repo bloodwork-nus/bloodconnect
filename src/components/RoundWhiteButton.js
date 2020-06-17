@@ -12,7 +12,7 @@ export default function RoundWhiteButton(props) {
             shadow={true}
             height={Dimens.roundButtonSize}
             borderRadius={Dimens.roundButtonSize / 2}
-            onPress={() => {}}
+            onPress={props.onPress}
             image={<View style={styles.image}>{props.image}</View>}
             renderContainer={() => (
                 <View style={styles.button} />

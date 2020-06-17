@@ -13,7 +13,7 @@ export default function RoundButton(props) {
             shadow={true}
             height={Dimens.roundButtonSize}
             borderRadius={Dimens.roundButtonSize / 2}
-            onPress={() => {}}
+            onPress={props.onPress}
             image={<View style={styles.image}>{props.image}</View>}
             renderContainer={() => (
                 <LinearGradient
