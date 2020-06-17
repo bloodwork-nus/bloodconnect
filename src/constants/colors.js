@@ -9,6 +9,8 @@ export default {
     lightGrey: "#EEEEEE",
     lightGrey2: "#EFEFEF",
     lightGrey3: "#9D9D9D",
+    offGrey: "#F3F3F3",
+    offGrey2: "#E8E8E8",
     reddishPurple: "#C70063",
     pink: "#FF4E60",
     red: "#F31E1E",
