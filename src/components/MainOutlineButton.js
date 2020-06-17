@@ -7,9 +7,17 @@ import Dimens from '../constants/dimens';
 import Button from "./Button";
 
 export default function MainOutlineButton(props) {
+    const styles = StyleSheet.create({
+        button: {
+            backgroundColor: "rgba(0,0,0,0)",
+            borderColor: props.color || Colors.darkBlue,
+            borderWidth: Dimens.mainOutlinedButtonBorderWidth
+        }
+    });
+
     return (
         <Button
-            textColor={Colors.darkBlue}
+            textColor={props.color || Colors.darkBlue}
             textSize={Dimens.mainButtonTextSize}
             height={Dimens.mainButtonHeight}
             borderRadius={Dimens.mainButtonHeight / 2}
@@ -29,11 +37,3 @@ export default function MainOutlineButton(props) {
         />
     );
 }
-
-const styles = StyleSheet.create({
-    button: {
-        backgroundColor: "rgba(0,0,0,0)",
-        borderColor: Colors.darkBlue,
-        borderWidth: Dimens.mainOutlinedButtonBorderWidth
-    }
-});
