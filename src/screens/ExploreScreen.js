@@ -206,7 +206,8 @@ const styles = StyleSheet.create({
 
     mapTopOverlay: {
         top: 10 + (StatusBar.currentHeight ? StatusBar.currentHeight : 20),
-        position: "absolute"
+        position: "absolute",
+        zIndex: 10
     },
 
     bottomSheetContent: {
