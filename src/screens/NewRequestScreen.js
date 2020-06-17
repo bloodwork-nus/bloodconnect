@@ -87,7 +87,7 @@ export default (props) => {
                         placeholder="Contact number"
                         style={{backgroundColor: Colors.offGrey2}}
                     />
-                </>)} style={{marginBottom: 20}} />
+                </>)} style={{marginBottom: 20}} info="This information is..." />
 
                 <Question prompt="Propose an appointment time" content={() => (
                     <MainOutlineButton caption="Thu Jun 22, 2020, 09:52" onPress={() => {}} />
