@@ -22,8 +22,8 @@ export default function MainWhiteButton(props) {
             touchableProps={{
                 style: props.style
             }}
-            height={props.height}
-            borderRadius={props.height / 2}
+            height={props.height ? props.height : Dimens.mainButtonHeight}
+            borderRadius={props.height ? props.height / 2 : Dimens.mainButtonHeight / 2}
         />
     );
 }
