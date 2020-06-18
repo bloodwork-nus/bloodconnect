@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, Keyboard } from "react-native";
+import { View, StyleSheet, StatusBar, ScrollView, Keyboard, Platform } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
@@ -11,15 +13,20 @@ import Question from "../components/Question";
 import MainOutlineButton from "../components/MainOutlineButton";
 import TextBox from "../components/TextBox";
 import CheckBox from '../components/CheckBox';
+import BottomSheetModal from '../components/BottomSheetModal';
 
 const requestTypes = { blood: 1, platelets: 2, plasma: 3 };
 
 export default (props) => {
     const [requestType, setRequestType] = useState(null);
+    const [appointmentTime, setAppointmentTime] = useState();
     const [description, setDescription] = useState("");
     const [useYourName, setUseYourName] = useState(false);
     const [isEmergency, setIsEmergency] = useState(false);
     const [showBottomBar, setShowBottomBar] = useState(true);
+
+    const [isBloodTypeModalVisible, setIsBloodTypeModalVisible] = useState(false);
+    const [isAppointmentModalVisible, setIsAppointmentModalVisible] = useState(false);
 
     useEffect(() => {
         Keyboard.addListener("keyboardWillShow", () => setShowBottomBar(false));
@@ -59,7 +66,7 @@ export default (props) => {
                 />
 
                 <Question prompt="For which blood type?" content={() => (
-                    <MainOutlineButton caption="Choose" onPress={() => {}} />
+                    <MainOutlineButton caption="Choose" onPress={() => {}} color={Colors.blue} onPress={() => setIsBloodTypeModalVisible(true)} />
                 )} style={{marginBottom: 20}} />
 
                 <Question prompt="How much units are required?" content={() => (
@@ -90,7 +97,12 @@ export default (props) => {
                 </>)} style={{marginBottom: 20}} info="This information is..." />
 
                 <Question prompt="Propose an appointment time" content={() => (
-                    <MainOutlineButton caption="Thu Jun 22, 2020, 09:52" onPress={() => {}} />
+                    <MainOutlineButton
+                        caption={appointmentTime ? moment(appointmentTime).format("ddd MMM D, YYYY, h:mm A") : "Pick a time"}
+                        onPress={() => setIsAppointmentModalVisible(true)}
+                        color={Colors.blue}
+                        {...appointmentTime ? {flavor: "bold"} : null}
+                    />
                 )} style={{marginBottom: 20}} />
 
                 <Question prompt="Anything the donors should know?" content={() => (<>
@@ -119,6 +131,35 @@ export default (props) => {
             </ScrollView>
 
             {showBottomBar ? <BottomNavBar /> : null}
+
+            {Platform.OS === "ios" ? 
+                <BottomSheetModal
+                    height={300}
+                    visible={isAppointmentModalVisible}
+                    onClose={() => setIsAppointmentModalVisible(false)}
+                    renderContent={() => (
+                        <View style={styles.appointmentTimeModal}>
+                            <FontText flavor="semibold" size={20} color={Colors.darkBlue} style={{paddingHorizontal: Dimens.screenPaddingHorizontal}}>Propose an appointment time</FontText>
+                            <DateTimePicker
+                                value={appointmentTime || new Date()}
+                                mode="datetime"
+                                onChange={(event, date) => setAppointmentTime(date)}
+                            />
+                        </View>
+                    )}
+                />
+            : null}
+
+            <BottomSheetModal
+                height={400}
+                visible={isBloodTypeModalVisible}
+                onClose={() => setIsBloodTypeModalVisible(false)}
+                renderContent={() => (
+                    <View style={styles.bloodTypeModal}>
+
+                    </View>
+                )}
+            />
         </View>
     );
 }
@@ -135,5 +176,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: Dimens.screenPaddingHorizontal,
         paddingTop: 70,
         paddingBottom: 100
+    },
+
+    appointmentTimeModal: {
+        height: "100%",
+        backgroundColor: Colors.white,
+        paddingTop: 30
+    },
+
+    bloodTypeModal: {
+        height: "100%",
+        backgroundColor: Colors.white
     }
 });
