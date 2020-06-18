@@ -14,5 +14,6 @@ export default {
     reddishPurple: "#C70063",
     pink: "#FF4E60",
     red: "#F31E1E",
-    yellow: "#FEC200"
+    yellow: "#FEC200",
+    black: "#000000"
 };
