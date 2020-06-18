@@ -21,6 +21,7 @@ export default function MainOutlineButton(props) {
             textSize={Dimens.mainButtonTextSize}
             height={Dimens.mainButtonHeight}
             borderRadius={Dimens.mainButtonHeight / 2}
+            flavor={props.flavor}
             caption={props.caption}
             onPress={props.onPress}
             imageLeft={props.imageLeft}

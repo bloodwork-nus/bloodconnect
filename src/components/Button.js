@@ -20,7 +20,8 @@ export default (props) => {
         notPressedStyle,
         touchableProps,
         height,
-        borderRadius
+        borderRadius,
+        flavor
     } = props;
 
     const [pressed, setPressed] = useState(false);
@@ -50,7 +51,7 @@ export default (props) => {
         return React.cloneElement(container, clonedProps, <>
             {imageLeft ? renderButtonImage(imageLeft, "left") : null}
     
-            {caption ? <FontText flavor="semibold" color={textColor} size={textSize}>{caption}</FontText> : null}
+            {caption ? <FontText flavor={flavor || "semibold"} color={textColor} size={textSize}>{caption}</FontText> : null}
 
             {image ? image : null}
 
