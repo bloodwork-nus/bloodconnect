@@ -31,7 +31,7 @@ export default (props) => {
                 <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>Fill your particulars</FontText>
 
                 <Question prompt="What's your blood type?" content={() => (
-                    <MainOutlineButton caption="Choose" onPress={() => {}} color={Colors.reddishPurple} />
+                    <MainOutlineButton caption="Choose" onPress={() => {}} color={Colors.reddishPurple} flavor="" />
                 )} style={{marginVertical: 20}} />
 
                 <Question prompt="What's your name?" content={() => (<>
