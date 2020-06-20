@@ -10,6 +10,4 @@ const config = {
     databaseURL: `https://${PROJECT_ID}.firebaseio.com`
 };
 
-firebase.initializeApp(config);
-
-export default firebase;
+export default !firebase.apps.length ? firebase.initializeApp(config) : firebase.app();
