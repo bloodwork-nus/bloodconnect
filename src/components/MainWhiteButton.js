@@ -9,7 +9,7 @@ import Button from "./Button";
 export default function MainWhiteButton(props) {
     return (
         <Button
-            shadow={true}
+            shadow={props.shadow === false ? false : true}
             textColor={Colors.darkBlue}
             textSize={Dimens.mainButtonTextSize}
             caption={props.caption}
