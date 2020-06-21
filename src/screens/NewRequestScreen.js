@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, Keyboard, Platform } from "react-native";
+import { View, StyleSheet, StatusBar, ScrollView, Keyboard, FlatList, TouchableHighlight, Button } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
+import { TouchableRipple } from 'react-native-paper';
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
@@ -19,14 +20,16 @@ const requestTypes = { blood: 1, platelets: 2, plasma: 3 };
 
 export default (props) => {
     const [requestType, setRequestType] = useState(null);
-    const [appointmentTime, setAppointmentTime] = useState();
+    // const [appointmentTime, setAppointmentTime] = useState();
     const [description, setDescription] = useState("");
     const [useYourName, setUseYourName] = useState(false);
     const [isEmergency, setIsEmergency] = useState(false);
     const [showBottomBar, setShowBottomBar] = useState(true);
+    const [bloodType, setBloodType] = useState();
 
     const [isBloodTypeModalVisible, setIsBloodTypeModalVisible] = useState(false);
-    const [isAppointmentModalVisible, setIsAppointmentModalVisible] = useState(false);
+    // const [isAppointmentModalVisible, setIsAppointmentModalVisible] = useState(false);
+    // const [dateTimePickerModeAndroid, setDateTimePickerModeAndroid] = useState();
 
     useEffect(() => {
         Keyboard.addListener("keyboardWillShow", () => setShowBottomBar(false));
@@ -96,14 +99,14 @@ export default (props) => {
                     />
                 </>)} style={{marginBottom: 20}} info="This information is..." />
 
-                <Question prompt="Propose an appointment time" content={() => (
+                {/* <Question prompt="Propose an appointment time" content={() => (
                     <MainOutlineButton
                         caption={appointmentTime ? moment(appointmentTime).format("ddd MMM D, YYYY, h:mm A") : "Pick a time"}
                         onPress={() => setIsAppointmentModalVisible(true)}
                         color={Colors.blue}
                         {...appointmentTime ? {flavor: "bold"} : null}
                     />
-                )} style={{marginBottom: 20}} />
+                )} style={{marginBottom: 20}} /> */}
 
                 <Question prompt="Anything the donors should know?" content={() => (<>
                     <TextBox 
@@ -132,7 +135,7 @@ export default (props) => {
 
             {showBottomBar ? <BottomNavBar /> : null}
 
-            {Platform.OS === "ios" ? 
+            {/* {Platform.OS === "ios" ? 
                 <BottomSheetModal
                     height={300}
                     visible={isAppointmentModalVisible}
@@ -143,12 +146,46 @@ export default (props) => {
                             <DateTimePicker
                                 value={appointmentTime || new Date()}
                                 mode="datetime"
-                                onChange={(event, date) => setAppointmentTime(date)}
+                                onChange={(event, datetime) => setAppointmentTime(datetime)}
                             />
                         </View>
                     )}
                 />
             : null}
+
+            {Platform.OS === "android" ?
+                <BottomSheetModal
+                    height={300}
+                    visible={isAppointmentModalVisible}
+                    onClose={() => setIsAppointmentModalVisible(false)}
+                    renderContent={() => (
+                        <View style={styles.appointmentTimeModal}>
+                            <FontText flavor="semibold" size={20} color={Colors.darkBlue} style={{paddingHorizontal: Dimens.screenPaddingHorizontal}}>Propose an appointment time</FontText>
+
+                            <TouchableRipple onPress={() => requestAnimationFrame(() => setDateTimePickerModeAndroid("date"))} style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                                padding: 20
+                            }}>
+                                <FontText>{moment(appointmentTime).format("ddd MMM D, YYYY") || "Pick date"}</FontText>
+                            </TouchableRipple>
+
+                            
+                        </View>
+                    )}
+                />
+            : null}
+
+            {Platform.OS === "android" && dateTimePickerModeAndroid === "date" ?
+                <DateTimePicker
+                    mode="date"
+                    value={appointmentTime || new Date()}
+                    onChange={(event, date) => {
+                        setIsAppointmentModalVisible(false);
+                        if (event.type === "set") setAppointmentTime(date);
+                    }}
+                />
+            : null} */}
 
             <BottomSheetModal
                 height={400}
@@ -156,7 +193,24 @@ export default (props) => {
                 onClose={() => setIsBloodTypeModalVisible(false)}
                 renderContent={() => (
                     <View style={styles.bloodTypeModal}>
-
+                        <FontText flavor="semibold" size={20} color={Colors.darkBlue} style={{paddingHorizontal: Dimens.screenPaddingHorizontal}}>Choose a blood type</FontText>
+                        <FlatList
+                            data={[
+                                { id: "ap", label: "A+" },
+                                { id: "am", label: "A-" },
+                                { id: "bp", label: "B+" },
+                                { id: "bm", label: "B-" },
+                                { id: "abp", label: "AB+" },
+                                { id: "abm", label: "AB-" },
+                                { id: "op", label: "O+" },
+                                { id: "om", label: "O-" }
+                            ]}
+                            renderItem={({ item }) => (
+                                <TouchableRipple onPress={() => requestAnimationFrame(() => {setIsBloodTypeModalVisible(false); setBloodType(item.id)})} style={{alignItems: "center", padding: 10}}>
+                                    <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.label}</FontText>
+                                </TouchableRipple>
+                            )}
+                        />
                     </View>
                 )}
             />
@@ -178,14 +232,9 @@ const styles = StyleSheet.create({
         paddingBottom: 100
     },
 
-    appointmentTimeModal: {
+    bloodTypeModal: {
         height: "100%",
         backgroundColor: Colors.white,
         paddingTop: 30
-    },
-
-    bloodTypeModal: {
-        height: "100%",
-        backgroundColor: Colors.white
     }
 });
