@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, Platform, BackHandler } from "react-native";
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
 
@@ -14,11 +14,13 @@ export default (props) => {
     } = props;
 
     let modalRef;
-    let fade = new Animated.Value(0);
+    let fade = new Animated.Value(Platform.OS === "ios" ? 0 : 1);
 
     useEffect(() => {
         modalRef.snapTo(visible ? 0 : 1);
     });
+
+    BackHandler.addEventListener("hardwareBackPress", () => {props.onClose(); return true;});
 
     return (<>
         {visible ? 
@@ -42,6 +44,7 @@ export default (props) => {
             borderRadius={30}
             callbackNode={fade}
             onCloseEnd={onClose}
+            enabledContentGestureInteraction={false}
         />
     </>);
 }
