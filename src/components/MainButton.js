@@ -9,7 +9,7 @@ import Button from "./Button";
 export default function MainButton(props) {
     return (
         <Button
-            shadow={true}
+            shadow={props.shadow === false ? false : true}
             textColor={Colors.white}
             textSize={Dimens.mainButtonTextSize}
             height={Dimens.mainButtonHeight}
@@ -28,6 +28,8 @@ export default function MainButton(props) {
             touchableProps={{
                 style: props.style
             }}
+            height={props.height ? props.height : Dimens.mainButtonHeight}
+            borderRadius={props.height ? props.height / 2 : Dimens.mainButtonHeight / 2}
         />
     );
 }
