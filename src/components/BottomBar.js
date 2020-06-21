@@ -24,8 +24,8 @@ export default function BottomBar(props) {
                     <BottomBarButton
                         image={<Icon name="location-on" color={Colors.darkBlue} size={Dimens.glyphSize} style={{marginLeft: -5}}/>}
                         caption={Strings.explore}
-                        isOnPage={true}
-                        onPress={() => {}}
+                        isOnPage={props.selected === "explore"}
+                        onPress={props.onExplore}
                     />
                 </View>
 
@@ -33,8 +33,8 @@ export default function BottomBar(props) {
                     <BottomBarButton
                         image={<Icon name="format-list-bulleted" color={Colors.darkBlue} size={Dimens.glyphSize} />}
                         caption={Strings.requests}
-                        isOnPage={false}
-                        onPress={() => {}}
+                        isOnPage={props.selected === "requests"}
+                        onPress={props.onRequests}
                     />
                 </View>
             </View>
