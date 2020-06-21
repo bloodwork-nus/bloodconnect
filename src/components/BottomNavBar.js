@@ -1,14 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Dimensions } from "react-native";
 import { BoxShadow } from "react-native-shadow";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 import Colors from "../constants/colors";
 import Dimens from "../constants/dimens";
-
-import MainButton from "./MainButton";
-import MainColorButton from "./MainColorButton";
-import MainWhiteButton from "./MainWhiteButton";
 
 const bottomBarWidth = Dimensions.get("window").width;
 const bottomBarHeight = 80;
@@ -47,20 +42,15 @@ const bottomBarShadowSettings = {
 };
 
 export default (props) => {
+    const {
+        renderRightButton,
+        renderLeftButton
+    } = props;
+
     return (
         <BoxShadow setting={bottomBarShadowSettings}><View style={styles.bar}>
-            <MainWhiteButton
-                caption="Cancel"
-                onPress={() => {}}
-            />
-
-            <MainColorButton
-                caption="Next"
-                color={Colors.blue}
-                textColor={Colors.white}
-                imageRight={<MaterialIcon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} />}
-                onPress={() => {}}
-            />
+            {renderRightButton ? renderRightButton() : null}
+            {renderLeftButton ? renderLeftButton() : null}
         </View></BoxShadow>
     );
 }
