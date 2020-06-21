@@ -69,7 +69,7 @@ export default (props) => {
                 />
 
                 <Question prompt="For which blood type?" content={() => (
-                    <MainOutlineButton caption="Choose" onPress={() => {}} color={Colors.blue} onPress={() => setIsBloodTypeModalVisible(true)} />
+                    <MainOutlineButton caption="Choose" color={Colors.blue} onPress={() => setIsBloodTypeModalVisible(true)} />
                 )} style={{marginBottom: 20}} />
 
                 <Question prompt="How much units are required?" content={() => (
