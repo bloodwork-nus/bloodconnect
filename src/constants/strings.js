@@ -21,5 +21,28 @@ export default {
     explore: "Explore",
     requests: "Requests",
     searchAnythingHere: "Search anything here",
-    noRequests: "There are currently no requests."
+    noRequests: "There are currently no requests.",
+
+    next: "Next",
+    cancel: "Cancel",
+    submit: "Submit",
+
+    makeARequest: "Make a request for...",
+    blood: "Blood",
+    platelets: "Platelets",
+    plasma: "Plasma",
+    forWhichBloodType: "For which blood type?",
+    choose: "Choose",
+    howManyUnits: "How many units are required?",
+    howCanDonorContact: "How can the donor contact you?",
+    contactName: "Contact name",
+    useYourName: "Use your name",
+    contactNumber: "Contact number",
+    contactDisclaimer: "This information is...",
+    anythingDonorShouldKnow: "Anything the donors should know?",
+    shareStory: "Share a story?",
+    thisIsAnEmergency: "This is an emergency",
+    emergencyDescription: "BloodConnect will prioritise this request to help find donors faster. Please be responsible and only tick if you need donation urgently.",
+    charactersAllowed: "characters allowed",
+    chooseBloodType: "Choose a blood type"
 };
