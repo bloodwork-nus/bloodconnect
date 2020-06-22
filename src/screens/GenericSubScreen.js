@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StatusBar } from "react-native";
+import { View, StatusBar, Dimensions } from "react-native";
 
 import Colors from '../constants/colors';
 
@@ -15,7 +15,8 @@ export default (props) => {
         <View style={{
             flex: 1,
             backgroundColor: backgroundColor || Colors.offGrey,
-            position: "relative"
+            position: "relative",
+            minHeight: Dimensions.get("window").height
         }}>
             {renderStatusBar 
                 ? renderStatusBar() 
