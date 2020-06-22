@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, Keyboard, FlatList, TouchableHighlight, Button } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import moment from "moment";
+import React, { useState } from 'react';
+import { View, StyleSheet, StatusBar, ScrollView, FlatList, KeyboardAvoidingView } from "react-native";
 import { TouchableRipple } from 'react-native-paper';
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
+import Strings from '../constants/strings';
 
-import BottomNavBar from '../components/BottomNavBar';
 import FontText from "../components/FontText";
 import Blobs from '../components/Blobs';
 import Question from "../components/Question";
@@ -15,89 +13,94 @@ import MainOutlineButton from "../components/MainOutlineButton";
 import TextBox from "../components/TextBox";
 import CheckBox from '../components/CheckBox';
 import BottomSheetModal from '../components/BottomSheetModal';
+import NumericUpDown from "../components/NumericUpDown";
 
 const requestTypes = { blood: 1, platelets: 2, plasma: 3 };
 
 export default (props) => {
-    const [requestType, setRequestType] = useState(null);
-    // const [appointmentTime, setAppointmentTime] = useState();
-    const [description, setDescription] = useState("");
-    const [useYourName, setUseYourName] = useState(false);
-    const [isEmergency, setIsEmergency] = useState(false);
-    const [showBottomBar, setShowBottomBar] = useState(true);
-    const [bloodType, setBloodType] = useState();
+    const {
+        requestType,
+        bloodType,
+        numberOfUnits,
+        contactName,
+        useYourName,
+        contactNumber,
+        description,
+        isEmergency
+    } = props.values;
 
     const [isBloodTypeModalVisible, setIsBloodTypeModalVisible] = useState(false);
-    // const [isAppointmentModalVisible, setIsAppointmentModalVisible] = useState(false);
-    // const [dateTimePickerModeAndroid, setDateTimePickerModeAndroid] = useState();
-
-    useEffect(() => {
-        Keyboard.addListener("keyboardWillShow", () => setShowBottomBar(false));
-        Keyboard.addListener("keyboardWillHide", () => setShowBottomBar(true));
-
-        return () => {
-            Keyboard.removeListener("keyboardWillShow", () => setShowBottomBar(false));
-            Keyboard.removeListener("keyboardWillHide", () => setShowBottomBar(true));
-        };
-    });
 
     return (
         <View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="dark-content" translucent={true} />
 
-            <ScrollView contentContainerStyle={styles.content}>
-                <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>Make a request for...</FontText>
+            <KeyboardAvoidingView behavior="height"><ScrollView contentContainerStyle={styles.content}>
+                <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Strings.makeARequest}</FontText>
                 <Blobs
                     color={Colors.blue}
                     active={requestType}
-                    onBlobPress={setRequestType}
+                    onBlobPress={props.handleChange("requestType")}
                     style={{marginVertical: 20}}
                     blobs={[
                         {
                             id: requestTypes.blood,
-                            caption: "Blood"
+                            caption: Strings.blood
                         },
                         {
                             id: requestTypes.platelets,
-                            caption: "Platelets"
+                            caption: Strings.platelets
                         },
                         {
                             id: requestTypes.plasma,
-                            caption: "Plasma"
+                            caption: Strings.plasma
                         }
                     ]}
                 />
 
-                <Question prompt="For which blood type?" content={() => (
-                    <MainOutlineButton caption="Choose" color={Colors.blue} onPress={() => setIsBloodTypeModalVisible(true)} />
+                <Question prompt={Strings.forWhichBloodType} content={() => (
+                    <MainOutlineButton
+                        caption={bloodType || Strings.choose}
+                        color={Colors.blue}
+                        onPress={() => setIsBloodTypeModalVisible(true)}
+                        {...bloodType ? {flavor: "bold"} : null}
+                    />
                 )} style={{marginBottom: 20}} />
 
-                <Question prompt="How much units are required?" content={() => (
-                    <></>
+                <Question prompt={Strings.howManyUnits} content={() => (
+                    <NumericUpDown
+                        value={numberOfUnits}
+                        color={Colors.blue}
+                        onChangeValue={props.handleChange("numberOfUnits")}
+                    />
                 )} style={{marginBottom: 20}} />
 
-                <Question prompt="How can the donor contact you?" content={() => (<>
+                <Question prompt={Strings.howCanDonorContact} content={() => (<>
                     <TextBox 
-                        placeholder="Contact name"
+                        placeholder={Strings.contactName}
                         style={{backgroundColor: Colors.offGrey2}}
+                        onChangeText={props.handleChange("contactName")}
+                        value={contactName}
                     />
 
                     <CheckBox
                         color={Colors.blue}
-                        caption="Use your name"
+                        caption={Strings.useYourName}
                         textColor={Colors.darkBlue}
                         checkedState={useYourName}
-                        onPress={() => setUseYourName(!useYourName)}
+                        onPress={() => props.handleChange("useYourName")(!useYourName)}
                         justifyContent="flex-end"
                         style={{marginVertical: 5}}
                     />
 
                     <TextBox
                         disabled={true}
-                        placeholder="Contact number"
+                        placeholder={Strings.contactNumber}
                         style={{backgroundColor: Colors.offGrey2}}
+                        onChangeText={props.handleChange("contactNumber")}
+                        value={contactNumber}
                     />
-                </>)} style={{marginBottom: 20}} info="This information is..." />
+                </>)} style={{marginBottom: 20}} info={Strings.contactDisclaimer} />
 
                 {/* <Question prompt="Propose an appointment time" content={() => (
                     <MainOutlineButton
@@ -108,84 +111,31 @@ export default (props) => {
                     />
                 )} style={{marginBottom: 20}} /> */}
 
-                <Question prompt="Anything the donors should know?" content={() => (<>
+                <Question prompt={Strings.anythingDonorShouldKnow} content={() => (<>
                     <TextBox 
-                        placeholder="Share a story?"
+                        placeholder={Strings.shareStory}
                         style={{height: 100, backgroundColor: Colors.offGrey2}}
                         multiline={true}
                         textAlignVertical="top"
                         maxLength={95}
-                        onChangeText={setDescription}
+                        onChangeText={props.handleChange("description")}
+                        value={description}
                     />
 
-                    <FontText color={Colors.grey2} size={15} align="right" style={{marginVertical: 10}}>{95 - description.length} characters allowed</FontText>
+                    <FontText color={Colors.grey2} size={15} align="right" style={{marginVertical: 10}}>{95 - description.length} {Strings.charactersAllowed}</FontText>
 
                     <CheckBox
                         color={Colors.red}
-                        caption="This is an emergency"
+                        caption={Strings.thisIsAnEmergency}
                         flavor="semibold"
                         textColor={Colors.red}
-                        checkedState={isEmergency}
-                        onPress={() => setIsEmergency(!isEmergency)}
+                        checkedState={props.values.isEmergency}
+                        onPress={() => props.handleChange("isEmergency")(!isEmergency)}
                         justifyContent="flex-start"
-                        description="BloodConnect will prioritise this request to help find donors faster. Please be responsible and only tick if you need donation urgently."
+                        description={Strings.emergencyDescription}
                     />
                 </>)} />
-            </ScrollView>
-
-            {showBottomBar ? <BottomNavBar /> : null}
-
-            {/* {Platform.OS === "ios" ? 
-                <BottomSheetModal
-                    height={300}
-                    visible={isAppointmentModalVisible}
-                    onClose={() => setIsAppointmentModalVisible(false)}
-                    renderContent={() => (
-                        <View style={styles.appointmentTimeModal}>
-                            <FontText flavor="semibold" size={20} color={Colors.darkBlue} style={{paddingHorizontal: Dimens.screenPaddingHorizontal}}>Propose an appointment time</FontText>
-                            <DateTimePicker
-                                value={appointmentTime || new Date()}
-                                mode="datetime"
-                                onChange={(event, datetime) => setAppointmentTime(datetime)}
-                            />
-                        </View>
-                    )}
-                />
-            : null}
-
-            {Platform.OS === "android" ?
-                <BottomSheetModal
-                    height={300}
-                    visible={isAppointmentModalVisible}
-                    onClose={() => setIsAppointmentModalVisible(false)}
-                    renderContent={() => (
-                        <View style={styles.appointmentTimeModal}>
-                            <FontText flavor="semibold" size={20} color={Colors.darkBlue} style={{paddingHorizontal: Dimens.screenPaddingHorizontal}}>Propose an appointment time</FontText>
-
-                            <TouchableRipple onPress={() => requestAnimationFrame(() => setDateTimePickerModeAndroid("date"))} style={{
-                                justifyContent: "center",
-                                alignItems: "center",
-                                padding: 20
-                            }}>
-                                <FontText>{moment(appointmentTime).format("ddd MMM D, YYYY") || "Pick date"}</FontText>
-                            </TouchableRipple>
-
-                            
-                        </View>
-                    )}
-                />
-            : null}
-
-            {Platform.OS === "android" && dateTimePickerModeAndroid === "date" ?
-                <DateTimePicker
-                    mode="date"
-                    value={appointmentTime || new Date()}
-                    onChange={(event, date) => {
-                        setIsAppointmentModalVisible(false);
-                        if (event.type === "set") setAppointmentTime(date);
-                    }}
-                />
-            : null} */}
+            </ScrollView></KeyboardAvoidingView>
 
             <BottomSheetModal
                 height={400}
@@ -193,7 +143,13 @@ export default (props) => {
                 onClose={() => setIsBloodTypeModalVisible(false)}
                 renderContent={() => (
                     <View style={styles.bloodTypeModal}>
-                        <FontText flavor="semibold" size={20} color={Colors.darkBlue} style={{paddingHorizontal: Dimens.screenPaddingHorizontal}}>Choose a blood type</FontText>
+                        <FontText
+                            flavor="semibold"
+                            size={20}
+                            color={Colors.darkBlue}
+                            style={{paddingHorizontal: Dimens.screenPaddingHorizontal}}
+                        >{Strings.chooseBloodType}</FontText>
+
                         <FlatList
                             data={[
                                 { id: "ap", label: "A+" },
@@ -206,7 +162,13 @@ export default (props) => {
                                 { id: "om", label: "O-" }
                             ]}
                             renderItem={({ item }) => (
-                                <TouchableRipple onPress={() => requestAnimationFrame(() => {setIsBloodTypeModalVisible(false); setBloodType(item.id)})} style={{alignItems: "center", padding: 10}}>
+                                <TouchableRipple
+                                    style={{ alignItems: "center", padding: 10 }}
+                                    onPress={() => requestAnimationFrame(() => {
+                                        setIsBloodTypeModalVisible(false);
+                                        props.handleChange("bloodType")(item.label)
+                                    })}
+                                >
                                     <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.label}</FontText>
                                 </TouchableRipple>
                             )}
