@@ -1,14 +1,20 @@
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, KeyboardAvoidingView } from "react-native";
 
 import GenericSubScreen from "./GenericSubScreen";
 
 export default (props) => {
+    const {
+        isKeyboardAvoiding
+    } = props;
+
     return (
         <GenericSubScreen>
-            <ScrollView contentContainerStyle={styles.content}>
-                {props.children}
-            </ScrollView>
+            <KeyboardAvoidingView behaviour="height" enabled={isKeyboardAvoiding === false ? false : true}>
+                <ScrollView contentContainerStyle={styles.content}>
+                    {props.children}
+                </ScrollView>
+            </KeyboardAvoidingView>
         </GenericSubScreen>
     );
 }
