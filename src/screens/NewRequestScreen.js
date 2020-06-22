@@ -94,7 +94,6 @@ export default (props) => {
                     />
 
                     <TextBox
-                        disabled={true}
                         placeholder={Strings.contactNumber}
                         style={{backgroundColor: Colors.offGrey2}}
                         onChangeText={props.handleChange("contactNumber")}
