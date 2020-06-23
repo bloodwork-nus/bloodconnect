@@ -9,13 +9,14 @@ import Strings from "../constants/strings";
 import GenericSubScreen from "./GenericSubScreen";
 import NewRequestScreen from "./NewRequestScreen";
 import SelectLocationScreen from "./SelectLocationScreen";
+import ReviewRequestScreen from "./ReviewRequestScreen";
 import CompletedRequestScreen from "./CompletedRequestScreen";
 import BottomNavBar from "../components/BottomNavBar";
 import MainWhiteButton from "../components/MainWhiteButton";
 import MainColorButton from "../components/MainColorButton";
 
 export default (props) => {
-    const [currentStep, setCurrentStep] = useState(2);
+    const [currentStep, setCurrentStep] = useState(1);
 
     const [requestType, setRequestType] = useState("");
     const [bloodType, setBloodType] = useState("");
@@ -45,6 +46,8 @@ export default (props) => {
         }
     }
 
+    const jump = (stepIndex) => setCurrentStep(stepIndex);
+
     const steps = [
         <NewRequestScreen handleChange={handleChange} values={{
             requestType,
@@ -60,6 +63,17 @@ export default (props) => {
             locationName,
             locationAddress,
             latitudeLongitude
+        }} />,
+        <ReviewRequestScreen handleChange={handleChange} jump={jump} values={{
+            requestType,
+            bloodType,
+            numberOfUnits,
+            contactName,
+            contactNumber,
+            description,
+            isEmergency,
+            locationName,
+            locationAddress
         }} />,
         <CompletedRequestScreen handleChange={handleChange} />
     ];

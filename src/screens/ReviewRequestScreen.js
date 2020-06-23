@@ -4,88 +4,88 @@ import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
+import Strings from '../constants/strings';
 
 import BottomNavBar from '../components/BottomNavBar';
 import FontText from "../components/FontText";
 import Category from "../components/Category";
 
 export default (props) => {
-    const request = {
-        requestType: "Blood",
-        bloodType: "AB",
-        units: 5,
-        contactName: "Phillmont Muktar",
-        contactNumber: "9641 3313",
-        venue: "Alexandria Hospital",
-        venueAddress: "25 Upper Hill Rd, City Hall, Singapore 100101",
-        appointmentTime: "Thu Jun 22, 2020, 09:52",
-        description: "Requires blood transfusion fast. Can fetch if willing to donate.",
-        isEmergency: true
-    }
+    const {
+        requestType,
+        bloodType,
+        numberOfUnits,
+        contactName,
+        contactNumber,
+        description,
+        isEmergency,
+        locationName,
+        locationAddress
+    } = props.values;
 
     return (
         <View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="dark-content" translucent={true} />
             
             <ScrollView contentContainerStyle={styles.content}>
-                <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>Review your request</FontText>
+                <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Strings.reviewYourRequest}</FontText>
 
                 <Category
-                    title="Request details"
+                    title={Strings.requestDetails}
                     edit={true}
                     style={{marginTop: 20}}
-                    onEdit={() => {}}
+                    onEdit={() => requestAnimationFrame(() => props.jump(1))}
                     content={() => (<>
-                        <FontText size={16} color={Colors.darkBlue}>Requesting for</FontText>
-                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{request.requestType}</FontText>
+                        <FontText size={16} color={Colors.darkBlue}>{Strings.requestingFor}</FontText>
+                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{requestType}</FontText>
                         
-                        <FontText size={16} color={Colors.darkBlue}>Blood type</FontText>
-                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{request.bloodType}</FontText>
+                        <FontText size={16} color={Colors.darkBlue}>{Strings.bloodType}</FontText>
+                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{bloodType}</FontText>
 
-                        <FontText size={16} color={Colors.darkBlue}>Number of units</FontText>
-                        <FontText flavor="semibold" size={18} color={Colors.darkBlue}>{request.units}</FontText>
+                        <FontText size={16} color={Colors.darkBlue}>{Strings.numberOfUnits}</FontText>
+                        <FontText flavor="semibold" size={18} color={Colors.darkBlue}>{numberOfUnits}</FontText>
                     </>)}
                 />
                 
                 <Category
-                    title="Contact details"
+                    title={Strings.contactDetails}
                     edit={true}
                     style={{marginTop: 20}}
-                    onEdit={() => {}}
+                    onEdit={() => requestAnimationFrame(() => props.jump(1))}
                     content={() => (<>
-                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 5}}>{request.contactName}</FontText>
-                        <FontText flavor="medium" size={18} color={Colors.darkBlue}>{request.contactNumber}</FontText>
+                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 5}}>{contactName}</FontText>
+                        <FontText flavor="medium" size={18} color={Colors.darkBlue}>{contactNumber}</FontText>
                     </>)}
                 />
                 
                 <Category
-                    title="Appointment details"
+                    title={Strings.appointmentDetails}
                     edit={true}
                     style={{marginTop: 20}}
-                    onEdit={() => {}}
+                    onEdit={() => requestAnimationFrame(() => props.jump(2))}
                     content={() => (<>
-                        <FontText flavor="semibold" size={18} color={Colors.darkBlue}>{request.venue}</FontText>
-                        <FontText flavor="medium" size={14} color={Colors.darkBlue}>{request.venueAddress}</FontText>
+                        <FontText flavor="semibold" size={18} color={Colors.darkBlue}>{locationName}</FontText>
+                        <FontText flavor="medium" size={14} color={Colors.darkBlue}>{locationAddress}</FontText>
                         
-                        <View style={styles.appointmentTime}>
+                        {/* <View style={styles.appointmentTime}>
                             <MaterialIcon name="schedule" size={Dimens.glyphSize} color={Colors.yellow} />
                             <FontText flavor="semibold" size={17} color={Colors.yellow} style={{marginLeft: 10}}>{request.appointmentTime}</FontText>
-                        </View>
+                        </View> */}
                     </>)}
                 />
                 
-                {request.description || request.isEmergency ?
+                {description || isEmergency ?
                     <Category
-                        title="Additional details"
+                        title={Strings.additionalDetails}
                         edit={true}
                         style={{marginTop: 20}}
-                        onEdit={() => {}}
+                        onEdit={() => requestAnimationFrame(() => props.jump(1))}
                         content={() => (<>
-                            {request.description ? <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{request.description}</FontText> : null}
-                            {request.isEmergency ?
+                            {description ? <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{description}</FontText> : null}
+                            {isEmergency ?
                                 <View style={styles.emergencyBadge}>
                                     <MaterialIcon name="priority-high" size={Dimens.glyphSize} color={Colors.red} />
-                                    <FontText flavor="semibold" size={17} color={Colors.red}>This is an emergency</FontText>
+                                    <FontText flavor="semibold" size={17} color={Colors.red}>{Strings.thisIsAnEmergency}</FontText>
                                 </View>
                             : null}
                         </>)}
