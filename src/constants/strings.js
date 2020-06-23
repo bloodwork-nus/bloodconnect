@@ -55,5 +55,8 @@ export default {
     numberOfUnits: "Number of units",
     contactDetails: "Contact details",
     appointmentDetails: "Appointment details",
-    additionalDetails: "Additional details"
+    additionalDetails: "Additional details",
+
+    allDone: "All done!",
+    requestMadeText: "We have submitted your request, and a donor will contact you soon. Hang in there!"
 };
