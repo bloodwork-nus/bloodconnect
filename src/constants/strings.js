@@ -21,6 +21,7 @@ export default {
     explore: "Explore",
     requests: "Requests",
     searchAnythingHere: "Search anything here",
+    searchHere: "Search here",
     noRequests: "There are currently no requests.",
 
     next: "Next",
@@ -44,5 +45,6 @@ export default {
     thisIsAnEmergency: "This is an emergency",
     emergencyDescription: "BloodConnect will prioritise this request to help find donors faster. Please be responsible and only tick if you need donation urgently.",
     charactersAllowed: "characters allowed",
-    chooseBloodType: "Choose a blood type"
+    chooseBloodType: "Choose a blood type",
+    pickYourLocation: "Pick your location"
 };

@@ -15,7 +15,7 @@ import MainWhiteButton from "../components/MainWhiteButton";
 import MainColorButton from "../components/MainColorButton";
 
 export default (props) => {
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(2);
 
     const [requestType, setRequestType] = useState("");
     const [bloodType, setBloodType] = useState("");
@@ -25,6 +25,9 @@ export default (props) => {
     const [contactNumber, setContactNumber] = useState("");
     const [description, setDescription] = useState("");
     const [isEmergency, setIsEmergency] = useState(false);
+    const [locationName, setLocationName] = useState("");
+    const [locationAddress, setLocationAddress] = useState("");
+    const [latitudeLongitude, setLatitudeLongitude] = useState("");
 
     const handleChange = (variable) => (value) => {
         switch (variable) {
@@ -36,6 +39,9 @@ export default (props) => {
             case "contactNumber": setContactNumber(value); break;
             case "description": setDescription(value); break;
             case "isEmergency": setIsEmergency(value); break;
+            case "locationName": setLocationName(value); break;
+            case "locationAddress": setLocationAddress(value); break;
+            case "latitudeLongitude": setLatitudeLongitude(value); break;
         }
     }
 
@@ -48,9 +54,13 @@ export default (props) => {
             useYourName,
             contactNumber,
             description,
-            isEmergency
+            isEmergency,
         }} />,
-        <SelectLocationScreen handleChange={handleChange} />,
+        <SelectLocationScreen handleChange={handleChange} values={{
+            locationName,
+            locationAddress,
+            latitudeLongitude
+        }} />,
         <CompletedRequestScreen handleChange={handleChange} />
     ];
     
