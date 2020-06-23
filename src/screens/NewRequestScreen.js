@@ -81,6 +81,7 @@ export default (props) => {
                         style={{backgroundColor: Colors.offGrey2}}
                         onChangeText={props.handleChange("contactName")}
                         value={contactName}
+                        autoCapitalize="words"
                     />
 
                     <CheckBox
@@ -98,6 +99,7 @@ export default (props) => {
                         style={{backgroundColor: Colors.offGrey2}}
                         onChangeText={props.handleChange("contactNumber")}
                         value={contactNumber}
+                        keyboardType="phone-pad"
                     />
                 </>)} style={{marginBottom: 20}} info={Strings.contactDisclaimer} />
 
