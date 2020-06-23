@@ -46,5 +46,14 @@ export default {
     emergencyDescription: "BloodConnect will prioritise this request to help find donors faster. Please be responsible and only tick if you need donation urgently.",
     charactersAllowed: "characters allowed",
     chooseBloodType: "Choose a blood type",
-    pickYourLocation: "Pick your location"
+    pickYourLocation: "Pick your location",
+
+    reviewYourRequest: "Review your request",
+    requestDetails: "Request details",
+    requestingFor: "Requesting for",
+    bloodType: "Blood type",
+    numberOfUnits: "Number of units",
+    contactDetails: "Contact details",
+    appointmentDetails: "Appointment details",
+    additionalDetails: "Additional details"
 };
