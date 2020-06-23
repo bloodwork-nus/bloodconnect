@@ -12,12 +12,12 @@ export default (props) => {
     } = props;
 
     return (
-        <View style={{
+        <View style={{...{
             flex: 1,
             backgroundColor: backgroundColor || Colors.offGrey,
             position: "relative",
             minHeight: Dimensions.get("window").height
-        }}>
+        }, ...props.style}}>
             {renderStatusBar 
                 ? renderStatusBar() 
                 : <StatusBar
