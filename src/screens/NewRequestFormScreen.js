@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, BackHandler } from "react-native";
+import { BackHandler } from "react-native";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 import Colors from "../constants/colors";
@@ -10,7 +10,6 @@ import GenericSubScreen from "./GenericSubScreen";
 import NewRequestScreen from "./NewRequestScreen";
 import SelectLocationScreen from "./SelectLocationScreen";
 import ReviewRequestScreen from "./ReviewRequestScreen";
-import CompletedRequestScreen from "./CompletedRequestScreen";
 import BottomNavBar from "../components/BottomNavBar";
 import MainWhiteButton from "../components/MainWhiteButton";
 import MainColorButton from "../components/MainColorButton";
@@ -64,7 +63,7 @@ export default (props) => {
             locationAddress,
             latitudeLongitude
         }} />,
-        <ReviewRequestScreen handleChange={handleChange} jump={jump} values={{
+        <ReviewRequestScreen jump={jump} values={{
             requestType,
             bloodType,
             numberOfUnits,
@@ -74,14 +73,14 @@ export default (props) => {
             isEmergency,
             locationName,
             locationAddress
-        }} />,
-        <CompletedRequestScreen handleChange={handleChange} />
+        }} />
     ];
     
     const numberOfSteps = steps.length;
 
     const nextStep = () => setCurrentStep(currentStep >= numberOfSteps ? numberOfSteps : currentStep + 1);
     const previousStep = () => setCurrentStep(currentStep <= 1 ? 1 : currentStep - 1);
+    const isLastStep = () => currentStep === numberOfSteps
 
     BackHandler.addEventListener("hardwareBackPress", () => {
         previousStep();
@@ -104,10 +103,10 @@ export default (props) => {
                 )}
                 renderLeftButton={() => (
                     <MainColorButton
-                        caption={Strings.next}
+                        caption={isLastStep() ? Strings.submit : Strings.next}
                         color={Colors.blue}
                         textColor={Colors.white}
-                        imageRight={<MaterialIcon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} />}
+                        {...isLastStep() ? null : { imageRight: <MaterialIcon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} /> }}
                         onPress={nextStep}
                     />
                 )}
@@ -115,9 +114,3 @@ export default (props) => {
         </GenericSubScreen>
     );
 }
-
-const styles = StyleSheet.create({
-    form: {
-        
-    }
-});
