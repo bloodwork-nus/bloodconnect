@@ -15,6 +15,7 @@ import MainWhiteButton from "../components/MainWhiteButton";
 import MainColorButton from "../components/MainColorButton";
 
 import * as Requests from "../../utils/requests";
+import * as Authentication from "../../utils/auth";
 
 export default (props) => {
     const { navigation, route } = props;
@@ -104,6 +105,7 @@ export default (props) => {
 
     const submitRequest = () => {
         Requests.newRequest({
+            requester: Authentication.getCurrentUserUid(),
             dateCreated: Date.now(),
             status: Requests.Constants.Status.OPEN,
             requestType,
@@ -119,6 +121,20 @@ export default (props) => {
                     locationAddress,
                     latitudeLongitude
                 }
+            }
+        }, (error) => {
+            if (error) {
+                alert("An error has occurred! " + error);
+                console.log(error);
+            } else {
+                navigation.navigate("CompletedForm", {
+                    configureScreen: {
+                        heading: Strings.allDone,
+                        subtitle: Strings.requestMadeText,
+                        color: Colors.blue,
+                        backButton: Strings.returnHome
+                    }
+                });
             }
         });
     }

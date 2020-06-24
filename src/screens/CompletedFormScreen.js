@@ -11,7 +11,16 @@ import FontText from "../components/FontText";
 import MainOutlineButton from "../components/MainOutlineButton";
 
 export default (props) => {
-    const { configureScreen } = props;
+    const { navigation, route: { params: { configureScreen } } } = props;
+
+    // const configureScreen = {
+    //     heading: Strings.thanks,
+    // subtitle: Strings.donationMadeText,
+    // color: Colors.reddishPurple,
+    // backButton: Strings.returnHome
+    // };
+
+    
 
     return (
         <GenericSubScreen style={styles.screen}>
@@ -34,7 +43,7 @@ export default (props) => {
 
             <MainOutlineButton
                 caption={configureScreen.backButton} 
-                onPress={() => {}}
+                onPress={() => navigation.navigate("Explore")}
                 style={{ marginTop: 20 }}
                 color={configureScreen.color}
                 imageLeft={<MaterialIcon name="arrow-back" size={Dimens.glyphSize} color={configureScreen.color} />}
