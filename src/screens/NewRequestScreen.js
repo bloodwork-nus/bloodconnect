@@ -15,7 +15,7 @@ import CheckBox from '../components/CheckBox';
 import BottomSheetModal from '../components/BottomSheetModal';
 import NumericUpDown from "../components/NumericUpDown";
 
-const requestTypes = { blood: 1, platelets: 2, plasma: 3 };
+import { Constants } from "../../utils/requests";
 
 export default (props) => {
     const {
@@ -44,15 +44,15 @@ export default (props) => {
                     style={{marginVertical: 20}}
                     blobs={[
                         {
-                            id: requestTypes.blood,
+                            id: Constants.RequestTypes.BLOOD,
                             caption: Strings.blood
                         },
                         {
-                            id: requestTypes.platelets,
+                            id: Constants.RequestTypes.PLATELETS,
                             caption: Strings.platelets
                         },
                         {
-                            id: requestTypes.plasma,
+                            id: Constants.RequestTypes.PLASMA,
                             caption: Strings.plasma
                         }
                     ]}
