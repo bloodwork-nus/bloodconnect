@@ -15,18 +15,15 @@ import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
 import GoogleLogo from "../../assets/icons/google.svg";
 
-import firebase from "../../utils/firebase";
+import * as Authentication from "../../utils/auth";
 
 export default function LoginScreen(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleLogin = () => {
-        firebase.auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(user => props.navigation.navigate("Explore", { userName: user.user.displayName, isVerified: user.user.emailVerified }))
-            .catch(error => alert(`LoginScreen.js: ${error}`));
-    };
+    const handleLogin = () => Authentication.signIn(email, password,
+        (user) => props.navigation.navigate("Explore"),
+        (error) => alert(`LoginScreen.js: ${error}`));
 
     return (
         <KeyboardAvoidingView><ScrollView bounces={false}><View style={styles.screen}>
