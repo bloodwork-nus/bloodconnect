@@ -25,8 +25,7 @@ import sampleRequests from "../constants/sampleRequests";
 import * as Authentication from "../../utils/auth";
 
 export default function ExploreScreen(props) {
-    const { navigation, route } = props;
-    const { isGuest } = route.params;
+    const { navigation, route: { params } } = props;
     // TODO: Set branch statements for actions for a Guest account
 
     const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
@@ -224,7 +223,7 @@ export default function ExploreScreen(props) {
 
             <SafeAreaView style={{...styles.mapTopOverlay, right: Dimens.bottomSheetPaddingHorizontal}}>
                 <MainWhiteButton
-                    caption={isGuest ? "Guest" : Authentication.getCurrentUserName().split(" ")[0]}
+                    caption={params && params.isGuest ? "Guest" : Authentication.getCurrentUserName().split(" ")[0]}
                     style={styles.userButton}
                     imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}
                     onPress={() => navigation.navigate("UserProfile")}
