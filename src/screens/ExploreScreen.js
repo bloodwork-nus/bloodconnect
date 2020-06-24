@@ -228,7 +228,7 @@ export default function ExploreScreen(props) {
 
             <SafeAreaView style={{...styles.mapTopOverlay, right: Dimens.bottomSheetPaddingHorizontal}}>
                 <MainWhiteButton
-                    caption={userName}
+                    caption={Authentication.getCurrentUserName().split(" ")[0]}
                     style={styles.userButton}
                     imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}
                     onPress={() => navigation.navigate("UserProfile")}
