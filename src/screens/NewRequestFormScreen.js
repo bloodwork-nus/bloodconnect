@@ -82,6 +82,26 @@ export default (props) => {
     const previousStep = () => setCurrentStep(currentStep <= 1 ? 1 : currentStep - 1);
     const isLastStep = () => currentStep === numberOfSteps
 
+    const validateAndNextStep = () => {
+        switch (currentStep) {
+            case 1:
+                if (requestType === "") { alert("Select a request type"); break; }
+                if (bloodType === "") { alert("Select a blood type"); break; }
+                if (contactName === "") { alert("Specify a contact name"); break; } 
+                if (contactNumber === "") { alert("Specify a contact number"); break; }
+                nextStep(); break;
+            case 2:
+                if (locationName === "") { alert("Select a location"); break; }
+                if (locationAddress === "") { alert("Select a location"); break; }
+                if (latitudeLongitude === "") { alert("Select a location"); break; }
+                nextStep(); break;
+        }
+    }
+
+    const submitRequest = () => {
+        alert("ay");
+    }
+
     BackHandler.addEventListener("hardwareBackPress", () => {
         previousStep();
         return true;
@@ -107,7 +127,7 @@ export default (props) => {
                         color={Colors.blue}
                         textColor={Colors.white}
                         {...isLastStep() ? null : { imageRight: <MaterialIcon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} /> }}
-                        onPress={nextStep}
+                        onPress={isLastStep() ? submitRequest : validateAndNextStep}
                     />
                 )}
             />
