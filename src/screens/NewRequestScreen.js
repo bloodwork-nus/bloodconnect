@@ -160,7 +160,9 @@ export default (props) => {
                                 { id: "abp", label: "AB+" },
                                 { id: "abm", label: "AB-" },
                                 { id: "op", label: "O+" },
-                                { id: "om", label: "O-" }
+                                { id: "om", label: "O-" },
+                                { id: "all", label: "Any blood groups" },
+                                { id: "other", label: "Other (specify in description)" }
                             ]}
                             renderItem={({ item }) => (
                                 <TouchableRipple
