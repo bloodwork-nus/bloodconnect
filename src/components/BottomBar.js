@@ -43,7 +43,7 @@ export default function BottomBar(props) {
                 <RoundButton
                     style={styles.primaryButton}
                     image={<Icon name="add" color={Colors.white} size={Dimens.roundButtonImageSize} />} 
-                    onPress={() => {}}
+                    onPress={props.onPrimaryButtonPress}
                 />
             </View>
         </View>
