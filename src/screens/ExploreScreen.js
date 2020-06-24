@@ -18,12 +18,14 @@ import MainWhiteButton from "../components/MainWhiteButton";
 import MediumText from '../components/MediumText';
 import RegularText from '../components/RegularText';
 import FontText from "../components/FontText";
-import firebase from "../../utils/firebase";
-
-import sampleRequests from "../constants/sampleRequests";
 import LocationCard from '../components/LocationCard';
 
+import sampleRequests from "../constants/sampleRequests";
+
+import * as Authentication from "../../utils/auth";
+
 export default function ExploreScreen(props) {
+    const { navigation, route } = props;
     // const { userName, isVerified } = props.route.params;
 
     // if (!isVerified) {
@@ -112,8 +114,8 @@ export default function ExploreScreen(props) {
     const userName = "Phillmont";
 
     const handleLogout = () => {
-        firebase.auth().signOut();
-        props.navigation.navigate("Login");
+        Authentication.signOut();
+        navigation.navigate("Login");
     };
 
     const renderListItem = ({ item, index, separators }) => {
@@ -229,7 +231,7 @@ export default function ExploreScreen(props) {
                     caption={userName}
                     style={styles.userButton}
                     imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}
-                    onPress={handleLogout}
+                    onPress={() => navigation.navigate("UserProfile")}
                     height={40}
                 />
             </SafeAreaView>
@@ -260,6 +262,7 @@ export default function ExploreScreen(props) {
                     setBottomBarSelectedButton("requests");
                     bottomSheetRef.snapTo(0);
                 }}
+                onPrimaryButtonPress={() => navigation.navigate("NewRequestForm")}
             />
         </View>
     );
