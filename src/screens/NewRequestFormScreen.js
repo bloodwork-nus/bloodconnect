@@ -17,6 +17,8 @@ import MainColorButton from "../components/MainColorButton";
 import * as Requests from "../../utils/requests";
 
 export default (props) => {
+    const { navigation, route } = props;
+
     const [currentStep, setCurrentStep] = useState(1);
 
     const [requestType, setRequestType] = useState("");
@@ -137,7 +139,7 @@ export default (props) => {
                     <MainWhiteButton
                         shadow={false}
                         caption={Strings.cancel}
-                        onPress={() => {}}
+                        onPress={() => navigation.goBack()}
                     />
                 )}
                 renderLeftButton={() => (

@@ -17,6 +17,8 @@ import MainButton from "../components/MainButton";
 import BottomSheetModal from "../components/BottomSheetModal";
 
 export default (props) => {
+    const { navigation, route } = props;
+
     const [bloodType, setBloodType] = useState("");
     const [contactName, setContactName] = useState("");
     const [contactNumber, setContactNumber] = useState("");
@@ -83,7 +85,7 @@ export default (props) => {
                         <MainWhiteButton
                             shadow={false}
                             caption={Strings.cancel}
-                            onPress={() => {}}
+                            onPress={() => navigation.goBack()}
                         />
                     )}
                     renderLeftButton={() => (
