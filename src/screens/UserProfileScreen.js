@@ -1,30 +1,24 @@
 import React from "react";
 import { StyleSheet, View, StatusBar, ScrollView } from "react-native";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { TouchableRipple } from "react-native-paper";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
 
 import FontText from "../components/FontText";
-import Blobs from '../components/Blobs';
-import { TouchableRipple } from "react-native-paper";
-import { TouchableHighlight } from "react-native-gesture-handler";
+
+import * as Authentication from "../../utils/auth";
 
 export default (props) => {
-    const user = {
-        name: "Phillmont Muktar",
-        email: "phillmont@bloodwork.org",
-        isVerified: false
-    };
-
     return (
         <View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="dark-content" translucent={true} />
 
             <ScrollView contentContainerStyle={styles.content}>
-                <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{user.name}</FontText>
-                <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{user.email}</FontText>
-                {user.isVerified ? 
+                <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Authentication.getCurrentUser().displayName}</FontText>
+                <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{Authentication.getCurrentUser().email}</FontText>
+                {Authentication.getCurrentUser().emailVerified ? 
                     <View style={styles.badge}>
                         <MaterialCommunityIcon name="check-circle-outline" size={25} color={Colors.green} />
                         <FontText flavor="medium" size={15} color={Colors.green} style={{marginLeft: 5}}>Verified</FontText>
