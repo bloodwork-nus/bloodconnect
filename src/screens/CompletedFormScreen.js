@@ -11,6 +11,8 @@ import FontText from "../components/FontText";
 import MainOutlineButton from "../components/MainOutlineButton";
 
 export default (props) => {
+    const { configureScreen } = props;
+
     return (
         <GenericSubScreen style={styles.screen}>
             <MaterialIcon name="check-circle" color={Colors.green} size={70} />
@@ -21,21 +23,21 @@ export default (props) => {
                 size={Dimens.heading1}
                 align="center"
                 style={{ marginTop: 20 }}
-            >{Strings.allDone}</FontText>
+            >{configureScreen.heading}</FontText>
 
             <FontText
                 color={Colors.darkBlue}
                 size={Dimens.body1}
                 align="center"
                 style={{ marginTop: 5 }}
-            >{Strings.requestMadeText}</FontText>
+            >{configureScreen.subtitle}</FontText>
 
             <MainOutlineButton
-                caption="Return home" 
+                caption={configureScreen.backButton} 
                 onPress={() => {}}
                 style={{ marginTop: 20 }}
-                color={Colors.blue}
-                imageLeft={<MaterialIcon name="arrow-back" size={Dimens.glyphSize} color={Colors.blue} />}
+                color={configureScreen.color}
+                imageLeft={<MaterialIcon name="arrow-back" size={Dimens.glyphSize} color={configureScreen.color} />}
             />
         </GenericSubScreen>
     );

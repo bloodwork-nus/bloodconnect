@@ -63,5 +63,8 @@ export default {
     fillYourParticulars: "Fill your particulars",
     whatsYourBloodType: "What's your blood type?",
     whatsYourName: "What's your name?",
-    howCanRequesterContact: "How can the requester contact you?"
+    howCanRequesterContact: "How can the requester contact you?",
+    returnHome: "Return home",
+    thanks: "Thanks!",
+    donationMadeText: "We have submitted your availability, and the requester will contact you soon. Thanks!"
 };
