@@ -58,5 +58,10 @@ export default {
     additionalDetails: "Additional details",
 
     allDone: "All done!",
-    requestMadeText: "We have submitted your request, and a donor will contact you soon. Hang in there!"
+    requestMadeText: "We have submitted your request, and a donor will contact you soon. Hang in there!",
+
+    fillYourParticulars: "Fill your particulars",
+    whatsYourBloodType: "What's your blood type?",
+    whatsYourName: "What's your name?",
+    howCanRequesterContact: "How can the requester contact you?"
 };
