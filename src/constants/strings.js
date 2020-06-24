@@ -17,6 +17,7 @@ export default {
     signInWithGoogle: "Sign in with Google",
     createANewAccount: "Create a new account",
     joinUs: "Join us",
+    logInAsGuest: "Log in as guest",
 
     explore: "Explore",
     requests: "Requests",

@@ -74,7 +74,17 @@ export default function LoginScreen(props) {
                         imageLeft={<GoogleLogo width={"100%"} height={"100%"} />}
                     />
                     
-                    <MainOutlineButton caption={Strings.createANewAccount} onPress={() => props.navigation.navigate("CreateAccount")} />
+                    <MainOutlineButton
+                        caption={Strings.createANewAccount}
+                        onPress={() => props.navigation.navigate("CreateAccount")}
+                        style={{marginBottom: Dimens.bodyMarginVertical}}
+                    />
+
+                    <MainOutlineButton
+                        caption={Strings.logInAsGuest}
+                        onPress={() => props.navigation.navigate("Explore", { isGuest: true })}
+                        imageRight={<Icon name="arrow-forward" color={Colors.darkBlue} size={Dimens.glyphSize} />}
+                    />
                 </View>
             </View>
         </View></ScrollView></KeyboardAvoidingView>

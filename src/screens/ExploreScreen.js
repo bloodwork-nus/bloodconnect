@@ -26,11 +26,9 @@ import * as Authentication from "../../utils/auth";
 
 export default function ExploreScreen(props) {
     const { navigation, route } = props;
-    // const { userName, isVerified } = props.route.params;
+    const { isGuest } = route.params;
+    // TODO: Set branch statements for actions for a Guest account
 
-    // if (!isVerified) {
-    //     alert("You are not verified! Please verify your email address.");
-    // }
     const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
     const [hasPermission, setHasPermission] = useState(null);
@@ -110,8 +108,6 @@ export default function ExploreScreen(props) {
             </Callout>
         </Marker>
     );
-
-    const userName = "Phillmont";
 
     const handleLogout = () => {
         Authentication.signOut();
@@ -228,7 +224,7 @@ export default function ExploreScreen(props) {
 
             <SafeAreaView style={{...styles.mapTopOverlay, right: Dimens.bottomSheetPaddingHorizontal}}>
                 <MainWhiteButton
-                    caption={Authentication.getCurrentUserName().split(" ")[0]}
+                    caption={isGuest ? "Guest" : Authentication.getCurrentUserName().split(" ")[0]}
                     style={styles.userButton}
                     imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}
                     onPress={() => navigation.navigate("UserProfile")}
