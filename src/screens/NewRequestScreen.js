@@ -166,7 +166,7 @@ export default (props) => {
                             ]}
                             renderItem={({ item }) => (
                                 <TouchableRipple
-                                    style={{ alignItems: "center", padding: 10 }}
+                                    style={{ alignItems: "flex-start", paddingVertical: 10, paddingHorizontal: Dimens.screenPaddingHorizontal }}
                                     onPress={() => requestAnimationFrame(() => {
                                         setIsBloodTypeModalVisible(false);
                                         props.handleChange("bloodType")(item.label)
@@ -176,7 +176,9 @@ export default (props) => {
                                 </TouchableRipple>
                             )}
                             ListFooterComponent={<View />}
-                            ListFooterComponentStyle={{height: 100}}
+                            ListFooterComponentStyle={{ height: 100 }}
+                            ListHeaderComponent={<View />}
+                            ListHeaderComponentStyle={{ height: 10 }}
                         />
                     </View>
                 )}
