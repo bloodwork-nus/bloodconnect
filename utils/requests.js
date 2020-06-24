@@ -12,9 +12,9 @@ export const Constants = {
     }
 };
 
-export const newRequest = (request) => {
+export const newRequest = (request, callback = () => {}) => {
     // TODO: Set callback for push
-    const newRequest = firebase.database().ref("requests").push(request).key
+    const newRequest = firebase.database().ref("requests").push(request, callback).key;
     //firebase.database().ref("users/").
     return newRequest;
 }
