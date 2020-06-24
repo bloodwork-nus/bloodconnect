@@ -1,35 +1,121 @@
 import React from "react";
-import { StyleSheet, View, StatusBar, ScrollView } from "react-native";
+import { StyleSheet, View, StatusBar, ScrollView, SectionList, TouchableHighlight } from "react-native";
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { TouchableRipple } from "react-native-paper";
+import Constants from "expo-constants";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
+import Strings from '../constants/strings';
 
 import FontText from "../components/FontText";
 
 import * as Authentication from "../../utils/auth";
 
+const renderListItem = ({ item, index, section, separators }) => (
+    <TouchableHighlight
+        activeOpacity={0.95}
+        underlayColor={Colors.black}
+        onPress={() => requestAnimationFrame(item.onPress)}
+    ><View style={styles.menuItem}>
+        <FontText size={17} color={item.color || Colors.black} numberOfLines={1}>{item.label}</FontText>
+    </View></TouchableHighlight>
+);
+
+const renderListSectionHeader = ({ section: { title } }) => (
+    <FontText flavor="semibold" size={15} style={styles.listSectionHeader}>{title}</FontText>
+);
+
 export default (props) => {
+    const { navigation, route: { params } } = props;
+
+    const settings = [
+        {
+            title: "Account preferences",
+            data: [
+                {
+                    id: "changeName",
+                    label: "Change user name",
+                    onPress: () => {}
+                },
+                {
+                    id: "changePassword",
+                    label: "Change password",
+                    onPress: () => {}
+                },
+                {
+                    id: "changeEmailAddress",
+                    label: "Change email address",
+                    onPress: () => {}
+                },
+                {
+                    id: "changePhoneNumber",
+                    label: "Change phone number",
+                    onPress: () => {}
+                }
+            ]
+        },
+        {
+            title: "Danger zone!",
+            data: [
+                {
+                    id: "signOut",
+                    label: "Sign out",
+                    color: Colors.red,
+                    onPress: () => Authentication.signOut()
+                        .then(() => navigation.navigate("Login"))
+                        .catch((error) => alert(`UserProfileScreen.js: ${error}`))
+                },
+                {
+                    id: "deleteAccount",
+                    label: "Delete my account",
+                    color: Colors.red,
+                    onPress: () => {}
+                }
+            ]
+        }
+    ];
+
     return (
         <View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="dark-content" translucent={true} />
 
-            <ScrollView contentContainerStyle={styles.content}>
-                <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Authentication.getCurrentUser().displayName}</FontText>
-                <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{Authentication.getCurrentUser().email}</FontText>
-                {Authentication.getCurrentUser().emailVerified ? 
-                    <View style={styles.badge}>
-                        <MaterialCommunityIcon name="check-circle-outline" size={25} color={Colors.green} />
-                        <FontText flavor="medium" size={15} color={Colors.green} style={{marginLeft: 5}}>Verified</FontText>
+            <SectionList
+                sections={settings}
+                renderItem={renderListItem}
+                renderSectionHeader={renderListSectionHeader}
+                ItemSeparatorComponent={({ highlighted, leadingItem }) => (
+                    <View style={styles.menuItemSeparator}>
+                        <View style={{ backgroundColor: Colors.white, width: 30, height: 1 }} />
                     </View>
-                :
-                    <TouchableRipple borderless={true} onPress={() => {}}><View style={styles.badge}>
-                        <MaterialCommunityIcon name="alert-circle-outline" size={25} color={Colors.yellow} />
-                        <FontText flavor="medium" size={15} color={Colors.yellow} style={{marginLeft: 5}}>Verify email</FontText>
-                    </View></TouchableRipple>
+                )}
+                ListFooterComponent={
+                    <View style={{ height: 100 }}>
+                        <FontText flavor="medium" size={14} style={styles.listSectionHeader} color={Colors.grey4}>
+                            {`${Constants.manifest.name} version ${Constants.manifest.version}`}
+                        </FontText>
+                    </View>
                 }
-            </ScrollView>
+                style={styles.content}
+                ListHeaderComponent={({ highlighted, leadingItem }) => (
+                    <View style={styles.userProfile}>
+                        <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Authentication.getCurrentUser().displayName}</FontText>
+                        <FontText size={17} color={Colors.darkBlue} style={{ marginBottom: 10 }}>{Authentication.getCurrentUser().email}</FontText>
+                        {Authentication.getCurrentUser().emailVerified ? 
+                            <View style={styles.badge}>
+                                <MaterialCommunityIcon name="check-circle-outline" size={25} color={Colors.green} />
+                                <FontText flavor="medium" size={15} color={Colors.green} style={{ marginLeft: 5 }}>Verified</FontText>
+                            </View>
+                        :
+                            <TouchableRipple borderless={true} onPress={() => {}}><View style={styles.badge}>
+                                <MaterialCommunityIcon name="alert-circle-outline" size={25} color={Colors.yellow} />
+                                <FontText flavor="medium" size={15} color={Colors.yellow} style={{ marginLeft: 5 }}>Verify email</FontText>
+                            </View></TouchableRipple>
+                        }
+                    </View>
+                )}
+                
+            />
         </View>
     );
 }
@@ -42,7 +128,6 @@ const styles = StyleSheet.create({
 
     content: {
         backgroundColor: Colors.offGrey,
-        paddingHorizontal: Dimens.screenPaddingHorizontal,
         paddingTop: 70,
         paddingBottom: 100
     },
@@ -50,5 +135,29 @@ const styles = StyleSheet.create({
     badge: {
         flexDirection: "row",
         alignItems: "center"
+    },
+
+    menuItemSeparator: {
+        height: 1,
+        backgroundColor: Colors.offGrey2
+    },
+
+    listSectionHeader: {
+        marginTop: 15,
+        marginBottom: 10,
+        marginHorizontal: 30
+    },
+
+    menuItem: {
+        height: 50,
+        backgroundColor: Colors.white,
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 30
+    },
+
+    userProfile: {
+        paddingHorizontal: Dimens.screenPaddingHorizontal,
+        paddingBottom: 20
     }
 });
