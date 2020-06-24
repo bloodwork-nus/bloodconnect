@@ -14,6 +14,8 @@ import BottomNavBar from "../components/BottomNavBar";
 import MainWhiteButton from "../components/MainWhiteButton";
 import MainColorButton from "../components/MainColorButton";
 
+import * as Requests from "../../utils/requests";
+
 export default (props) => {
     const [currentStep, setCurrentStep] = useState(1);
 
@@ -99,7 +101,24 @@ export default (props) => {
     }
 
     const submitRequest = () => {
-        alert("ay");
+        Requests.newRequest({
+            dateCreated: Date.now(),
+            status: Requests.Constants.Status.OPEN,
+            requestType,
+            payload: {
+                bloodType,
+                numberOfUnits,
+                contactName,
+                contactNumber,
+                description,
+                isEmergency,
+                location: {
+                    locationName,
+                    locationAddress,
+                    latitudeLongitude
+                }
+            }
+        });
     }
 
     BackHandler.addEventListener("hardwareBackPress", () => {
