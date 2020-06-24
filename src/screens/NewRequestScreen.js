@@ -175,6 +175,8 @@ export default (props) => {
                                     <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.label}</FontText>
                                 </TouchableRipple>
                             )}
+                            ListFooterComponent={<View />}
+                            ListFooterComponentStyle={{height: 100}}
                         />
                     </View>
                 )}
