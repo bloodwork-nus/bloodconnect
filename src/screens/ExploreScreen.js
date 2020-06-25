@@ -33,6 +33,7 @@ export default function ExploreScreen(props) {
     const [requestToShow, setRequestToShow] = useState();
     const [bottomBarSelectedButton, setBottomBarSelectedButton] = useState("explore");
     const [requests, setRequests] = useState({ });
+    const [loadingLocation, setLoadingLocation] = useState(false);
 
     useEffect(() => {
         firebase.database().ref("requests").on("value", (snapshot) => {
@@ -49,6 +50,8 @@ export default function ExploreScreen(props) {
     }
 
     const getCurrentLocation = async () => {
+        setLoadingLocation(true);
+
         const location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest });
         const region = {
             latitude: location.coords.latitude - 0.01,
@@ -59,7 +62,7 @@ export default function ExploreScreen(props) {
 
         setCurrentLocation(region);
         mapViewRef.current.animateToRegion(region);
-        console.log(region);
+        setLoadingLocation(false);
     }
 
     useEffect(() => { askForPermission(); });
@@ -208,7 +211,11 @@ export default function ExploreScreen(props) {
 
             <SafeAreaView style={{...styles.mapTopOverlay, left: Dimens.bottomSheetPaddingHorizontal}}>
                 <RoundWhiteButton
-                    image={<Icon name="my-location" color={Colors.darkBlue} size={Dimens.glyphSize} />}
+                    image={
+                        loadingLocation
+                        ? <ActivityIndicator size={Dimens.glyphSize} color={Colors.blue} />
+                        : <Icon name="my-location" color={Colors.darkBlue} size={Dimens.glyphSize} />
+                    }
                     onPress={getCurrentLocation}
                 />
             </SafeAreaView>
