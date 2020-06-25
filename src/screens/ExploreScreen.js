@@ -22,6 +22,7 @@ import LocationCard from '../components/LocationCard';
 
 import sampleRequests from "../constants/sampleRequests";
 
+import firebase from "../../utils/firebase";
 import * as Authentication from "../../utils/auth";
 
 export default function ExploreScreen(props) {
@@ -33,6 +34,13 @@ export default function ExploreScreen(props) {
     const [hasPermission, setHasPermission] = useState(null);
     const [requestToShow, setRequestToShow] = useState();
     const [bottomBarSelectedButton, setBottomBarSelectedButton] = useState("explore");
+    const [requests, setRequests] = useState({ });
+
+    useEffect(() => {
+        firebase.database().ref("requests").on("value", (snapshot) => {
+            setRequests(snapshot.val());
+        });
+    }, []);
 
     let mapViewRef = useRef(null);
     let bottomSheetRef;
@@ -91,22 +99,34 @@ export default function ExploreScreen(props) {
         }
     ];
 
-    const renderMarker = (request) => (
-        <Marker
-            key={request.id}
-            coordinate={{latitude: request.latitude, longitude: request.longitude}}
-            calloutOffset={{x: 0, y: 10}}
-            onPress={() => {bottomSheetRef.snapTo(2); setRequestToShow(request); mapViewRef.current.animateToRegion({
-                latitude: request.latitude - 0.01, longitude: request.longitude,latitudeDelta: 0.02,
-                longitudeDelta: 0.03
-            })}}
-        >
-            <Icon name="location-on" color={Colors.red} size={Dimens.glyphSize} />
-            <Callout tooltip={true} style={styles.callout}>
-                <FontText flavor="medium" color={Colors.blue} size={15} numberOfLines={1}>{request.location}</FontText>
-            </Callout>
-        </Marker>
-    );
+    const renderMarker = (id) => {
+        const requestItem = requests[id];
+        const {
+            bloodType,
+            contactName,
+            contactNumber,
+            description,
+            isEmergency,
+            location: { locationName, locationAddress, latitudeLongitude: { latitude, longitude } },
+            numberOfUnits
+        } = requestItem.payload;
+
+        return (
+            <Marker
+                key={id}
+                coordinate={{latitude: latitude, longitude: longitude}}
+                onPress={() => {bottomSheetRef.snapTo(2); setRequestToShow(requestItem); mapViewRef.current.animateToRegion({
+                    latitude: latitude - 0.01, longitude: longitude,latitudeDelta: 0.02,
+                    longitudeDelta: 0.03
+                })}}
+            >
+                <Icon name="location-on" color={Colors.red} size={Dimens.glyphSize} />
+                <Callout tooltip={true} style={styles.callout}>
+                    <FontText flavor="medium" color={Colors.blue} size={15} numberOfLines={1}>{locationName}</FontText>
+                </Callout>
+            </Marker>
+        )
+    }
 
     const handleLogout = () => {
         Authentication.signOut();
@@ -114,46 +134,53 @@ export default function ExploreScreen(props) {
     };
 
     const renderListItem = ({ item, index, separators }) => {
-        let emergency = item.isEmergency ? <Icon name="priority-high" color={Colors.red} size={Dimens.glyphSize} /> : null;
-        let venueTypeIcon;
+        const requestItem = requests[item];
+        const {
+            bloodType,
+            isEmergency,
+            location
+        } = requestItem.payload;
 
-        switch (item.venueType) {
-            case "hospital":
-                venueTypeIcon = <Icon name="local-hospital" color={Colors.blue} size={Dimens.glyphSize} />
-                break;
-            case "bloodbank":
-                venueTypeIcon = <Icon name="home" color={Colors.red} size={Dimens.glyphSize} />
-                break;
-            case "institution":
-                venueTypeIcon = <CommunityIcon name="office-building" color={Colors.grey4} size={Dimens.glyphSize} />
-                break;
-            case "event":
-                venueTypeIcon = <Icon name="event" color={Colors.yellow} size={Dimens.glyphSize} />
-                break;
-        };
+        let emergency = isEmergency ? <Icon name="priority-high" color={Colors.red} size={Dimens.glyphSize} /> : null;
+        // let venueTypeIcon;
 
-        let distance;
+        // switch (item.venueType) {
+        //     case "hospital":
+        //         venueTypeIcon = <Icon name="local-hospital" color={Colors.blue} size={Dimens.glyphSize} />
+        //         break;
+        //     case "bloodbank":
+        //         venueTypeIcon = <Icon name="home" color={Colors.red} size={Dimens.glyphSize} />
+        //         break;
+        //     case "institution":
+        //         venueTypeIcon = <CommunityIcon name="office-building" color={Colors.grey4} size={Dimens.glyphSize} />
+        //         break;
+        //     case "event":
+        //         venueTypeIcon = <Icon name="event" color={Colors.yellow} size={Dimens.glyphSize} />
+        //         break;
+        // };
 
-        if (item.distance > 1000) {
-            distance = (item.distance / 1000) + "km";
-        } else {
-            distance = item.distance + "m";
-        }
+        // let distance;
+
+        // if (item.distance > 1000) {
+        //     distance = (item.distance / 1000) + "km";
+        // } else {
+        //     distance = item.distance + "m";
+        // }
 
         return (
             <TouchableOpacity onPress={() => {}}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
-                    <BoldText color={Colors.darkBlue} size={25}>{item.bloodType}</BoldText>
+                    <BoldText color={Colors.darkBlue} size={25}>{bloodType}</BoldText>
                 </View>
 
                 <View style={styles.requestItemDetails}>
-                    <MediumText color={Colors.darkBlue} size={16} numberOfLines={1} >{item.venue}</MediumText>
-                    <RegularText color={Colors.lightGrey3} size={14}>{distance}</RegularText>
+                    <MediumText color={Colors.darkBlue} size={16} numberOfLines={1} >{location.locationName}</MediumText>
+                    <RegularText color={Colors.lightGrey3} size={14}>{location.locationAddress}</RegularText>
                 </View>
 
                 <View style={styles.requestItemIcons}>
                     {emergency}
-                    {venueTypeIcon}
+                    {/* {venueTypeIcon} */}
                 </View>
             </View></TouchableOpacity>
         );
@@ -179,14 +206,14 @@ export default function ExploreScreen(props) {
     };
 
     const renderContent = () => {
-        sampleRequests.sort((a, b) => a.distance - b.distance);
+        // sampleRequests.sort((a, b) => a.distance - b.distance);
 
         return (
             <View style={styles.bottomSheetContent}>
                 <FlatList
-                    keyExtractor={item => item.key.toString()}
+                    keyExtractor={id => id.toString()}
                     renderItem={renderListItem}
-                    data={sampleRequests}
+                    data={Object.keys(requests)}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
                     bounces={true}
                     ListEmptyComponent={<MediumText style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</MediumText>}
@@ -212,7 +239,7 @@ export default function ExploreScreen(props) {
                 }}
                 onPanDrag={() => bottomSheetRef.snapTo(2)}
                 moveOnMarkerPress={false}
-            >{markers.map(renderMarker)}</MapView>
+            >{Object.keys(requests).map(renderMarker)}</MapView>
 
             <SafeAreaView style={{...styles.mapTopOverlay, left: Dimens.bottomSheetPaddingHorizontal}}>
                 <RoundWhiteButton

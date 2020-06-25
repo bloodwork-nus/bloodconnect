@@ -7,17 +7,27 @@ import Dimens from '../constants/dimens';
 import FontText from "../components/FontText";
 import MainButton from "../components/MainButton";
 
-export default ({ request }) => {    
+export default ({ request }) => {
+    const {
+        bloodType,
+        contactName,
+        contactNumber,
+        description,
+        isEmergency,
+        location: { locationName, locationAddress, latitudeLongitude: { latitude, longitude } },
+        numberOfUnits
+    } = request.payload;
+
     return (
         <View style={styles.container}><View style={styles.locationCard}>
-            <FontText flavor="medium" size={19} color={Colors.darkBlue} style={{marginBottom: Platform.OS === "ios" ? 3 : 0}}>{request.location}</FontText>
-            <FontText size={13} color={Colors.lightGrey3} numberOfLines={1} style={{marginBottom: Platform.OS === "ios" ? 7 : 5}}>{request.address}</FontText>
-            <FontText size={16} color={Colors.darkBlue}>{request.description}</FontText>
+            <FontText flavor="medium" size={19} color={Colors.darkBlue} style={{marginBottom: Platform.OS === "ios" ? 3 : 0}}>{locationName}</FontText>
+            <FontText size={13} color={Colors.lightGrey3} numberOfLines={1} style={{marginBottom: Platform.OS === "ios" ? 7 : 5}}>{locationAddress}</FontText>
+            <FontText size={16} color={Colors.darkBlue}>{description}</FontText>
 
             <View style={styles.badges}>
-                <FontText flavor="bold" size={30} color={Colors.darkBlue}>{request.bloodType}</FontText>
+                <FontText flavor="bold" size={30} color={Colors.darkBlue}>{bloodType}</FontText>
 
-                {request.isEmergency ?
+                {isEmergency ?
                     <FontText flavor="bold" size={15} color={Colors.red}>EMERGENCY</FontText>
                 : null}
             </View>
