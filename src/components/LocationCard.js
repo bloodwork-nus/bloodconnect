@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         alignSelf: "center",
         bottom: Dimens.bottomBarHeight + Dimens.bottomSheetHeaderHeight + 30,
+        elevation: 0
     },
 
     locationCard: {
