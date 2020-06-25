@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, TouchableOpacity, TouchableWithoutFeedback, Platform } from "react-native";
+import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, TouchableOpacity, ActivityIndicator, Platform } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -135,10 +135,14 @@ export default function ExploreScreen(props) {
         //     distance = item.distance + "m";
         // }
 
+        let renderedBloodType = bloodType;
+        if (bloodType === "Any blood groups") renderedBloodType = "Any";
+        if (bloodType === "Others (specify in description)") renderedBloodType = "*";
+
         return (
             <TouchableOpacity onPress={() => {}}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
-                    <BoldText color={Colors.darkBlue} size={25}>{bloodType}</BoldText>
+                    <BoldText color={Colors.darkBlue} size={25}>{renderedBloodType}</BoldText>
                 </View>
 
                 <View style={styles.requestItemDetails}>
@@ -328,7 +332,7 @@ const styles = StyleSheet.create({
     },
     
     requestItemBloodType: {
-        width: 40,
+        width: 50,
         flexDirection: "row",
         justifyContent: "flex-start",
         //backgroundColor: "red",
