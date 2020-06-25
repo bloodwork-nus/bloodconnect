@@ -20,8 +20,6 @@ import RegularText from '../components/RegularText';
 import FontText from "../components/FontText";
 import LocationCard from '../components/LocationCard';
 
-import sampleRequests from "../constants/sampleRequests";
-
 import firebase from "../../utils/firebase";
 import * as Authentication from "../../utils/auth";
 
@@ -65,39 +63,6 @@ export default function ExploreScreen(props) {
     }
 
     useEffect(() => { askForPermission(); });
-
-    const markers = [
-        {
-            id: "lkcnhm",
-            location: "Lee Kong Chian National History Museum",
-            latitude: 1.3013503,
-            longitude: 103.7735254,
-            address: "25 Upper Hill Rd, City Hall, Singapore 100101",
-            description: "Requires blood transfusion fast. Can fetch if willing to donate.",
-            bloodType: "B+",
-            isEmergency: true
-        },
-        {
-            id: "yih",
-            location: "Yusof Ishak House",
-            latitude: 1.2982189,
-            longitude: 103.7750632,
-            address: "5 Westlands Ave, Eunos Industrial Park, Singapore 144194",
-            description: "Blood bank is in need of type A blood. Supplies are running low.",
-            bloodType: "AB",
-            isEmergency: false
-        },
-        {
-            id: "kr",
-            location: "Kent Ridge MRT",
-            latitude: 1.2971384,
-            longitude: 103.7799802,
-            address: "12 Imagination Rd, Infectionopolis Central, Singapore 231121",
-            description: "Requires blood transfusion fast. Can fetch if willing to donate.",
-            bloodType: "All",
-            isEmergency: false
-        }
-    ];
 
     const renderMarker = (id) => {
         const requestItem = requests[id];
