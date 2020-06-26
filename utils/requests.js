@@ -19,14 +19,14 @@ export const newRequest = (request, callback = () => {}) => {
     return newRequest;
 }
 
-export const donateToRequest = (requestId, donation) => {
+export const donateToRequest = (requestId, donation, callback = () => {}) => {
     firebase.database().ref(`requests/${requestId}`).once("value").then(snapshot => {
         const status = snapshot.val().status;
         switch (status) {
             case Constants.Status.OPEN:
                 // TODO: Set callback for push
                 const newDonation = firebase.database().ref("donations").push(donation).key;
-                firebase.database().ref(`requests/${requestId}/donors`).push(newDonation);
+                firebase.database().ref(`requests/${requestId}/donors`).push(newDonation, callback);
                 return newDonation;
             default:
                 console.log("status unknown");

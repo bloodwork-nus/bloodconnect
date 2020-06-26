@@ -34,6 +34,7 @@ export default function ExploreScreen(props) {
     const [bottomBarSelectedButton, setBottomBarSelectedButton] = useState("explore");
     const [requests, setRequests] = useState({ });
     const [loadingLocation, setLoadingLocation] = useState(false);
+    const [requestIdToDonate, setRequestIdToDonate] = useState("");
 
     useEffect(() => {
         firebase.database().ref("requests").on("value", (snapshot) => {
@@ -65,9 +66,10 @@ export default function ExploreScreen(props) {
         setLoadingLocation(false);
     }
 
-    const openRequestDetails = (requestItem, latitude, longitude) => {
+    const openRequestDetails = (requestId, requestItem, latitude, longitude) => {
         bottomSheetRef.snapTo(2);
         setRequestToShow(requestItem);
+        setRequestIdToDonate(requestId);
         mapViewRef.current.animateToRegion({
             latitude: latitude - 0.01,
             longitude: longitude,
@@ -94,7 +96,7 @@ export default function ExploreScreen(props) {
             <Marker
                 key={id}
                 coordinate={{latitude: latitude, longitude: longitude}}
-                onPress={() => openRequestDetails(requestItem, latitude, longitude)}
+                onPress={() => openRequestDetails(id, requestItem, latitude, longitude)}
             >
                 <Icon name="location-on" color={requestToShow === requestItem ? Colors.blue : Colors.red} size={Dimens.glyphSize} />
                 <Callout tooltip={true} style={styles.callout}>
@@ -148,7 +150,7 @@ export default function ExploreScreen(props) {
         if (bloodType === "Others (specify in description)") renderedBloodType = "*";
 
         return (
-            <TouchableOpacity onPress={() => openRequestDetails(requestItem, latitude, longitude)}><View style={styles.requestItem}>
+            <TouchableOpacity onPress={() => openRequestDetails(item, requestItem, latitude, longitude)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
                     <BoldText color={Colors.darkBlue} size={25}>{renderedBloodType}</BoldText>
                 </View>
@@ -242,7 +244,7 @@ export default function ExploreScreen(props) {
                 />
             </SafeAreaView>
 
-            {requestToShow ? <LocationCard request={requestToShow} /> : null}
+            {requestToShow ? <LocationCard request={requestToShow} requestId={requestIdToDonate} navigation={navigation} /> : null}
 
             <BottomSheet
                 snapPoints={[

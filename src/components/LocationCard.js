@@ -7,7 +7,9 @@ import Dimens from '../constants/dimens';
 import FontText from "../components/FontText";
 import MainButton from "../components/MainButton";
 
-export default ({ request }) => {
+export default (props) => {
+    const { navigation, request, requestId } = props;
+
     const {
         bloodType,
         contactName,
@@ -36,7 +38,7 @@ export default ({ request }) => {
                 shadow={false}
                 caption="Donate"
                 height={35}
-                onPress={() => {}}
+                onPress={() => navigation.navigate("Donate", { requestId })}
             />
         </View></View>
     );

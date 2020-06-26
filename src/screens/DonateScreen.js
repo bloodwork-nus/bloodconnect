@@ -16,8 +16,11 @@ import MainWhiteButton from "../components/MainWhiteButton";
 import MainButton from "../components/MainButton";
 import BottomSheetModal from "../components/BottomSheetModal";
 
+import * as Requests from "../../utils/requests";
+import * as Authentication from "../../utils/auth";
+
 export default (props) => {
-    const { navigation, route } = props;
+    const { navigation, route: { params: { requestId } } } = props;
 
     const [bloodType, setBloodType] = useState("");
     const [contactName, setContactName] = useState("");
@@ -30,7 +33,30 @@ export default (props) => {
         if (contactName === "") return alert("Specify a contact name");
         if (contactNumber === "") return alert("Specify a contact number");
 
-
+        Requests.donateToRequest(requestId, {
+            donor: Authentication.getCurrentUserUid(),
+            requestId,
+            dateCreated: Date.now(),
+            payload: {
+                bloodType,
+                contactName,
+                contactNumber
+            }
+        }, (error) => {
+            if (error) {
+                alert("An error has occurred! " + error);
+                console.log(error);
+            } else {
+                navigation.navigate("CompletedForm", {
+                    configureScreen: {
+                        heading: Strings.thanks,
+                        subtitle: Strings.donationMadeText,
+                        color: Colors.reddishPurple,
+                        backButton: Strings.returnHome
+                    }
+                });
+            }
+        });
     }
 
     return (

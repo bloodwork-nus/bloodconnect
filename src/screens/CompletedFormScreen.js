@@ -11,16 +11,7 @@ import FontText from "../components/FontText";
 import MainOutlineButton from "../components/MainOutlineButton";
 
 export default (props) => {
-    const { navigation, route: { params: { configureScreen } } } = props;
-
-    // const configureScreen = {
-    //     heading: Strings.thanks,
-    // subtitle: Strings.donationMadeText,
-    // color: Colors.reddishPurple,
-    // backButton: Strings.returnHome
-    // };
-
-    
+    const { navigation, route: { params: { configureScreen } } } = props;    
 
     return (
         <GenericSubScreen style={styles.screen}>
