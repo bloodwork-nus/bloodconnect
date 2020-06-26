@@ -195,7 +195,7 @@ export default function ExploreScreen(props) {
                 <FlatList
                     keyExtractor={id => id.toString()}
                     renderItem={renderListItem}
-                    data={Object.keys(requests)}
+                    data={requests ? Object.keys(requests) : []}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
                     bounces={true}
                     ListEmptyComponent={<MediumText style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</MediumText>}
@@ -221,7 +221,7 @@ export default function ExploreScreen(props) {
                 }}
                 onPanDrag={() => bottomSheetRef.snapTo(2)}
                 moveOnMarkerPress={false}
-            >{Object.keys(requests).map(renderMarker)}</MapView>
+            >{requests ? Object.keys(requests).map(renderMarker) : null}</MapView>
 
             <SafeAreaView style={{...styles.mapTopOverlay, left: Dimens.bottomSheetPaddingHorizontal}}>
                 <RoundWhiteButton
