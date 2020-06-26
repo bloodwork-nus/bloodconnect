@@ -96,7 +96,7 @@ export default function ExploreScreen(props) {
                 coordinate={{latitude: latitude, longitude: longitude}}
                 onPress={() => openRequestDetails(requestItem, latitude, longitude)}
             >
-                <Icon name="location-on" color={Colors.red} size={Dimens.glyphSize} />
+                <Icon name="location-on" color={requestToShow === requestItem ? Colors.blue : Colors.red} size={Dimens.glyphSize} />
                 <Callout tooltip={true} style={styles.callout}>
                     <FontText flavor="medium" color={Colors.blue} size={15} numberOfLines={1}>{locationName}</FontText>
                 </Callout>
