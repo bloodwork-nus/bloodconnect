@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, TouchableOpacity, ActivityIndicator, Platform } from "react-native";
+import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, ActivityIndicator, Platform } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import * as Location from "expo-location";
-import { FlatList } from "react-native-gesture-handler";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 import BoldText from "../components/BoldText";
 import BottomBar from '../components/BottomBar';
