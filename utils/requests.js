@@ -1,8 +1,11 @@
 import firebase from "./firebase";
+import * as Authentication from "./auth";
 
 export const Constants = {
     Status: {
-        OPEN: "OPEN"
+        OPEN: "OPEN",
+        COMPLETED: "COMPLETED",
+        CANCELLED: "CANCELLED"
     },
 
     RequestTypes: {
@@ -13,9 +16,9 @@ export const Constants = {
 };
 
 export const newRequest = (request, callback = () => {}) => {
-    // TODO: Set callback for push
-    const newRequest = firebase.database().ref("requests").push(request, callback).key;
-    //firebase.database().ref("users/").
+    const newRequest = firebase.database().ref("requests").push();
+    newRequest.set({ ...request, id: newRequest.key }, callback);
+    // firebase.database().ref(`users/${Authentication.getCurrentUserUid()}/requests`).push(newRequest, callback);
     return newRequest;
 }
 
