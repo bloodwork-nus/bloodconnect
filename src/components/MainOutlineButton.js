@@ -19,7 +19,6 @@ export default function MainOutlineButton(props) {
         <Button
             textColor={props.color || Colors.darkBlue}
             textSize={Dimens.mainButtonTextSize}
-            height={Dimens.mainButtonHeight}
             borderRadius={Dimens.mainButtonHeight / 2}
             flavor={props.flavor}
             caption={props.caption}
@@ -35,6 +34,8 @@ export default function MainOutlineButton(props) {
             }}
             pressedStyle={{backgroundColor: "rgba(0,0,0,0.1)"}}
             notPressedStyle={{backgroundColor: "rgba(0,0,0,0)"}}
+            height={props.height ? props.height : Dimens.mainButtonHeight}
+            borderRadius={props.height ? props.height / 2 : Dimens.mainButtonHeight / 2}
         />
     );
 }
