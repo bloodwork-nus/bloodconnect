@@ -119,7 +119,7 @@ export default (props) => {
                         multiline={true}
                         textAlignVertical="top"
                         maxLength={95}
-                        onChangeText={(text) => props.handleChange("description")(text.trim())}
+                        onChangeText={props.handleChange("description")}
                         value={description}
                     />
 

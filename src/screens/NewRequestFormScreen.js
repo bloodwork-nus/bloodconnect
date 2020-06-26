@@ -114,7 +114,7 @@ export default (props) => {
                 numberOfUnits,
                 contactName,
                 contactNumber,
-                description,
+                description: description.trim(),
                 isEmergency,
                 location: {
                     locationName,

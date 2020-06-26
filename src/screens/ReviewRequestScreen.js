@@ -81,7 +81,7 @@ export default (props) => {
                         style={{marginTop: 20}}
                         onEdit={() => requestAnimationFrame(() => props.jump(1))}
                         content={() => (<>
-                            {description ? <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{description}</FontText> : null}
+                            {description ? <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{description.trim()}</FontText> : null}
                             {isEmergency ?
                                 <View style={styles.emergencyBadge}>
                                     <MaterialIcon name="priority-high" size={Dimens.glyphSize} color={Colors.red} />
