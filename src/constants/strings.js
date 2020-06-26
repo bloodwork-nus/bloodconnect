@@ -67,5 +67,7 @@ export default {
     howCanRequesterContact: "How can the requester contact you?",
     returnHome: "Return home",
     thanks: "Thanks!",
-    donationMadeText: "We have submitted your availability, and the requester will contact you soon. Thanks!"
+    donationMadeText: "We have submitted your availability, and the requester will contact you soon. Thanks!",
+
+    myRequests: "My requests",
 };

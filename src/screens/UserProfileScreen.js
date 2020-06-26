@@ -31,6 +31,16 @@ export default (props) => {
 
     const settings = [
         {
+            title: "Donations and requests",
+            data: [
+                {
+                    id: "manageRequests",
+                    label: "Manage requests",
+                    onPress: () => navigation.navigate("Requests")
+                }
+            ]
+        },
+        {
             title: "Account preferences",
             data: [
                 {

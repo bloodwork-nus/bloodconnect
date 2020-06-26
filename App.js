@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -13,9 +13,10 @@ import NewRequestFormScreen from "./src/screens/NewRequestFormScreen";
 import DonateScreen from './src/screens/DonateScreen';
 import UserProfileScreen from './src/screens/UserProfileScreen';
 import CompletedFormScreen from './src/screens/CompletedFormScreen';
+import RequestsScreen from "./src/screens/RequestsScreen";
 
 import firebase from "./utils/firebase";
-import requests from "./utils/requests";
+import * as Authentication from "./utils/auth";
 
 const fetchFonts = () => {
     return Font.loadAsync({
@@ -38,7 +39,7 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Intro" headerMode="none">
+            <Stack.Navigator initialRouteName={"Login"} headerMode="none">
                 <Stack.Screen name="Intro" component={IntroScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
@@ -47,6 +48,7 @@ export default function App() {
                 <Stack.Screen name="Donate" component={DonateScreen} />
                 <Stack.Screen name="UserProfile" component={UserProfileScreen} />
                 <Stack.Screen name="CompletedForm" component={CompletedFormScreen} />
+                <Stack.Screen name="Requests" component={RequestsScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );
