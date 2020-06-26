@@ -65,6 +65,17 @@ export default function ExploreScreen(props) {
         setLoadingLocation(false);
     }
 
+    const openRequestDetails = (requestItem, latitude, longitude) => {
+        bottomSheetRef.snapTo(2);
+        setRequestToShow(requestItem);
+        mapViewRef.current.animateToRegion({
+            latitude: latitude - 0.01,
+            longitude: longitude,
+            latitudeDelta: 0.02,
+            longitudeDelta: 0.03
+        })
+    }
+
     useEffect(() => { askForPermission(); });
 
     const renderMarker = (id) => {
@@ -83,10 +94,7 @@ export default function ExploreScreen(props) {
             <Marker
                 key={id}
                 coordinate={{latitude: latitude, longitude: longitude}}
-                onPress={() => {bottomSheetRef.snapTo(2); setRequestToShow(requestItem); mapViewRef.current.animateToRegion({
-                    latitude: latitude - 0.01, longitude: longitude,latitudeDelta: 0.02,
-                    longitudeDelta: 0.03
-                })}}
+                onPress={() => openRequestDetails(requestItem, latitude, longitude)}
             >
                 <Icon name="location-on" color={Colors.red} size={Dimens.glyphSize} />
                 <Callout tooltip={true} style={styles.callout}>
@@ -106,7 +114,7 @@ export default function ExploreScreen(props) {
         const {
             bloodType,
             isEmergency,
-            location
+            location: { locationName, locationAddress, latitudeLongitude: { latitude, longitude } }
         } = requestItem.payload;
 
         let emergency = isEmergency ? <Icon name="priority-high" color={Colors.red} size={Dimens.glyphSize} /> : null;
@@ -140,14 +148,14 @@ export default function ExploreScreen(props) {
         if (bloodType === "Others (specify in description)") renderedBloodType = "*";
 
         return (
-            <TouchableOpacity onPress={() => {}}><View style={styles.requestItem}>
+            <TouchableOpacity onPress={() => openRequestDetails(requestItem, latitude, longitude)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
                     <BoldText color={Colors.darkBlue} size={25}>{renderedBloodType}</BoldText>
                 </View>
 
                 <View style={styles.requestItemDetails}>
-                    <MediumText color={Colors.darkBlue} size={16} numberOfLines={1} >{location.locationName}</MediumText>
-                    <RegularText color={Colors.lightGrey3} size={14}>{location.locationAddress}</RegularText>
+                    <MediumText color={Colors.darkBlue} size={16} numberOfLines={1} >{locationName}</MediumText>
+                    <RegularText color={Colors.lightGrey3} size={14}>{locationAddress}</RegularText>
                 </View>
 
                 <View style={styles.requestItemIcons}>
