@@ -41,7 +41,7 @@ export default (props) => {
             </View>
 
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity onPress={() => { Requests.completeRequest(params.requestId, item.donor); navigation.goBack(); }}>
+                <TouchableOpacity onPress={() => { Requests.completeRequest(params.requestId, item.payload.contactName, item.payload.contactNumber); navigation.goBack(); }}>
                     <MaterialIcon name="check" color={Colors.green} size={Dimens.glyphSize} style={{ marginRight: 20 }} />
                 </TouchableOpacity>
 

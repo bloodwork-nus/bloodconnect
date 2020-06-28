@@ -47,10 +47,10 @@ export const deleteRequest = (requestId) => {
     firebase.database().ref(`requests/${requestId}`).remove();
 }
 
-export const completeRequest = (requestId, donorId) => {
+export const completeRequest = (requestId, contactName, contactNumber) => {
     firebase.database().ref(`requests/${requestId}`).update({
         status: Constants.Status.COMPLETED,
-        donor: donorId,
+        donor: { contactName, contactNumber },
         dateCompleted: Date.now()
     });
 }
