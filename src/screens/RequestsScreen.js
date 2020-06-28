@@ -13,7 +13,7 @@ import FontText from "../components/FontText";
 import MainOutlineButton from "../components/MainOutlineButton";
 
 import firebase from "../../utils/firebase";
-import { Constants } from "../../utils/requests";
+import * as Requests from "../../utils/requests";
 import * as Authentication from "../../utils/auth";
 import MainButton from "../components/MainButton";
 
@@ -21,8 +21,8 @@ export default (props) => {
     const [requests, setRequests] = useState({ });
 
     const sectionedRequests = () => {
-        const openRequests = Object.values(requests).filter((request) => request.status === Constants.Status.OPEN);
-        const pastRequests = Object.values(requests).filter((request) => request.status !== Constants.Status.OPEN);
+        const openRequests = Object.values(requests).filter((request) => request.status === Requests.Constants.Status.OPEN);
+        const pastRequests = Object.values(requests).filter((request) => request.status !== Requests.Constants.Status.OPEN);
         let requestsToDisplay = [];
 
         if (openRequests.length > 0) requestsToDisplay.push({
@@ -67,11 +67,11 @@ export default (props) => {
                 : null}
             </View>
             
-            {item.status === Constants.Status.CANCELLED ? 
+            {item.status === Requests.Constants.Status.CANCELLED ? 
                 <FontText flavor="bold" size={15} color={Colors.red} style={{ marginBottom: 10 }}>CANCELLED</FontText>
             : null}
 
-            {item.status === Constants.Status.COMPLETED ? 
+            {item.status === Requests.Constants.Status.COMPLETED ? 
                 <FontText flavor="bold" size={15} color={Colors.green} style={{ marginBottom: 10 }}>COMPLETED</FontText>
             : null}
 
@@ -94,21 +94,21 @@ export default (props) => {
                     >View donors</Button>
                 : null}
 
-                {item.status === Constants.Status.OPEN ? 
+                {item.status === Requests.Constants.Status.OPEN ? 
                     <Button
                         color={Colors.red}
                         mode="outlined"
-                        onPress={() => {}}
+                        onPress={() => Requests.closeRequest(item.id)}
                         style={{ borderRadius: 100 }}
                         labelStyle={{ fontFamily: "inter-semibold" }}
                     >Close request</Button>
                 : null}
 
-                {item.status !== Constants.Status.OPEN ?
+                {item.status !== Requests.Constants.Status.OPEN ?
                     <Button
                         color={Colors.red}
                         mode="outlined"
-                        onPress={() => {}}
+                        onPress={() => Requests.deleteRequest(item.id)}
                         style={{ borderRadius: 100 }}
                         labelStyle={{ fontFamily: "inter-semibold" }}
                     >Delete request</Button>

@@ -37,6 +37,16 @@ export const donateToRequest = (requestId, donation, callback = () => {}) => {
     });
 }
 
+export const closeRequest = (requestId) => {
+    firebase.database().ref(`requests/${requestId}`).update({
+        status: Constants.Status.CANCELLED
+    });
+}
+
+export const deleteRequest = (requestId) => {
+    firebase.database().ref(`requests/${requestId}`).remove();
+}
+
 // firebase.auth()
 //     .signInWithEmailAndPassword("phillmont@bloodwork.org", "testingaccount")
 //     .then(({ user }) => newRequest({
