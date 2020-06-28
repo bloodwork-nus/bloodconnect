@@ -63,7 +63,7 @@ export default (props) => {
                 <FontText flavor="bold" size={25} color={Colors.darkBlue}>{item.payload.bloodType}</FontText>
 
                 {item.payload.isEmergency ?
-                    <FontText flavor="bold" size={15} color={Colors.red}>EMERGENCY</FontText>
+                    <FontText flavor="bold" size={15} color={item.status === Requests.Constants.Status.OPEN ? Colors.red : Colors.grey2}>EMERGENCY</FontText>
                 : null}
             </View>
             
