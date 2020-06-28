@@ -77,12 +77,12 @@ export default (props) => {
 
             <FontText flavor="medium" color={Colors.grey2} size={16} numberOfLines={1} >Made on {moment(item.dateCreated).format("ddd MMM D, YYYY, hh:mm A")}</FontText>
 
-            {item.donors ? 
+            {item.status === Requests.Constants.Status.OPEN && item.donors ? 
                 <FontText flavor="medium" color={Colors.blue} size={16} numberOfLines={1} align="center" style={{ marginTop: 10 }}>{Object.values(item.donors).length} donor{Object.values(item.donors).length > 1 ? "s" : ""}</FontText>
             : null}
 
             <View style={styles.requestOptions}>
-                {item.donors ? 
+                {item.status === Requests.Constants.Status.OPEN && item.donors ? 
                     <Button
                         color={Colors.blue}
                         mode="contained"
