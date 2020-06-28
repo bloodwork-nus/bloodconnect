@@ -14,6 +14,7 @@ import DonateScreen from './src/screens/DonateScreen';
 import UserProfileScreen from './src/screens/UserProfileScreen';
 import CompletedFormScreen from './src/screens/CompletedFormScreen';
 import RequestsScreen from "./src/screens/RequestsScreen";
+import ViewDonorsScreen from "./src/screens/ViewDonorsScreen";
 
 import firebase from "./utils/firebase";
 import * as Authentication from "./utils/auth";
@@ -49,6 +50,7 @@ export default function App() {
                 <Stack.Screen name="UserProfile" component={UserProfileScreen} />
                 <Stack.Screen name="CompletedForm" component={CompletedFormScreen} />
                 <Stack.Screen name="Requests" component={RequestsScreen} />
+                <Stack.Screen name="ViewDonors" component={ViewDonorsScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

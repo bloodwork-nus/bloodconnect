@@ -81,14 +81,19 @@ export default (props) => {
                 <FontText flavor="medium" color={Colors.blue} size={16} numberOfLines={1} align="center" style={{ marginTop: 10 }}>{Object.values(item.donors).length} donor{Object.values(item.donors).length > 1 ? "s" : ""}</FontText>
             : null}
 
-
-
             <View style={styles.requestOptions}>
                 {item.donors ? 
                     <Button
                         color={Colors.blue}
                         mode="contained"
-                        onPress={() => {}}
+                        onPress={() => props.navigation.navigate("ViewDonors", {
+                            requestId: item.id,
+                            locationName: item.payload.location.locationName,
+                            locationAddress: item.payload.location.locationAddress,
+                            bloodType: item.payload.bloodType,
+                            isEmergency: item.payload.isEmergency,
+                            dateCreated: item.dateCreated
+                        })}
                         style={{ marginBottom: 10, borderRadius: 100 }}
                         labelStyle={{ fontFamily: "inter-semibold" }}
                     >View donors</Button>
