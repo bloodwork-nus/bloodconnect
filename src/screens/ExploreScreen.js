@@ -5,6 +5,8 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import * as Location from "expo-location";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
 
 import BoldText from "../components/BoldText";
 import BottomBar from '../components/BottomBar';
@@ -22,6 +24,32 @@ import LocationCard from '../components/LocationCard';
 
 import firebase from "../../utils/firebase";
 import * as Authentication from "../../utils/auth";
+
+const registerForPushNotificationsAsync = async () => {
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+
+    if (existingStatus !== "granted") {
+        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        finalStatus = status;
+    }
+
+    if (finalStatus !== "granted") {
+        return;
+    }
+
+    const pushToken = await Notifications.getExpoPushTokenAsync();
+    firebase.database().ref(`users/${Authentication.getCurrentUserUid()}`).set({ pushToken });
+
+    if (Platform.OS === 'android') {
+        Notifications.createChannelAndroidAsync('default', {
+            name: 'default',
+            sound: true,
+            priority: 'max',
+            vibrate: [0, 250, 250, 250],
+        });
+    }
+}
 
 export default function ExploreScreen(props) {
     const { navigation, route: { params } } = props;
@@ -41,6 +69,10 @@ export default function ExploreScreen(props) {
             setRequests(snapshot.val());
         });
     }, []);
+
+    useEffect(() => {
+        registerForPushNotificationsAsync();
+    });
 
     let mapViewRef = useRef(null);
     let bottomSheetRef;
