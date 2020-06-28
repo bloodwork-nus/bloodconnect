@@ -75,7 +75,13 @@ export default (props) => {
                 <FontText flavor="bold" size={15} color={Colors.green} style={{ marginBottom: 10 }}>COMPLETED</FontText>
             : null}
 
-            <FontText flavor="medium" color={Colors.grey2} size={16} numberOfLines={1} >Made on {moment(item.dateCreated).format("ddd MMM D, YYYY, hh:mm A")}</FontText>
+            <FontText flavor="medium" color={Colors.grey2} size={16}>Made on {moment(item.dateCreated).format("ddd MMM D, YYYY, hh:mm A")}</FontText>
+
+            {item.status === Requests.Constants.Status.COMPLETED ?
+                <FontText flavor="medium" color={Colors.grey2} size={16} style={{ marginTop: 10 }}>
+                    Completed on {moment(item.dateCompleted).format("ddd MMM D, YYYY, hh:mm A")} with {item.donor.contactName} ({item.donor.contactNumber}) as the donor.
+                </FontText>
+            : null}
 
             {item.status === Requests.Constants.Status.OPEN && item.donors ? 
                 <FontText flavor="medium" color={Colors.blue} size={16} numberOfLines={1} align="center" style={{ marginTop: 10 }}>{Object.values(item.donors).length} donor{Object.values(item.donors).length > 1 ? "s" : ""}</FontText>
