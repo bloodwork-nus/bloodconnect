@@ -47,6 +47,14 @@ export const deleteRequest = (requestId) => {
     firebase.database().ref(`requests/${requestId}`).remove();
 }
 
+export const completeRequest = (requestId, donorId) => {
+    firebase.database().ref(`requests/${requestId}`).update({
+        status: Constants.Status.COMPLETED,
+        donor: donorId,
+        dateCompleted: Date.now()
+    });
+}
+
 // firebase.auth()
 //     .signInWithEmailAndPassword("phillmont@bloodwork.org", "testingaccount")
 //     .then(({ user }) => newRequest({
