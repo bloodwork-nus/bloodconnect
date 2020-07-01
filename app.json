@@ -28,12 +28,7 @@
     },
     "android": {
       "package": "sg.bloodwork.bloodconnect",
-      "versionCode": 1,
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyBhVpwEszX6z1BWhO6yF-tW0Jt9CDOdsSc"
-        }
-      }
+      "versionCode": 1
     },
     "packagerOpts": {
       "config": "metro.config.js",
