@@ -23,11 +23,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "sg.bloodwork.bloodconnect",
+      "bundleIdentifier": "org.bloodwork.bloodconnect",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "sg.bloodwork.bloodconnect",
+      "package": "org.bloodwork.bloodconnect",
       "versionCode": 1
     },
     "packagerOpts": {
