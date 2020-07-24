@@ -12,7 +12,7 @@ import FontText from "../components/FontText";
 import Question from "../components/Question";
 import TextBox from "../components/TextBox";
 import MainOutlineButton from "../components/MainOutlineButton";
-import MainWhiteButton from "../components/MainWhiteButton";
+import MainColorButton from "../components/MainColorButton";
 import MainButton from "../components/MainButton";
 import BottomSheetModal from "../components/BottomSheetModal";
 
@@ -108,7 +108,8 @@ export default (props) => {
 
                 <BottomNavBar
                     renderRightButton={() => (
-                        <MainWhiteButton
+                        <MainColorButton
+                            color={Colors.white}
                             shadow={false}
                             caption={Strings.cancel}
                             onPress={() => navigation.goBack()}

@@ -11,7 +11,6 @@ import NewRequestScreen from "./NewRequestScreen";
 import SelectLocationScreen from "./SelectLocationScreen";
 import ReviewRequestScreen from "./ReviewRequestScreen";
 import BottomNavBar from "../components/BottomNavBar";
-import MainWhiteButton from "../components/MainWhiteButton";
 import MainColorButton from "../components/MainColorButton";
 
 import * as Requests from "../../utils/requests";
@@ -152,7 +151,8 @@ export default (props) => {
 
             <BottomNavBar
                 renderRightButton={() => (
-                    <MainWhiteButton
+                    <MainColorButton
+                        color={Colors.white}
                         shadow={false}
                         caption={Strings.cancel}
                         onPress={() => navigation.goBack()}

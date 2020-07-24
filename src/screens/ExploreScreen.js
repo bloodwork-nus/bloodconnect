@@ -15,7 +15,7 @@ import TextBox from "../components/TextBox";
 import Strings from '../constants/strings';
 import Colors from "../constants/colors";
 import RoundWhiteButton from "../components/RoundWhiteButton";
-import MainWhiteButton from "../components/MainWhiteButton";
+import MainColorButton from "../components/MainColorButton";
 import FontText from "../components/FontText";
 import LocationCard from '../components/LocationCard';
 
@@ -264,7 +264,8 @@ export default function ExploreScreen(props) {
             </SafeAreaView>
 
             <SafeAreaView style={{...styles.mapTopOverlay, right: Dimens.bottomSheetPaddingHorizontal}}>
-                <MainWhiteButton
+                <MainColorButton
+                    color={Colors.white}
                     caption={params && params.isGuest ? "Guest" : Authentication.getCurrentUserName().split(" ")[0]}
                     style={styles.userButton}
                     imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}
