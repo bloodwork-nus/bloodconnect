@@ -72,6 +72,8 @@ export default (props) => {
                         value={numberOfUnits}
                         color={Colors.blue}
                         onChangeValue={props.handleChange("numberOfUnits")}
+                        minimum={1}
+                        maximum={20}
                     />
                 )} style={{marginBottom: 20}} />
 
