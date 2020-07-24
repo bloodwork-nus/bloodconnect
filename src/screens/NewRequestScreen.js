@@ -80,20 +80,10 @@ export default (props) => {
                 <Question prompt={Strings.howCanDonorContact} content={() => (<>
                     <TextBox 
                         placeholder={Strings.contactName}
-                        style={{backgroundColor: Colors.offGrey2}}
+                        style={{backgroundColor: Colors.offGrey2, marginBottom: 15}}
                         onChangeText={props.handleChange("contactName")}
                         value={contactName}
                         autoCapitalize="words"
-                    />
-
-                    <CheckBox
-                        color={Colors.blue}
-                        caption={Strings.useYourName}
-                        textColor={Colors.darkBlue}
-                        checkedState={useYourName}
-                        onPress={() => props.handleChange("useYourName")(!useYourName)}
-                        justifyContent="flex-end"
-                        style={{marginVertical: 5}}
                     />
 
                     <TextBox
