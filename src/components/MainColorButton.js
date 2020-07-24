@@ -1,34 +1,46 @@
 import React from 'react';
 import { StyleSheet, View } from "react-native";
 
+import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
 
 import Button from "./Button";
 
-export default function MainWhiteButton(props) {
+export default (props) => {
+    const {
+        shadow,
+        textColor,
+        caption,
+        onPress,
+        imageLeft,
+        imageRight,
+        height,
+        color
+    } = props;
+
     const styles = StyleSheet.create({
         button: {
-            backgroundColor: props.color
+            backgroundColor: color
         }
     });
 
     return (
         <Button
-            shadow={true}
-            textColor={props.textColor}
+            shadow={shadow === false ? false : true}
+            textColor={textColor || Colors.darkBlue}
             textSize={Dimens.mainButtonTextSize}
-            caption={props.caption}
-            onPress={props.onPress}
-            imageLeft={props.imageLeft}
-            imageRight={props.imageRight}
+            caption={caption}
+            onPress={onPress}
+            imageLeft={imageLeft}
+            imageRight={imageRight}
             renderContainer={() => (
                 <View style={{...styles.button, ...props.style}} />
             )}
             touchableProps={{
                 style: props.style
             }}
-            height={props.height ? props.height : Dimens.mainButtonHeight}
-            borderRadius={props.height ? props.height / 2 : Dimens.mainButtonHeight / 2}
+            height={height ? height : Dimens.mainButtonHeight}
+            borderRadius={height ? height / 2 : Dimens.mainButtonHeight / 2}
         />
     );
 }
