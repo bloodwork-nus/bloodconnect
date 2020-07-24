@@ -8,7 +8,6 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 
-import BoldText from "../components/BoldText";
 import BottomBar from '../components/BottomBar';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Dimens from '../constants/dimens';
@@ -17,8 +16,6 @@ import Strings from '../constants/strings';
 import Colors from "../constants/colors";
 import RoundWhiteButton from "../components/RoundWhiteButton";
 import MainWhiteButton from "../components/MainWhiteButton";
-import MediumText from '../components/MediumText';
-import RegularText from '../components/RegularText';
 import FontText from "../components/FontText";
 import LocationCard from '../components/LocationCard';
 
@@ -184,12 +181,12 @@ export default function ExploreScreen(props) {
         return (
             <TouchableOpacity onPress={() => openRequestDetails(item, requestItem, latitude, longitude)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
-                    <BoldText color={Colors.darkBlue} size={25}>{renderedBloodType}</BoldText>
+                    <FontText flavor="bold" color={Colors.darkBlue} size={25}>{renderedBloodType}</FontText>
                 </View>
 
                 <View style={styles.requestItemDetails}>
-                    <MediumText color={Colors.darkBlue} size={16} numberOfLines={1} >{locationName}</MediumText>
-                    <RegularText color={Colors.lightGrey3} size={14}>{locationAddress}</RegularText>
+                    <FontText flavor="medium" color={Colors.darkBlue} size={16} numberOfLines={1} >{locationName}</FontText>
+                    <FontText color={Colors.lightGrey3} size={14}>{locationAddress}</FontText>
                 </View>
 
                 <View style={styles.requestItemIcons}>
@@ -230,7 +227,7 @@ export default function ExploreScreen(props) {
                     data={requests ? Object.keys(requests) : []}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
                     bounces={true}
-                    ListEmptyComponent={<MediumText style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</MediumText>}
+                    ListEmptyComponent={<FontText flavor="medium" style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</FontText>}
                     ListFooterComponent={<View />}
                     ListFooterComponentStyle={{height: Dimens.bottomBarHeight + 50}}
                 />

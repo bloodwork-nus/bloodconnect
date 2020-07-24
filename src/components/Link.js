@@ -1,14 +1,15 @@
 import React from 'react';
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 
-import MediumText from "./MediumText";
 import Colors from '../constants/colors';
+
+import FontText from "./FontText";
 
 export default function Link(props) {
     return (
         <TouchableHighlight onPress={props.onPress}>
             <View style={{...styles.link, ...props.style}}>
-                <MediumText color={Colors.blue} size={props.size}>{props.caption}</MediumText>
+                <FontText flavor="medium" color={Colors.blue} size={props.size}>{props.caption}</FontText>
             </View>
         </TouchableHighlight>
     );

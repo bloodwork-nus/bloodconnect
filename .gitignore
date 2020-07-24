@@ -12,6 +12,7 @@ web-report/
 node_modules_bak
 package-lock.json.bak
 .env
+*.bak
 
 # macOS
 .DS_Store

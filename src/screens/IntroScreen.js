@@ -5,21 +5,22 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import Strings from "../constants/strings";
 import Colors from "../constants/colors";
 import Dimens from "../constants/dimens";
+
 import EmergencyCarriageImage from "../../assets/images/bc-emergency-carriage.svg";
 import GirlBrowsingImage from "../../assets/images/bc-girl-browsing.svg";
 import GirlDonatingImage from "../../assets/images/bc-girl-donating.svg";
-import SemiBoldText from "../components/SemiBoldText";
-import MediumText from "../components/MediumText";
+
 import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
+import FontText from "../components/FontText";
 
 export default function IntroScreen(props) {
     const renderItem = ({ item }) => {
         return (
             <View style={styles.slide}>
                 {item.image}
-                <SemiBoldText style={styles.title} color={Colors.darkBlue} size={Dimens.heading1}>{item.title}</SemiBoldText>
-                <MediumText color={Colors.darkBlue} size={Dimens.body1}>{item.description}</MediumText>
+                <FontText flavor="semibold" style={styles.title} color={Colors.darkBlue} size={Dimens.heading1}>{item.title}</FontText>
+                <FontText flavor="medium" color={Colors.darkBlue} size={Dimens.body1}>{item.description}</FontText>
             </View>
         );
     };

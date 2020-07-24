@@ -5,12 +5,14 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Strings from "../constants/strings";
 import Colors from "../constants/colors";
 import Dimens from "../constants/dimens";
+
 import BiWavesWithLogo from "../components/BiWavesWithLogo";
-import SemiBoldText from '../components/SemiBoldText';
 import TextBox from '../components/TextBox';
 import PasswordTextBox from '../components/PasswordTextBox';
 import MainButton from '../components/MainButton';
 import MainOutlineButton from '../components/MainOutlineButton';
+import FontText from "../components/FontText";
+
 import firebase from "../../utils/firebase";
 
 export default function CreateAccountScreen(props) {
@@ -40,7 +42,7 @@ export default function CreateAccountScreen(props) {
 
             <View style={styles.contents}>
                 <View style={styles.topControls}>
-                    <SemiBoldText style={styles.heading} color={Colors.darkBlue} size={Dimens.heading1}>{Strings.createANewAccount}</SemiBoldText>
+                    <FontText flavor="semibold" style={styles.heading} color={Colors.darkBlue} size={Dimens.heading1}>{Strings.createANewAccount}</FontText>
                     <TextBox
                         placeholder={Strings.fullName}
                         autoCompleteType="name"
