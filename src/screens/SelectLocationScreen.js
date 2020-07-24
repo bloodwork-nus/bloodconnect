@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, ActivityIndicator, KeyboardAvoidingView, Text, Keyboard } from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { GooglePlacesAutocomplete as AutoComplete } from "react-native-google-places-autocomplete";
 // import Geocoder from "react-native-geocoding";
@@ -80,7 +80,7 @@ export default (props) => {
                 >
                     {latitudeLongitude ? 
                         <Marker coordinate={latitudeLongitude}>
-                            <MaterialIcon name="location-on" color={Colors.blue} size={Dimens.glyphSize} />
+                            <Icon name="location-on" color={Colors.blue} size={Dimens.glyphSize} />
                         </Marker>
                     : null}
                 </MapView>
@@ -185,7 +185,7 @@ export default (props) => {
                 />                
                 {locationName !== "" || locationAddress !== "" ?
                     <View style={styles.selectedLocation}>
-                        <MaterialIcon name="location-on" color={Colors.darkBlue} size={Dimens.glyphSize} style={{ marginRight: 10 }} />
+                        <Icon name="location-on" color={Colors.darkBlue} size={Dimens.glyphSize} style={{ marginRight: 10 }} />
 
                         <View style={{ flex: 1 }}>
                             {locationName !== "" ? 

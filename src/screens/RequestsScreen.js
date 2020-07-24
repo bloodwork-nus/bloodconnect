@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, SectionList, TouchableHighlight, TouchableOpacity } from "react-native";
 import moment from "moment";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
 
 import Colors from '../constants/colors';
@@ -142,7 +142,7 @@ export default (props) => {
                 ListHeaderComponent={({ highlighted, leadingItem }) => (
                     <View style={styles.header}>
                         <TouchableOpacity onPress={() => requestAnimationFrame(() => props.navigation.goBack())}>
-                            <MaterialIcon name="arrow-back" size={Dimens.glyphSize} color={Colors.blue} style={{ marginRight: 10, marginLeft: -5 }}/>
+                            <Icon name="arrow-back" size={Dimens.glyphSize} color={Colors.blue} style={{ marginRight: 10, marginLeft: -5 }}/>
                         </TouchableOpacity>
 
                         <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Strings.myRequests}</FontText>

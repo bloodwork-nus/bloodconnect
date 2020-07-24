@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { TouchableRipple } from "react-native-paper";
 
 import Colors from '../constants/colors';
@@ -26,7 +26,7 @@ export default (props) => {
 
                 {info ? 
                     <TouchableRipple onPress={showInfo} borderless={true} style={styles.touchable}>
-                        <MaterialIcon name="info" size={23} color={Colors.grey2} />
+                        <Icon name="info" size={23} color={Colors.grey2} />
                     </TouchableRipple>
                 : null}
             </View>

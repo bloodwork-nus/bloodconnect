@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, StatusBar, ScrollView, SectionList, TouchableHighlight } from "react-native";
-import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialIcons as MaterialIcon, MaterialCommunityIcons as MaterialCommunityIcon } from "@expo/vector-icons";
 import { TouchableRipple } from "react-native-paper";
 import Constants from "expo-constants";
 

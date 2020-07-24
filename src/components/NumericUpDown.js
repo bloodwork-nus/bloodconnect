@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { TouchableRipple } from "react-native-paper";
 
 import Colors from "../constants/colors";
@@ -30,7 +30,7 @@ export default (props) => {
                 style={{ borderRadius: 100 }}
                 disabled={!decreaseButtonEnabled}
             >
-                <MaterialIcon name="remove" color={decreaseButtonEnabled ? color : Colors.grey1} size={Dimens.glyphSize} />
+                <Icon name="remove" color={decreaseButtonEnabled ? color : Colors.grey1} size={Dimens.glyphSize} />
             </TouchableRipple>
 
             <FontText flavor="bold" size={24}>{value}</FontText>
@@ -41,7 +41,7 @@ export default (props) => {
                 style={{ borderRadius: 100 }}
                 disabled={!increaseButtonEnabled}
             >
-                <MaterialIcon name="add" color={increaseButtonEnabled ? color : Colors.grey1} size={Dimens.glyphSize} />
+                <Icon name="add" color={increaseButtonEnabled ? color : Colors.grey1} size={Dimens.glyphSize} />
             </TouchableRipple>
         </View>
     );

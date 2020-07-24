@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { TouchableRipple } from "react-native-paper";
 
 import Colors from '../constants/colors';
@@ -28,7 +28,7 @@ export default (props) => {
                 {edit ? 
                     <View style={styles.edit}>
                         <TouchableRipple onPress={onEdit} borderless={true} style={styles.touchable}>
-                            <MaterialIcon name="create" color={editButtonColor || Colors.blue} size={20} />
+                            <Icon name="create" color={editButtonColor || Colors.blue} size={20} />
                         </TouchableRipple>
                     </View>
                 : null}

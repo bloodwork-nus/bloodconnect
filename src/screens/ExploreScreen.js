@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, ActivityIndicator, Platform } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Notifications } from "expo";

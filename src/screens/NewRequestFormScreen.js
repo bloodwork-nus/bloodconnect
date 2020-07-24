@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BackHandler } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 import Colors from "../constants/colors";
 import Dimens from "../constants/dimens";
@@ -163,7 +163,7 @@ export default (props) => {
                         caption={isLastStep() ? Strings.submit : Strings.next}
                         color={Colors.blue}
                         textColor={Colors.white}
-                        {...isLastStep() ? null : { imageRight: <MaterialIcon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} /> }}
+                        {...isLastStep() ? null : { imageRight: <Icon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} /> }}
                         onPress={isLastStep() ? submitRequest : validateAndNextStep}
                     />
                 )}

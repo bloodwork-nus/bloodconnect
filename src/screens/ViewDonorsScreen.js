@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, FlatList, TouchableOpacity, View } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
 import moment from "moment";
 
@@ -42,11 +42,11 @@ export default (props) => {
 
             <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity onPress={() => { Requests.completeRequest(params.requestId, item.payload.contactName, item.payload.contactNumber); navigation.goBack(); }}>
-                    <MaterialIcon name="check" color={Colors.green} size={Dimens.glyphSize} style={{ marginRight: 20 }} />
+                    <Icon name="check" color={Colors.green} size={Dimens.glyphSize} style={{ marginRight: 20 }} />
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => Linking.openURL(`tel://${item.payload.contactNumber}`)}>
-                    <MaterialIcon name="call" color={Colors.blue} size={Dimens.glyphSize} />
+                    <Icon name="call" color={Colors.blue} size={Dimens.glyphSize} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -62,7 +62,7 @@ export default (props) => {
                     <View style={styles.header}>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity onPress={() => requestAnimationFrame(() => navigation.goBack())}>
-                                <MaterialIcon name="arrow-back" size={Dimens.glyphSize} color={Colors.blue} style={{ marginRight: 10, marginLeft: -5 }}/>
+                                <Icon name="arrow-back" size={Dimens.glyphSize} color={Colors.blue} style={{ marginRight: 10, marginLeft: -5 }}/>
                             </TouchableOpacity>
 
                             <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>Donors</FontText>

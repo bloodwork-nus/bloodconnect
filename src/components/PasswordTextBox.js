@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, View, TouchableWithoutFeedback, Dimensions } fro
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import Strings from '../constants/strings';
 
 export default function PasswordTextBox(props) {
