@@ -64,6 +64,8 @@ export default function ExploreScreen(props) {
     const [requests, setRequests] = useState({ });
     const [loadingLocation, setLoadingLocation] = useState(false);
     const [requestIdToDonate, setRequestIdToDonate] = useState("");
+    const [searchKeywords, setSearchKeywords] = useState("");
+    const [searchWaiting, setSearchWaiting] = useState(null);
 
     useEffect(() => {
         firebase.database().ref("requests").on("value", (snapshot) => {
@@ -198,6 +200,28 @@ export default function ExploreScreen(props) {
         );
     };
 
+    const getRequestsList = () => {
+        if (requests) {
+            const keys = Object.keys(requests);
+
+            if (searchKeywords === "") {
+                return keys;
+            } else {
+                const keyword = searchKeywords.toLowerCase();
+                const results = new Set();
+
+                keys.forEach((id) => requests[id].payload.bloodType.toLowerCase().includes(keyword) ? results.add(id) : null);
+                keys.forEach((id) => requests[id].requestType.toLowerCase().includes(keyword) ? results.add(id) : null);
+                keys.forEach((id) => requests[id].payload.location.locationName.toLowerCase().includes(keyword) || 
+                    requests[id].payload.location.locationAddress.toLowerCase().includes(keyword) ? results.add(id) : null);
+                
+                return Array.from(results);
+            }
+        } else {
+            return [];
+        }
+    }
+
     const radius = isBottomSheetOpened ? 0 : Dimens.bottomSheetBorderRadius;
 
     const renderHeader = () => {
@@ -212,6 +236,13 @@ export default function ExploreScreen(props) {
                     placeholder={Strings.searchAnythingHere}
                     style={{width: "100%"}}
                     onTouchEnd={() => bottomSheetRef.snapTo(0)}
+                    onChangeText={(text) => {
+                        if (searchWaiting) clearTimeout(searchWaiting);
+                        setSearchWaiting(setTimeout(() => {
+                            setSearchWaiting(null);
+                            setSearchKeywords(text);
+                        }, 200));
+                    }}
                 />
             </View>
         );
@@ -225,7 +256,7 @@ export default function ExploreScreen(props) {
                 <FlatList
                     keyExtractor={id => id.toString()}
                     renderItem={renderListItem}
-                    data={requests ? Object.keys(requests) : []}
+                    data={getRequestsList()}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
                     bounces={true}
                     ListEmptyComponent={<FontText flavor="medium" style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</FontText>}
