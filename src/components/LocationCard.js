@@ -24,7 +24,10 @@ export default (props) => {
         <View style={styles.container}><View style={styles.locationCard}>
             <FontText flavor="medium" size={19} color={Colors.darkBlue} style={{marginBottom: Platform.OS === "ios" ? 3 : 0}}>{locationName}</FontText>
             <FontText size={13} color={Colors.lightGrey3} numberOfLines={1} style={{marginBottom: Platform.OS === "ios" ? 7 : 5}}>{locationAddress}</FontText>
-            <FontText size={16} color={Colors.darkBlue}>{description}</FontText>
+
+            {description ? 
+                <FontText size={16} color={Colors.darkBlue}>{description}</FontText>
+            : null}
 
             <View style={styles.badges}>
                 <FontText flavor="bold" size={30} color={Colors.darkBlue}>{bloodType}</FontText>
