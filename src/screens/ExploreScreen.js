@@ -191,6 +191,9 @@ export default function ExploreScreen(props) {
                 <View style={styles.requestItemDetails}>
                     <FontText flavor="medium" color={Colors.darkBlue} size={16} numberOfLines={1} >{locationName}</FontText>
                     <FontText color={Colors.lightGrey3} size={14}>{locationAddress}</FontText>
+                    {requestItem.requester === Authentication.getCurrentUserUid() ?
+                        <FontText flavor="medium" color={Colors.blue} size={14}>Tap to view your request.</FontText>
+                    : null}
                 </View>
 
                 <View style={styles.requestItemIcons}>
