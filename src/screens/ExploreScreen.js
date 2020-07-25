@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, ActivityIndicator, Platform, Keyboard } from "react-native";
+import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, ActivityIndicator, Platform, Keyboard, BackHandler } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
+import { useFocusEffect } from "@react-navigation/native";
 
 import BloodRequestGlyph from "../../assets/icons/blood.svg";
 import PlasmaRequestGlyph from "../../assets/icons/plasma.svg";
@@ -76,6 +77,12 @@ export default function ExploreScreen(props) {
     useEffect(() => {
         registerForPushNotificationsAsync();
     });
+
+    useFocusEffect(React.useCallback(() => {
+        const onBackPress = () => { BackHandler.exitApp(); return true; };
+        BackHandler.addEventListener("hardwareBackPress", onBackPress);
+        return () => BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }), []);
 
     let mapViewRef = useRef(null);
     let bottomSheetRef = useRef(null);
