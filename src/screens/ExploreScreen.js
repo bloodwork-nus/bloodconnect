@@ -78,7 +78,11 @@ export default function ExploreScreen(props) {
     });
 
     let mapViewRef = useRef(null);
-    let bottomSheetRef;
+    let bottomSheetRef = useRef(null);
+
+    const maximiseBottomSheet = () => bottomSheetRef.current.snapTo(0);
+    const restoreBottomSheet = () => bottomSheetRef.current.snapTo(1);
+    const minimiseBottomSheet = () => bottomSheetRef.current.snapTo(2);
 
     const askForPermission = async () => {
         const { status } = await Location.requestPermissionsAsync();
@@ -103,7 +107,7 @@ export default function ExploreScreen(props) {
 
     const openRequestDetails = (requestId, requestItem, latitude, longitude) => {
         Keyboard.dismiss();
-        bottomSheetRef.snapTo(2);
+        minimiseBottomSheet();
         setRequestToShow(requestItem);
         setRequestIdToDonate(requestId);
         mapViewRef.current.animateToRegion({
@@ -254,7 +258,7 @@ export default function ExploreScreen(props) {
                 <TextBox
                     placeholder={Strings.searchAnythingHere}
                     style={{width: "100%"}}
-                    onTouchEnd={() => bottomSheetRef.snapTo(0)}
+                    onTouchEnd={maximiseBottomSheet}
                     onChangeText={(text) => {
                         if (searchWaiting) clearTimeout(searchWaiting);
                         setSearchWaiting(setTimeout(() => {
@@ -281,7 +285,7 @@ export default function ExploreScreen(props) {
                     ListEmptyComponent={<FontText flavor="medium" style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</FontText>}
                     ListFooterComponent={<View />}
                     ListFooterComponentStyle={{height: Dimens.bottomBarHeight + 50}}
-                    onScroll={() => bottomSheetRef.snapTo(0)}
+                    onScroll={maximiseBottomSheet}
                 />
             </View>
         );
@@ -300,7 +304,7 @@ export default function ExploreScreen(props) {
                     // iOS' nativeEvent action has marker-press, Android doesn't trigger
                     if (nativeEvent.action !== "marker-press") setRequestToShow(null);
                 }}
-                onPanDrag={() => bottomSheetRef.snapTo(2)}
+                onPanDrag={minimiseBottomSheet}
                 moveOnMarkerPress={false}
                 initialRegion={{
                     latitude: 1.3421 - 0.05,
@@ -343,7 +347,7 @@ export default function ExploreScreen(props) {
                 initialSnap={1}
                 renderHeader={renderHeader}
                 renderContent={renderContent}
-                ref={ref => bottomSheetRef = ref}
+                ref={bottomSheetRef}
                 onOpenEnd={() => setBottomBarSelectedButton("requests")}
                 onCloseStart={() => setBottomBarSelectedButton("explore")}
             />
@@ -352,11 +356,11 @@ export default function ExploreScreen(props) {
                 selected={bottomBarSelectedButton}
                 onExplore={() => {
                     setBottomBarSelectedButton("explore");
-                    bottomSheetRef.snapTo(1);
+                    restoreBottomSheet();
                 }}
                 onRequests={() => {
                     setBottomBarSelectedButton("requests");
-                    bottomSheetRef.snapTo(0);
+                    maximiseBottomSheet();
                 }}
                 onPrimaryButtonPress={() => navigation.navigate("NewRequestForm")}
             />
