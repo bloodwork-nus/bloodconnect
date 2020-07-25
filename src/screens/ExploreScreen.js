@@ -423,7 +423,7 @@ const styles = StyleSheet.create({
     },
     
     requestItemBloodType: {
-        width: 50,
+        width: 55,
         flexDirection: "row",
         justifyContent: "flex-start",
         //backgroundColor: "red",
