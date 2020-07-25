@@ -284,6 +284,12 @@ export default function ExploreScreen(props) {
                 }}
                 onPanDrag={() => bottomSheetRef.snapTo(2)}
                 moveOnMarkerPress={false}
+                initialRegion={{
+                    latitude: 1.3421 - 0.05,
+                    longitude: 103.8198,
+                    latitudeDelta: 0.2,
+                    longitudeDelta: 0.2
+                }}
             >{requests ? Object.keys(requests).map(renderMarker) : null}</MapView>
 
             <SafeAreaView style={{...styles.mapTopOverlay, left: Dimens.bottomSheetPaddingHorizontal}}>
