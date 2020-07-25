@@ -182,6 +182,8 @@ export default function ExploreScreen(props) {
         if (bloodType === "Any blood groups") renderedBloodType = "Any";
         if (bloodType === "Other (specify in description)") renderedBloodType = "*";
 
+        const numberOfDonors = requestItem.donors ? Object.values(requestItem.donors).length : 0;
+
         return (
             <TouchableOpacity onPress={() => openRequestDetails(item, requestItem, latitude, longitude)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
@@ -192,7 +194,9 @@ export default function ExploreScreen(props) {
                     <FontText flavor="medium" color={Colors.darkBlue} size={16} numberOfLines={1} >{locationName}</FontText>
                     <FontText color={Colors.lightGrey3} size={14}>{locationAddress}</FontText>
                     {requestItem.requester === Authentication.getCurrentUserUid() ?
-                        <FontText flavor="medium" color={Colors.blue} size={14}>Tap to view your request.</FontText>
+                        <FontText flavor="medium" color={Colors.blue} size={14}>
+                            {numberOfDonors > 0 ? `You have ${numberOfDonors > 1 ? numberOfDonors + " potential donors!" : "a potential donor!"}` : "Tap to view your request."}
+                        </FontText>
                     : null}
                 </View>
 
