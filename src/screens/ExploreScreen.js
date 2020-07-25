@@ -191,7 +191,7 @@ export default function ExploreScreen(props) {
         return (
             <TouchableOpacity onPress={() => openRequestDetails(item, requestItem, latitude, longitude)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
-                    <FontText flavor="bold" color={Colors.darkBlue} size={25}>{renderedBloodType}</FontText>
+                    <FontText flavor="bold" color={Colors.darkBlue} size={23}>{renderedBloodType}</FontText>
                 </View>
 
                 <View style={styles.requestItemDetails}>
@@ -432,7 +432,7 @@ const styles = StyleSheet.create({
     },
     
     requestItemBloodType: {
-        width: 55,
+        width: 50,
         flexDirection: "row",
         justifyContent: "flex-start",
         //backgroundColor: "red",
