@@ -348,8 +348,6 @@ export default function ExploreScreen(props) {
                 renderHeader={renderHeader}
                 renderContent={renderContent}
                 ref={bottomSheetRef}
-                onOpenEnd={() => setBottomBarSelectedButton("requests")}
-                onCloseStart={() => setBottomBarSelectedButton("explore")}
             />
             
             <BottomBar
