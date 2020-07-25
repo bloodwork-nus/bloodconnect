@@ -21,11 +21,14 @@ export default (props) => {
 
     useEffect(() => {
         firebase.database().ref(`requests/${params.requestId}/donors`).on("value", (snapshot) => {
-            const donorIds = Object.values(snapshot.val());
-            firebase.database().ref("donations").once("value").then((snapshot) => {
-                const donations = snapshot.val();
-                setDonors(donorIds.map((donorId) => donations[donorId]));
-            });
+            const snapshotValue = snapshot.val();
+            if (snapshotValue !== null) {
+                const donorIds = Object.values(snapshotValue);
+                firebase.database().ref("donations").once("value").then((snapshot) => {
+                    const donations = snapshot.val();
+                    setDonors(donorIds.map((donorId) => donations[donorId]));
+                });
+            }
         });
     }, []);
 
