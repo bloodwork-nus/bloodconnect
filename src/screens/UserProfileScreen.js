@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, StatusBar, ScrollView, SectionList, TouchableHighlight } from "react-native";
+import { StyleSheet, View, StatusBar, TouchableOpacity, SectionList, TouchableHighlight } from "react-native";
 import { MaterialIcons as MaterialIcon, MaterialCommunityIcons as MaterialCommunityIcon } from "@expo/vector-icons";
 import { TouchableRipple } from "react-native-paper";
 import Constants from "expo-constants";
@@ -109,7 +109,12 @@ export default (props) => {
                 style={styles.content}
                 ListHeaderComponent={({ highlighted, leadingItem }) => (
                     <View style={styles.userProfile}>
+                        <TouchableOpacity onPress={() => requestAnimationFrame(() => navigation.goBack())} style={{ marginBottom: 10 }}>
+                            <MaterialIcon name="arrow-back" size={Dimens.glyphSize} color={Colors.blue} style={{ marginRight: 10, marginLeft: -5 }}/>
+                        </TouchableOpacity>
+
                         <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Authentication.getCurrentUser().displayName}</FontText>
+                        
                         <FontText size={17} color={Colors.darkBlue} style={{ marginBottom: 10 }}>{Authentication.getCurrentUser().email}</FontText>
                         {Authentication.getCurrentUser().emailVerified ? 
                             <View style={styles.badge}>
@@ -138,7 +143,7 @@ const styles = StyleSheet.create({
 
     content: {
         backgroundColor: Colors.offGrey,
-        paddingTop: 70,
+        paddingTop: 40,
         paddingBottom: 100
     },
 
