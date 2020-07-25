@@ -37,6 +37,10 @@ export default (props) => {
         };
     }
 
+    let finalBloodType = bloodType;
+    if (finalBloodType === "Any blood groups") finalBloodType = "Any";
+    if (finalBloodType === "Other (specify in description)") finalBloodType = "*";
+
     return (
         <View style={styles.container}><View style={styles.locationCard}>
             <View style={styles.requestTypeBadge}>
@@ -52,7 +56,7 @@ export default (props) => {
             : null}
 
             <View style={styles.badges}>
-                <FontText flavor="bold" size={30} color={Colors.darkBlue}>{bloodType}</FontText>
+                <FontText flavor="bold" size={30} color={Colors.darkBlue}>{finalBloodType}</FontText>
 
                 {isEmergency ?
                     <FontText flavor="bold" size={15} color={Colors.red}>EMERGENCY</FontText>
