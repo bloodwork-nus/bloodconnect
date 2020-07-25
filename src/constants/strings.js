@@ -23,7 +23,7 @@ export default {
     requests: "Requests",
     searchAnythingHere: "Search anything here",
     searchHere: "Search here",
-    noRequests: "There are currently no requests.",
+    noRequests: "No requests here.",
 
     next: "Next",
     cancel: "Cancel",
