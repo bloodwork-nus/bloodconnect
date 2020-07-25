@@ -57,8 +57,6 @@ export default function ExploreScreen(props) {
     const { navigation, route: { params } } = props;
     // TODO: Set branch statements for actions for a Guest account
 
-    const [isBottomSheetOpened, setIsBottomSheetOpened] = useState(false);
-    const [currentLocation, setCurrentLocation] = useState(null);
     const [hasPermission, setHasPermission] = useState(null);
     const [requestToShow, setRequestToShow] = useState();
     const [bottomBarSelectedButton, setBottomBarSelectedButton] = useState("explore");
@@ -107,7 +105,6 @@ export default function ExploreScreen(props) {
             longitudeDelta: 0.03
         };
 
-        setCurrentLocation(region);
         mapViewRef.current.animateToRegion(region);
         setLoadingLocation(false);
     }
@@ -252,15 +249,9 @@ export default function ExploreScreen(props) {
         }
     }
 
-    const radius = isBottomSheetOpened ? 0 : Dimens.bottomSheetBorderRadius;
-
     const renderHeader = () => {
         return (
-            <View style={{
-                ...styles.bottomSheetHeader,
-                borderTopLeftRadius: radius,
-                borderTopRightRadius: radius
-            }}>
+            <View style={styles.bottomSheetHeader}>
                 <View style={styles.bottomSheetHandle} />
                 <TextBox
                     placeholder={Strings.searchAnythingHere}
@@ -389,6 +380,8 @@ const styles = StyleSheet.create({
         paddingTop: 15,
         paddingHorizontal: Dimens.bottomSheetPaddingHorizontal,
         position: "relative",
+        borderTopRightRadius: Dimens.bottomSheetBorderRadius,
+        borderTopLeftRadius: Dimens.bottomSheetBorderRadius,
         ...Dimens.bottomSheetHeaderShadowStyle
     },
 
