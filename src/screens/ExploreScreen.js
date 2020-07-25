@@ -206,7 +206,7 @@ export default function ExploreScreen(props) {
 
     const getRequestsList = () => {
         if (requests) {
-            const keys = Object.keys(requests);
+            const keys = Object.keys(requests).filter((id) => requests[id].status === Requests.Constants.Status.OPEN);
 
             if (searchKeywords === "") {
                 return keys.sort((a, b) => {
