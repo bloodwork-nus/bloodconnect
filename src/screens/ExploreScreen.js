@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, ActivityIndicator, Platform } from "react-native";
+import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, ActivityIndicator, Platform, Keyboard } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
@@ -102,6 +102,7 @@ export default function ExploreScreen(props) {
     }
 
     const openRequestDetails = (requestId, requestItem, latitude, longitude) => {
+        Keyboard.dismiss();
         bottomSheetRef.snapTo(2);
         setRequestToShow(requestItem);
         setRequestIdToDonate(requestId);
