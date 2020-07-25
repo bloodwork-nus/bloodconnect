@@ -177,7 +177,7 @@ export default function ExploreScreen(props) {
 
         let renderedBloodType = bloodType;
         if (bloodType === "Any blood groups") renderedBloodType = "Any";
-        if (bloodType === "Others (specify in description)") renderedBloodType = "*";
+        if (bloodType === "Other (specify in description)") renderedBloodType = "*";
 
         return (
             <TouchableOpacity onPress={() => openRequestDetails(item, requestItem, latitude, longitude)}><View style={styles.requestItem}>
