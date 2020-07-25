@@ -263,6 +263,7 @@ export default function ExploreScreen(props) {
                     ListEmptyComponent={<FontText flavor="medium" style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</FontText>}
                     ListFooterComponent={<View />}
                     ListFooterComponentStyle={{height: Dimens.bottomBarHeight + 50}}
+                    onScroll={() => bottomSheetRef.snapTo(0)}
                 />
             </View>
         );
