@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, YellowBox } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as Font from "expo-font";
@@ -29,6 +29,9 @@ const fetchFonts = () => {
 };
 
 const Stack = createStackNavigator();
+
+// Unfixable "bug" since Firebase uses long setTimeout (see https://github.com/facebook/react-native/issues/12981)
+YellowBox.ignoreWarnings(["Setting a timer for a long period of"]);
 
 export default function App() {
     const [assetsLoaded, setAssetsLoaded] = useState(false);
