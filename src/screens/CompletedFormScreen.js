@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableHighlight, Text } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
@@ -15,7 +15,7 @@ export default (props) => {
 
     return (
         <GenericSubScreen style={styles.screen}>
-            <MaterialIcon name="check-circle" color={Colors.green} size={70} />
+            <Icon name="check-circle" color={Colors.green} size={70} />
 
             <FontText
                 flavor="semibold"
@@ -37,7 +37,7 @@ export default (props) => {
                 onPress={() => navigation.navigate("Explore")}
                 style={{ marginTop: 20 }}
                 color={configureScreen.color}
-                imageLeft={<MaterialIcon name="arrow-back" size={Dimens.glyphSize} color={configureScreen.color} />}
+                imageLeft={<Icon name="arrow-back" size={Dimens.glyphSize} color={configureScreen.color} />}
             />
         </GenericSubScreen>
     );

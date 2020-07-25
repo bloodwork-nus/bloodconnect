@@ -23,17 +23,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "sg.bloodwork.bloodconnect",
+      "bundleIdentifier": "org.bloodwork.bloodconnect",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "sg.bloodwork.bloodconnect",
-      "versionCode": 1,
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyBhVpwEszX6z1BWhO6yF-tW0Jt9CDOdsSc"
-        }
-      }
+      "package": "org.bloodwork.bloodconnect",
+      "versionCode": 1
     },
     "packagerOpts": {
       "config": "metro.config.js",

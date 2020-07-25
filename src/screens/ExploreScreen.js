@@ -1,14 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Dimensions, SafeAreaView, StatusBar, ActivityIndicator, Platform } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import CommunityIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 
-import BoldText from "../components/BoldText";
 import BottomBar from '../components/BottomBar';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Dimens from '../constants/dimens';
@@ -16,9 +14,7 @@ import TextBox from "../components/TextBox";
 import Strings from '../constants/strings';
 import Colors from "../constants/colors";
 import RoundWhiteButton from "../components/RoundWhiteButton";
-import MainWhiteButton from "../components/MainWhiteButton";
-import MediumText from '../components/MediumText';
-import RegularText from '../components/RegularText';
+import MainColorButton from "../components/MainColorButton";
 import FontText from "../components/FontText";
 import LocationCard from '../components/LocationCard';
 
@@ -184,12 +180,12 @@ export default function ExploreScreen(props) {
         return (
             <TouchableOpacity onPress={() => openRequestDetails(item, requestItem, latitude, longitude)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
-                    <BoldText color={Colors.darkBlue} size={25}>{renderedBloodType}</BoldText>
+                    <FontText flavor="bold" color={Colors.darkBlue} size={25}>{renderedBloodType}</FontText>
                 </View>
 
                 <View style={styles.requestItemDetails}>
-                    <MediumText color={Colors.darkBlue} size={16} numberOfLines={1} >{locationName}</MediumText>
-                    <RegularText color={Colors.lightGrey3} size={14}>{locationAddress}</RegularText>
+                    <FontText flavor="medium" color={Colors.darkBlue} size={16} numberOfLines={1} >{locationName}</FontText>
+                    <FontText color={Colors.lightGrey3} size={14}>{locationAddress}</FontText>
                 </View>
 
                 <View style={styles.requestItemIcons}>
@@ -230,7 +226,7 @@ export default function ExploreScreen(props) {
                     data={requests ? Object.keys(requests) : []}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
                     bounces={true}
-                    ListEmptyComponent={<MediumText style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</MediumText>}
+                    ListEmptyComponent={<FontText flavor="medium" style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</FontText>}
                     ListFooterComponent={<View />}
                     ListFooterComponentStyle={{height: Dimens.bottomBarHeight + 50}}
                 />
@@ -267,7 +263,8 @@ export default function ExploreScreen(props) {
             </SafeAreaView>
 
             <SafeAreaView style={{...styles.mapTopOverlay, right: Dimens.bottomSheetPaddingHorizontal}}>
-                <MainWhiteButton
+                <MainColorButton
+                    color={Colors.white}
                     caption={params && params.isGuest ? "Guest" : Authentication.getCurrentUserName().split(" ")[0]}
                     style={styles.userButton}
                     imageRight={<Icon name="person-outline" color={Colors.darkBlue} size={Dimens.glyphSize} />}

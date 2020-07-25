@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BackHandler } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 import Colors from "../constants/colors";
 import Dimens from "../constants/dimens";
@@ -11,7 +11,6 @@ import NewRequestScreen from "./NewRequestScreen";
 import SelectLocationScreen from "./SelectLocationScreen";
 import ReviewRequestScreen from "./ReviewRequestScreen";
 import BottomNavBar from "../components/BottomNavBar";
-import MainWhiteButton from "../components/MainWhiteButton";
 import MainColorButton from "../components/MainColorButton";
 
 import * as Requests from "../../utils/requests";
@@ -139,10 +138,14 @@ export default (props) => {
         });
     }
 
-    BackHandler.addEventListener("hardwareBackPress", () => {
-        previousStep();
-        return true;
-    });
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
+            previousStep();
+            return true;
+        });
+
+        return () => backHandler.remove();
+    }, []);
 
     const step = () => steps[currentStep - 1];
 
@@ -152,7 +155,8 @@ export default (props) => {
 
             <BottomNavBar
                 renderRightButton={() => (
-                    <MainWhiteButton
+                    <MainColorButton
+                        color={Colors.white}
                         shadow={false}
                         caption={Strings.cancel}
                         onPress={() => navigation.goBack()}
@@ -163,7 +167,7 @@ export default (props) => {
                         caption={isLastStep() ? Strings.submit : Strings.next}
                         color={Colors.blue}
                         textColor={Colors.white}
-                        {...isLastStep() ? null : { imageRight: <MaterialIcon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} /> }}
+                        {...isLastStep() ? null : { imageRight: <Icon name="arrow-forward" color={Colors.white} size={Dimens.glyphSize} /> }}
                         onPress={isLastStep() ? submitRequest : validateAndNextStep}
                     />
                 )}

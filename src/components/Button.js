@@ -68,7 +68,7 @@ export default (props) => {
 
     return (
         <TouchableHighlight
-            onPress={() => requestAnimationFrame(onPress)}
+            onPress={onPress}
             onShowUnderlay={() => setPressed(true)}
             onHideUnderlay={() => setPressed(false)}
             {...touchableProps}

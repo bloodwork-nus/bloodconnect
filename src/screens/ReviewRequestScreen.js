@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, StatusBar, ScrollView } from "react-native";
-import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+import { MaterialIcons as Icon } from "@expo/vector-icons";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
@@ -84,7 +84,7 @@ export default (props) => {
                             {description ? <FontText size={17} color={Colors.darkBlue} style={{marginBottom: 10}}>{description.trim()}</FontText> : null}
                             {isEmergency ?
                                 <View style={styles.emergencyBadge}>
-                                    <MaterialIcon name="priority-high" size={Dimens.glyphSize} color={Colors.red} />
+                                    <Icon name="priority-high" size={Dimens.glyphSize} color={Colors.red} />
                                     <FontText flavor="semibold" size={17} color={Colors.red}>{Strings.thisIsAnEmergency}</FontText>
                                 </View>
                             : null}
