@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, StatusBar, Dimensions, KeyboardAvoidingView, ScrollView } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
+import { CommonActions } from '@react-navigation/native';
 
 import Strings from "../constants/strings";
 import Colors from "../constants/colors";
@@ -28,7 +29,13 @@ export default function CreateAccountScreen(props) {
                     user.updateProfile({ displayName: name })
                         .then(() => {
                             user.sendEmailVerification();
-                            props.navigation.navigate("Explore", { userName: user.displayName, isVerified: user.emailVerified });
+                            props.navigation.dispatch(CommonActions.reset({
+                                index: 0,
+                                routes: [{ name: "Explore", params: {
+                                    userName: user.displayName,
+                                    isVerified: user.emailVerified
+                                } }]
+                            }))
                         });
                 }
             })

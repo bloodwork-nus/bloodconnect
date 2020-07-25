@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, StatusBar, Dimensions, KeyboardAvoidingView, ScrollView } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
+import { CommonActions } from "@react-navigation/native";
 
 import Strings from "../constants/strings";
 import Colors from "../constants/colors";
@@ -22,7 +23,7 @@ export default function LoginScreen(props) {
     const [password, setPassword] = useState("");
 
     const handleLogin = () => Authentication.signIn(email, password,
-        (user) => props.navigation.navigate("Explore"),
+        (user) => props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: "Explore" }] })),
         (error) => alert(`LoginScreen.js: ${error}`));
 
     return (

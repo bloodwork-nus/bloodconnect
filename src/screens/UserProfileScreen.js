@@ -3,6 +3,7 @@ import { StyleSheet, View, StatusBar, TouchableOpacity, SectionList, TouchableHi
 import { MaterialIcons as MaterialIcon, MaterialCommunityIcons as MaterialCommunityIcon } from "@expo/vector-icons";
 import { TouchableRipple } from "react-native-paper";
 import Constants from "expo-constants";
+import { CommonActions } from "@react-navigation/native";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
@@ -73,7 +74,7 @@ export default (props) => {
                     label: "Sign out",
                     color: Colors.red,
                     onPress: () => Authentication.signOut()
-                        .then(() => navigation.navigate("Login"))
+                        .then(() => navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: "Login" }] })))
                         .catch((error) => alert(`UserProfileScreen.js: ${error}`))
                 },
                 {
