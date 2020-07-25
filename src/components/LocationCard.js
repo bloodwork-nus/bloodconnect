@@ -10,8 +10,11 @@ import PlateletsRequestGlyph from "../../assets/icons/platelets.svg";
 
 import FontText from "../components/FontText";
 import MainButton from "../components/MainButton";
+import MainColorButton from "./MainColorButton";
+import MainOutlineButton from "./MainOutlineButton";
 
 import * as Requests from "../../utils/requests";
+import * as Authentication from "../../utils/auth";
 
 export default (props) => {
     const { navigation, request, requestId } = props;
@@ -41,6 +44,8 @@ export default (props) => {
     if (finalBloodType === "Any blood groups") finalBloodType = "Any";
     if (finalBloodType === "Other (specify in description)") finalBloodType = "*";
 
+    const numberOfDonors = request.donors ? Object.values(request.donors).length : 0;
+
     return (
         <View style={styles.container}><View style={styles.locationCard}>
             <View style={styles.requestTypeBadge}>
@@ -62,13 +67,41 @@ export default (props) => {
                     <FontText flavor="bold" size={15} color={Colors.red}>EMERGENCY</FontText>
                 : null}
             </View>
-
-            <MainButton
-                shadow={false}
-                caption="Donate"
-                height={35}
-                onPress={() => navigation.navigate("Donate", { requestId })}
-            />
+            
+            {request.requester === Authentication.getCurrentUserUid() ?
+                numberOfDonors > 0 ? 
+                    <MainColorButton
+                        shadow={false}
+                        color={Colors.blue}
+                        textColor={Colors.white}
+                        caption={`View ${numberOfDonors} donor${numberOfDonors > 1 ? "s" : ""}`}
+                        height={35}
+                        onPress={() => navigation.navigate("ViewDonors", {
+                            requestId: requestId,
+                            locationName: locationName,
+                            locationAddress: locationAddress,
+                            bloodType: finalBloodType,
+                            isEmergency: isEmergency,
+                            dateCreated: request.dateCreated
+                        })}
+                    />
+                :
+                    <MainOutlineButton
+                        shadow={false}
+                        color={Colors.darkBlue}
+                        textColor={Colors.blue}
+                        caption="Manage request"
+                        height={35}
+                        onPress={() => navigation.navigate("Requests")}
+                    />
+            :
+                <MainButton
+                    shadow={false}
+                    caption="Donate"
+                    height={35}
+                    onPress={() => navigation.navigate("Donate", { requestId })}
+                />
+            }
         </View></View>
     );
 }
