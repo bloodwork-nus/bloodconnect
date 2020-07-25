@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BackHandler } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 
@@ -138,10 +138,14 @@ export default (props) => {
         });
     }
 
-    BackHandler.addEventListener("hardwareBackPress", () => {
-        previousStep();
-        return true;
-    });
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener("hardwareBackPress", () => {
+            previousStep();
+            return true;
+        });
+
+        return () => backHandler.remove();
+    }, []);
 
     const step = () => steps[currentStep - 1];
 
