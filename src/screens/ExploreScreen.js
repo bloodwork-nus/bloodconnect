@@ -7,6 +7,10 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 
+import BloodRequestGlyph from "../../assets/icons/blood.svg";
+import PlasmaRequestGlyph from "../../assets/icons/plasma.svg";
+import PlateletsRequestGlyph from "../../assets/icons/platelets.svg";
+
 import BottomBar from '../components/BottomBar';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Dimens from '../constants/dimens';
@@ -20,6 +24,7 @@ import LocationCard from '../components/LocationCard';
 
 import firebase from "../../utils/firebase";
 import * as Authentication from "../../utils/auth";
+import * as Requests from "../../utils/requests";
 
 const registerForPushNotificationsAsync = async () => {
     const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
@@ -148,22 +153,19 @@ export default function ExploreScreen(props) {
         } = requestItem.payload;
 
         let emergency = isEmergency ? <Icon name="priority-high" color={Colors.red} size={Dimens.glyphSize} /> : null;
-        // let venueTypeIcon;
+        let requestTypeIcon;
 
-        // switch (item.venueType) {
-        //     case "hospital":
-        //         venueTypeIcon = <Icon name="local-hospital" color={Colors.blue} size={Dimens.glyphSize} />
-        //         break;
-        //     case "bloodbank":
-        //         venueTypeIcon = <Icon name="home" color={Colors.red} size={Dimens.glyphSize} />
-        //         break;
-        //     case "institution":
-        //         venueTypeIcon = <CommunityIcon name="office-building" color={Colors.grey4} size={Dimens.glyphSize} />
-        //         break;
-        //     case "event":
-        //         venueTypeIcon = <Icon name="event" color={Colors.yellow} size={Dimens.glyphSize} />
-        //         break;
-        // };
+        switch (requestItem.requestType) {
+            case Requests.Constants.RequestTypes.BLOOD:
+                requestTypeIcon = <View style={styles.requestTypeGlyph}><BloodRequestGlyph fill={Colors.grey2} /></View>
+                break;
+            case Requests.Constants.RequestTypes.PLASMA:
+                requestTypeIcon = <View style={styles.requestTypeGlyph}><PlasmaRequestGlyph fill={Colors.grey2} /></View>
+                break;
+            case Requests.Constants.RequestTypes.PLATELETS:
+                requestTypeIcon = <View style={styles.requestTypeGlyph}><PlateletsRequestGlyph fill={Colors.grey2} /></View>
+                break;
+        };
 
         // let distance;
 
@@ -190,7 +192,7 @@ export default function ExploreScreen(props) {
 
                 <View style={styles.requestItemIcons}>
                     {emergency}
-                    {/* {venueTypeIcon} */}
+                    {requestTypeIcon}
                 </View>
             </View></TouchableOpacity>
         );
@@ -416,5 +418,10 @@ const styles = StyleSheet.create({
         shadowRadius: 5.46,
         
         elevation: 9,
+    },
+
+    requestTypeGlyph: {
+        width: Dimens.glyphSize,
+        height: Dimens.glyphSize
     }
 });

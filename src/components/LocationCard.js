@@ -4,8 +4,14 @@ import { StyleSheet, View, Dimensions, Platform } from "react-native";
 import Colors from "../constants/colors";
 import Dimens from '../constants/dimens';
 
+import BloodRequestGlyph from "../../assets/icons/blood.svg";
+import PlasmaRequestGlyph from "../../assets/icons/plasma.svg";
+import PlateletsRequestGlyph from "../../assets/icons/platelets.svg";
+
 import FontText from "../components/FontText";
 import MainButton from "../components/MainButton";
+
+import * as Requests from "../../utils/requests";
 
 export default (props) => {
     const { navigation, request, requestId } = props;
@@ -20,8 +26,24 @@ export default (props) => {
         numberOfUnits
     } = request.payload;
 
+    const renderRequestTypeIcon = () => {
+        switch (request.requestType) {
+            case Requests.Constants.RequestTypes.BLOOD:
+                return <View style={styles.requestTypeGlyph}><BloodRequestGlyph fill={Colors.reddishPurple} /></View>;
+            case Requests.Constants.RequestTypes.PLASMA:
+                return <View style={styles.requestTypeGlyph}><PlasmaRequestGlyph fill={Colors.reddishPurple} /></View>;
+            case Requests.Constants.RequestTypes.PLATELETS:
+                return <View style={styles.requestTypeGlyph}><PlateletsRequestGlyph fill={Colors.reddishPurple} /></View>;
+        };
+    }
+
     return (
         <View style={styles.container}><View style={styles.locationCard}>
+            <View style={styles.requestTypeBadge}>
+                {renderRequestTypeIcon()}
+                <FontText flavor="semibold" size={14} color={Colors.reddishPurple} style={{ textTransform: "capitalize" }}>{request.requestType} request</FontText>
+            </View>
+
             <FontText flavor="medium" size={19} color={Colors.darkBlue} style={{marginBottom: Platform.OS === "ios" ? 3 : 0}}>{locationName}</FontText>
             <FontText size={13} color={Colors.lightGrey3} numberOfLines={1} style={{marginBottom: Platform.OS === "ios" ? 7 : 5}}>{locationAddress}</FontText>
 
@@ -61,7 +83,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         borderRadius: 20,
         paddingHorizontal: 23,
-        paddingVertical: 0,
         paddingTop: 10,
         paddingBottom: 15,
         shadowColor: Colors.black,
@@ -80,5 +101,20 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: 10
+    },
+
+    requestTypeBadge: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        marginBottom: 15
+    },
+
+    requestTypeGlyph: {
+        width: 23,
+        height: 23,
+        marginRight: 10
     }
 });
