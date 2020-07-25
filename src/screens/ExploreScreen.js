@@ -206,7 +206,18 @@ export default function ExploreScreen(props) {
             const keys = Object.keys(requests);
 
             if (searchKeywords === "") {
-                return keys;
+                return keys.sort((a, b) => {
+                    const request1 = requests[a];
+                    const request2 = requests[b];
+
+                    if (request1.payload.isEmergency && !request2.payload.isEmergency) {
+                        return -1;
+                    } else if (request2.payload.isEmergency && !request1.payload.isEmergency) {
+                        return 1;
+                    } else {
+                        return request2.dateCreated - request1.dateCreated;
+                    }
+                });
             } else {
                 const keyword = searchKeywords.toLowerCase();
                 const results = new Set();
