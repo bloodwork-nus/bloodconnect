@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, FlatList, TouchableOpacity, View } from "react-native";
+import { StyleSheet, FlatList, TouchableOpacity, View, ActivityIndicator } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
 import moment from "moment";
@@ -30,6 +30,8 @@ export default (props) => {
                     const donations = snapshot.val();
                     setDonors(donorIds.map((donorId) => donations[donorId]));
                 });
+            } else {
+                navigation.goBack();
             }
         });
 
@@ -91,13 +93,10 @@ export default (props) => {
                         </View>
                     </View>
                 }
-                ListEmptyComponent={
-                    <View style={styles.noDonationsMessage}>
-                        <FontText flavor="medium" color={Colors.darkBlue} size={20}>
-                            You have no donors yet.
-                        </FontText>
-                    </View>
-                }
+                ListEmptyComponent={<>
+                    <ActivityIndicator size="large" color={Colors.darkBlue} style={{ marginTop: 10 }} />
+                    <FontText flavor="medium" align="center" color={Colors.darkBlue} size={17} style={{ marginTop: 15 }}>Fetching donors</FontText>
+                </>}
                 ItemSeparatorComponent={({ highlighted, leadingItem }) => (
                     <View style={styles.listItemSeparator}>
                         <View style={{ backgroundColor: Colors.white, width: 30, height: 1 }} />
