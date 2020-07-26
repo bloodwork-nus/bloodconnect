@@ -20,7 +20,9 @@ export default (props) => {
     const [donors, setDonors] = useState([]);
 
     useEffect(() => {
-        firebase.database().ref(`requests/${params.requestId}/donors`).on("value", (snapshot) => {
+        const requestDonorsRef = firebase.database().ref(`requests/${params.requestId}/donors`);
+        
+        requestDonorsRef.on("value", (snapshot) => {
             const snapshotValue = snapshot.val();
             if (snapshotValue !== null) {
                 const donorIds = Object.values(snapshotValue);
@@ -30,6 +32,8 @@ export default (props) => {
                 });
             }
         });
+
+        return () => requestDonorsRef.off("value");
     }, []);
 
     const renderDonorItem = ({ item, index, separators }) => (
