@@ -40,13 +40,11 @@ export default (props) => {
 
     const renderDonorItem = ({ item, index, separators }) => (
         <View style={styles.donorItem}>
-            <View style={{ flexDirection: "row" }}>
-                <FontText flavor="bold" size={25} color={Colors.darkBlue} style={{ width: 65 }}>{Requests.Constants.BloodTypesLabel[item.payload.bloodType].short}</FontText>
+            <FontText flavor="bold" size={25} color={Colors.darkBlue} style={{ width: 65 }}>{Requests.Constants.BloodTypesLabel[item.payload.bloodType].short}</FontText>
 
-                <View>
-                    <FontText flavor="medium" color={Colors.darkBlue} size={17} numberOfLines={1} >{item.payload.contactName}</FontText>
-                    <FontText color={Colors.lightGrey3} size={15}>{item.payload.contactNumber}</FontText>
-                </View>
+            <View style={{ flex: 1 }}>
+                <FontText flavor="medium" color={Colors.darkBlue} size={17} numberOfLines={4}>{item.payload.contactName}</FontText>
+                <FontText color={Colors.lightGrey3} size={15}>{item.payload.contactNumber}</FontText>
             </View>
 
             <View style={{ flexDirection: "row" }}>
