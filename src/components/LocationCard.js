@@ -68,6 +68,11 @@ export default (props) => {
                     <FontText flavor="bold" size={15} color={Colors.red}>EMERGENCY</FontText>
                 : null}
             </View>
+
+            <FontText flavor="semibold" color={Colors.darkBlue} size={15} style->Compatible donors</FontText>
+            <FontText color={Colors.darkBlue} size={17} style={{ marginBottom: 15, marginTop: 5 }}>
+                {Requests.Constants.DonorCompatibility[bloodType].map((bloodTypeId) => Requests.Constants.BloodTypesLabel[bloodTypeId].value).reduce((a, b) => a + "  |  " + b)}
+            </FontText>
             
             {request.requester === Authentication.getCurrentUserUid() ?
                 numberOfDonors > 0 ? 
