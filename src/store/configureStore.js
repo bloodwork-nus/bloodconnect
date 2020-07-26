@@ -1,18 +1,49 @@
 import { combineReducers } from "redux";
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { firebaseReducer, actionTypes } from "react-redux-firebase";
+import AsyncStorage from "@react-native-community/async-storage";
+import { persistStore, persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER
+} from "redux-persist";
 
 import preferences from "./preferences";
 import requests from "./requests";
 import donations from "./donations";
 
-const reducers = combineReducers({
+const persistConfig = {
+    key: "root",
+    storage: AsyncStorage
+}
+
+const reducer = persistReducer(persistConfig, combineReducers({
     preferences,
     requests,
-    donations
-});
+    donations,
+    firebase: firebaseReducer
+}));
 
 export default () => {
-    const store = configureStore(reducers);
+    const store = configureStore({
+        reducer,
+        middleware: [
+            ...getDefaultMiddleware({
+                serializableCheck: {
+                    ignoredPaths: ["firebase"],
+                    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER,
+                        ...Object.keys(actionTypes).map((type) => `@@reactReduxFirebase/${type}`)
+                    ]
+                }
+            }),
+            store => next => action => { console.log(store.getState()); return next(action); }
+        ]
+    });
+    
+    const persistor = persistStore(store);
 
-    return { store };
+    return { store, persistor };
 }
