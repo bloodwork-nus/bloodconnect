@@ -67,6 +67,7 @@ const registerForPushNotificationsAsync = async () => {
 export default function ExploreScreen(props) {
     const { navigation, route: { params } } = props;
     // TODO: Set branch statements for actions for a Guest account
+    // TODO: Display verification email sent after creating a new account
 
     const [hasPermission, setHasPermission] = useState(null);
     const [bottomBarSelectedButton, setBottomBarSelectedButton] = useState("explore");

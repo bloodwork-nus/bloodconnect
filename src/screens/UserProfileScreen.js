@@ -123,6 +123,7 @@ export default (props) => {
                                 <FontText flavor="medium" size={15} color={Colors.green} style={{ marginLeft: 5 }}>Verified</FontText>
                             </View>
                         :
+                            // TODO: When Verify email is tapped, send verification email to the user
                             <TouchableRipple borderless={true} onPress={() => {}}><View style={styles.badge}>
                                 <MaterialCommunityIcon name="alert-circle-outline" size={25} color={Colors.yellow} />
                                 <FontText flavor="medium" size={15} color={Colors.yellow} style={{ marginLeft: 5 }}>Verify email</FontText>
