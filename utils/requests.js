@@ -40,7 +40,20 @@ export const Constants = {
         BPOS: { value: "B+", short: "B+" },
         BNEG: { value: "B-", short: "B-" },
         ANY: { value: "Any blood groups", short: "Any" },
-        OTHER: { value: "Other (specify in description)", short: "*" }
+        OTHER: { value: "Other blood groups", short: "*" }
+    },
+
+    DonorCompatibility: {
+        ABPOS: ["ABPOS"],
+        ABNEG: ["ABPOS", "ABNEG"],
+        BPOS: ["ABPOS", "BPOS"],
+        BNEG: ["ABPOS", "ABNEG", "BPOS", "BNEG"],
+        APOS: ["ABPOS", "APOS"],
+        ANEG: ["ABPOS", "ABNEG", "APOS", "ANEG"],
+        OPOS: ["ABPOS", "BPOS", "APOS", "OPOS"],
+        ONEG: ["ABPOS", "ABNEG", "BPOS", "BNEG", "APOS", "ANEG", "OPOS", "ONEG"],
+        ANY: ["ABPOS", "ABNEG", "BPOS", "BNEG", "APOS", "ANEG", "OPOS", "ONEG", "OTHER"],
+        ANY: ["ABPOS", "ABNEG", "BPOS", "BNEG", "APOS", "ANEG", "OPOS", "ONEG", "OTHER"],
     }
 };
 

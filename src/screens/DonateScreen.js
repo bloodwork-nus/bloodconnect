@@ -20,7 +20,7 @@ import * as Requests from "../../utils/requests";
 import * as Authentication from "../../utils/auth";
 
 export default (props) => {
-    const { navigation, route: { params: { requestId } } } = props;
+    const { navigation, route: { params: { requestId, requestBloodType } } } = props;
 
     const [bloodType, setBloodType] = useState("");
     const [contactName, setContactName] = useState(Authentication.getCurrentUserName());
@@ -38,7 +38,7 @@ export default (props) => {
             requestId,
             dateCreated: Date.now(),
             payload: {
-                bloodType: bloodType.id,
+                bloodType,
                 contactName,
                 contactNumber
             }
@@ -76,7 +76,8 @@ export default (props) => {
                             >{Strings.chooseBloodType}</FontText>
 
                             <FlatList
-                                data={Requests.Constants.BloodTypes}
+                                data={Requests.Constants.DonorCompatibility[requestBloodType]}
+                                keyExtractor={(item) => item.toString()}
                                 renderItem={({ item }) => (
                                     <TouchableRipple
                                         style={{ alignItems: "flex-start", paddingVertical: 10, paddingHorizontal: Dimens.screenPaddingHorizontal }}
@@ -85,7 +86,7 @@ export default (props) => {
                                             setBloodType(item)
                                         })}
                                     >
-                                        <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.value}</FontText>
+                                        <FontText flavor="medium" size={20} color={Colors.darkBlue}>{Requests.Constants.BloodTypesLabel[item].value}</FontText>
                                     </TouchableRipple>
                                 )}
                                 ListFooterComponent={<View />}
@@ -120,7 +121,7 @@ export default (props) => {
 
             <Question prompt={Strings.whatsYourBloodType} content={() => (
                     <MainOutlineButton
-                        caption={bloodType.value || Strings.choose}
+                        caption={bloodType ? Requests.Constants.BloodTypesLabel[bloodType].value : Strings.choose}
                         color={Colors.reddishPurple}
                         onPress={() => setIsBloodTypeModalVisible(true)}
                         {...bloodType ? {flavor: "bold"} : null}

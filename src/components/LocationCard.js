@@ -95,7 +95,7 @@ export default (props) => {
                     shadow={false}
                     caption="Donate"
                     height={35}
-                    onPress={() => navigation.navigate("Donate", { requestId })}
+                    onPress={() => navigation.navigate("Donate", { requestId, requestBloodType: bloodType })}
                 />
             }
         </View></View>
