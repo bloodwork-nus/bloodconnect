@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, FlatList, KeyboardAvoidingView } from "react-native";
+import { View, StyleSheet, StatusBar, ScrollView, FlatList, KeyboardAvoidingView, Keyboard } from "react-native";
 import { TouchableRipple } from 'react-native-paper';
 
 import Colors from '../constants/colors';
@@ -35,12 +35,12 @@ export default (props) => {
         <View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="dark-content" translucent={true} />
 
-            <KeyboardAvoidingView behavior="height"><ScrollView contentContainerStyle={styles.content}>
+            <KeyboardAvoidingView behavior="height"><ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="always">
                 <FontText flavor="semibold" size={Dimens.heading1} color={Colors.darkBlue}>{Strings.makeARequest}</FontText>
                 <Blobs
                     color={Colors.blue}
                     active={requestType}
-                    onBlobPress={props.handleChange("requestType")}
+                    onBlobPress={() => props.handleChange("requestType")}
                     style={{marginVertical: 20}}
                     blobs={[
                         {
@@ -62,7 +62,7 @@ export default (props) => {
                     <MainOutlineButton
                         caption={bloodType || Strings.choose}
                         color={Colors.blue}
-                        onPress={() => setIsBloodTypeModalVisible(true)}
+                        onPress={() => { Keyboard.dismiss(); setIsBloodTypeModalVisible(true); }}
                         {...bloodType ? {flavor: "bold"} : null}
                     />
                 )} style={{marginBottom: 20}} />

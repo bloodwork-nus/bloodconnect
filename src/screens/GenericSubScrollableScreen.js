@@ -18,7 +18,7 @@ export default (props) => {
             {renderOutsideScrollViewTop ? renderOutsideScrollViewTop() : null}
 
             <KeyboardAvoidingView behaviour="height" enabled={isKeyboardAvoiding === false ? false : true}>
-                <ScrollView contentContainerStyle={styles.content}>
+                <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="always">
                     {props.children}
                 </ScrollView>
             </KeyboardAvoidingView>

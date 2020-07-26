@@ -43,7 +43,7 @@ export default function CreateAccountScreen(props) {
     };
 
     return (
-        <KeyboardAvoidingView><ScrollView bounces={false}><View style={styles.screen}>
+        <KeyboardAvoidingView><ScrollView bounces={false} keyboardShouldPersistTaps="always"><View style={styles.screen}>
             <StatusBar backgroundColor={"rgba(0,0,0,0)"} barStyle="light-content" translucent={true} />
             <BiWavesWithLogo />
 
