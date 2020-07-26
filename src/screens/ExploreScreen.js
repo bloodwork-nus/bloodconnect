@@ -4,7 +4,7 @@ import MapView, { Marker, Callout } from "react-native-maps";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import * as Location from "expo-location";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { Notifications } from "expo";
+import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -27,7 +27,16 @@ import firebase from "../../utils/firebase";
 import * as Authentication from "../../utils/auth";
 import * as Requests from "../../utils/requests";
 
+Notifications.setNotificationHandler({
+    handleNotification: async() => ({
+        shouldShowAlert: true,
+        shouldPlaySound: false,
+        shouldSetBadge: false
+    })
+});
+
 const registerForPushNotificationsAsync = async () => {
+    let pushToken;
     const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
     let finalStatus = existingStatus;
 
@@ -40,15 +49,14 @@ const registerForPushNotificationsAsync = async () => {
         return;
     }
 
-    const pushToken = await Notifications.getExpoPushTokenAsync();
+    pushToken = (await Notifications.getExpoPushTokenAsync()).data;
     firebase.database().ref(`users/${Authentication.getCurrentUserUid()}`).set({ pushToken });
 
     if (Platform.OS === 'android') {
-        Notifications.createChannelAndroidAsync('default', {
+        Notifications.setNotificationChannelAsync('default', {
             name: 'default',
-            sound: true,
-            priority: 'max',
-            vibrate: [0, 250, 250, 250],
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250]
         });
     }
 }
