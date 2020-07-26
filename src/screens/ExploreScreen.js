@@ -7,6 +7,7 @@ import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import { useFocusEffect } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 import BloodRequestGlyph from "../../assets/icons/blood.svg";
 import PlasmaRequestGlyph from "../../assets/icons/plasma.svg";
@@ -26,6 +27,8 @@ import LocationCard from '../components/LocationCard';
 import firebase from "../../utils/firebase";
 import * as Authentication from "../../utils/auth";
 import * as Requests from "../../utils/requests";
+
+import { updateRequests } from "../store/requests";
 
 Notifications.setNotificationHandler({
     handleNotification: async() => ({
@@ -75,11 +78,16 @@ export default function ExploreScreen(props) {
     const [searchWaiting, setSearchWaiting] = useState(null);
     const [loadingRequests, setLoadingRequests] = useState(true);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         const requestsRef = firebase.database().ref("requests");
         
         requestsRef.on("value", (snapshot) => {
-            setRequests(snapshot.val());
+            // setRequests(snapshot.val());
+            const fetchedRequests = snapshot.val();
+            dispatch(updateRequests(fetchedRequests));
+            setRequests(fetchedRequests);
             setLoadingRequests(false);
         });
 
