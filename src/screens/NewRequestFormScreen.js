@@ -93,6 +93,7 @@ export default (props) => {
                 if (bloodType === "") { alert("Select a blood type"); break; }
                 if (contactName === "") { alert("Specify a contact name"); break; } 
                 if (contactNumber === "") { alert("Specify a contact number"); break; }
+                if (bloodType.id === "OTHER" && description === "") { alert("Please specify your blood group in the description"); break; }
                 nextStep(); break;
             case 2:
                 if (locationName === "") { alert("Select a location"); break; }
