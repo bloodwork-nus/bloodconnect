@@ -23,7 +23,7 @@ export default (props) => {
     const { navigation, route: { params: { requestId } } } = props;
 
     const [bloodType, setBloodType] = useState("");
-    const [contactName, setContactName] = useState("");
+    const [contactName, setContactName] = useState(Authentication.getCurrentUserName());
     const [contactNumber, setContactNumber] = useState("");
 
     const [isBloodTypeModalVisible, setIsBloodTypeModalVisible] = useState(false);
