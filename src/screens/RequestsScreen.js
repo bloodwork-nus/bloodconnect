@@ -150,8 +150,9 @@ export default (props) => {
 
                         <MainButton
                             caption="Make a request"
-                            onPress={() => {}}
+                            onPress={() => props.navigation.navigate("NewRequestForm")}
                             style={{ marginTop: 20}}
+                            imageLeft={<Icon name="add" size={Dimens.glyphSize} color={Colors.white} />}
                         />
                     </View>
                 }
@@ -199,6 +200,8 @@ const styles = StyleSheet.create({
     },
 
     noRequestsMessage: {
+        justifyContent: "center",
+        alignItems: "center",
         paddingHorizontal: Dimens.screenPaddingHorizontal,
         paddingBottom: 20
     }
