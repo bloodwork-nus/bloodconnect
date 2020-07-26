@@ -3,6 +3,7 @@ import { StyleSheet, View, SectionList, TouchableHighlight, TouchableOpacity } f
 import moment from "moment";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
 import { Button } from "react-native-paper";
+import { useSelector } from "react-redux";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
@@ -12,13 +13,14 @@ import GenericSubScreen from "./GenericSubScreen";
 import FontText from "../components/FontText";
 import MainOutlineButton from "../components/MainOutlineButton";
 
-import firebase from "../../utils/firebase";
 import * as Requests from "../../utils/requests";
 import * as Authentication from "../../utils/auth";
 import MainButton from "../components/MainButton";
 
+import { getMyRequests } from "../store/requests";
+
 export default (props) => {
-    const [requests, setRequests] = useState({ });
+    const requests = useSelector(getMyRequests(Authentication.getCurrentUserUid()));
 
     const sectionedRequests = () => {
         const openRequests = Object.values(requests).filter((request) => request.status === Requests.Constants.Status.OPEN);
@@ -37,14 +39,6 @@ export default (props) => {
 
         return requestsToDisplay;
     }
-
-    useEffect(() => {
-        firebase.database().ref("requests").on("value", (snapshot) => {
-            setRequests(Object.values(snapshot.val()).filter((request) => request.requester === Authentication.getCurrentUserUid()));
-        })
-    }, []);
-
-    console.log(requests);
 
     const renderSectionHeader = ({ section: { title } }) => (
         <FontText flavor="semibold" size={15} style={styles.listSectionHeader} color={Colors.darkBlue}>{title}</FontText>
