@@ -11,9 +11,7 @@ import { persistStore, persistReducer,
     REGISTER
 } from "redux-persist";
 
-import preferences from "./preferences";
 import requests from "./requests";
-import donations from "./donations";
 
 const persistConfig = {
     key: "root",
@@ -21,9 +19,7 @@ const persistConfig = {
 }
 
 const reducer = persistReducer(persistConfig, combineReducers({
-    preferences,
     requests,
-    donations,
     firebase: firebaseReducer
 }));
 
