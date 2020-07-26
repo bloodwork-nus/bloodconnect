@@ -142,6 +142,7 @@ export default (props) => {
                     style={{backgroundColor: Colors.offGrey2}}
                     onChangeText={setContactName}
                     autoCapitalize="words"
+                    value={contactName}
                 />
             </>)} style={{marginBottom: 20}} />
 
@@ -151,6 +152,7 @@ export default (props) => {
                     style={{backgroundColor: Colors.offGrey2}}
                     onChangeText={setContactNumber}
                     keyboardType="phone-pad"
+                    value={contactNumber}
                 />
             </>)} style={{marginBottom: 20}} />
         </GenericSubScrollableScreen>

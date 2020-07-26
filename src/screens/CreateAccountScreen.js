@@ -57,6 +57,7 @@ export default function CreateAccountScreen(props) {
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
                         onChangeText={nameInput => setName(nameInput)}
+                        value={name}
                     />
                     <TextBox
                         placeholder={Strings.email}
@@ -67,9 +68,11 @@ export default function CreateAccountScreen(props) {
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
                         onChangeText={emailInput => setEmail(emailInput)}
+                        value={email}
                     />
                     <PasswordTextBox
                         onChangeText={passwordInput => setPassword(passwordInput)}
+                        value={password}
                     />
 
                     <View style={styles.inputControls}>                        

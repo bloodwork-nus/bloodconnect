@@ -43,9 +43,11 @@ export default function LoginScreen(props) {
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         returnKeyType="next"
                         onChangeText={emailInput => setEmail(emailInput)}
+                        value={email}
                     />
                     <PasswordTextBox
                         onChangeText={passwordInput => setPassword(passwordInput)}
+                        value={password}
                     />
 
                     <View style={styles.loginControls}>
