@@ -67,9 +67,13 @@ export default function ExploreScreen(props) {
     const [searchWaiting, setSearchWaiting] = useState(null);
 
     useEffect(() => {
-        firebase.database().ref("requests").on("value", (snapshot) => {
+        const requestsRef = firebase.database().ref("requests");
+        
+        requestsRef.on("value", (snapshot) => {
             setRequests(snapshot.val());
         });
+
+        return () => requestsRef.off("value");
     }, []);
 
     useEffect(() => {
