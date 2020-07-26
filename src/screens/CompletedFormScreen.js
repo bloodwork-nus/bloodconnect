@@ -16,7 +16,7 @@ export default (props) => {
 
     return (
         <GenericSubScreen style={styles.screen}>
-            <Icon name="check-circle" color={Colors.green} size={70} />
+            <Icon name={configureScreen.icon || "check-circle"} color={configureScreen.iconColor || Colors.green} size={70} />
 
             <FontText
                 flavor="semibold"

@@ -56,6 +56,17 @@ export default (props) => {
                     }
                 });
             }
+        }, () => {
+            navigation.navigate("CompletedForm", {
+                configureScreen: {
+                    heading: Strings.whoops,
+                    subtitle: Strings.requestWasCompleted,
+                    color: Colors.yellow,
+                    backButton: Strings.returnHome,
+                    icon: "error",
+                    iconColor: Colors.yellow
+                }
+            });
         });
     }
 

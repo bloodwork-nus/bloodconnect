@@ -64,7 +64,7 @@ export const newRequest = (request, callback = () => {}) => {
     return newRequest;
 }
 
-export const donateToRequest = (requestId, donation, callback = () => {}) => {
+export const donateToRequest = (requestId, donation, callback = () => {}, onClosedRequest = () => {}) => {
     firebase.database().ref(`requests/${requestId}`).once("value").then(snapshot => {
         const status = snapshot.val().status;
         switch (status) {
@@ -74,7 +74,7 @@ export const donateToRequest = (requestId, donation, callback = () => {}) => {
                 firebase.database().ref(`requests/${requestId}/donors`).push(newDonation, callback);
                 return newDonation;
             default:
-                console.log("status unknown");
+                return onClosedRequest();
         }
     });
 }
