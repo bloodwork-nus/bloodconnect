@@ -24,7 +24,8 @@ export default function LoginScreen(props) {
 
     const handleLogin = () => Authentication.signIn(email, password,
         (user) => props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: "Explore" }] })),
-        (error) => alert(`LoginScreen.js: ${error}`));
+        (error) => alert(`LoginScreen.js: ${error}`)
+    );
 
     return (
         <KeyboardAvoidingView><ScrollView bounces={false} keyboardShouldPersistTaps="always"><View style={styles.screen}>
@@ -67,24 +68,24 @@ export default function LoginScreen(props) {
                 </View>
 
                 <View style={styles.bottomControls}>
-                    <MainOutlineButton
+                    {/* <MainOutlineButton
                         caption={Strings.signInWithGoogle}
-                        onPress={() => {}}
+                        onPress={handleSignInWithGoogle}
                         style={{marginBottom: Dimens.bodyMarginVertical}}
                         imageLeft={<GoogleLogo width={"100%"} height={"100%"} />}
-                    />
+                    /> */}
                     
                     <MainOutlineButton
                         caption={Strings.createANewAccount}
                         onPress={() => props.navigation.navigate("CreateAccount")}
-                        style={{marginBottom: Dimens.bodyMarginVertical}}
+                        // style={{marginBottom: Dimens.bodyMarginVertical}}
                     />
 
-                    <MainOutlineButton
+                    {/* <MainOutlineButton
                         caption={Strings.logInAsGuest}
                         onPress={() => props.navigation.navigate("Explore", { isGuest: true })}
                         imageRight={<Icon name="arrow-forward" color={Colors.darkBlue} size={Dimens.glyphSize} />}
-                    />
+                    /> */}
                 </View>
             </View>
         </View></ScrollView></KeyboardAvoidingView>
