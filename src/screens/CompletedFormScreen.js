@@ -37,7 +37,6 @@ export default (props) => {
                 onPress={() => navigation.navigate("Explore")}
                 style={{ marginTop: 20 }}
                 color={configureScreen.color}
-                imageLeft={<Icon name="arrow-back" size={Dimens.glyphSize} color={configureScreen.color} />}
             />
         </GenericSubScreen>
     );
