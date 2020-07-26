@@ -70,7 +70,6 @@ export default function ExploreScreen(props) {
     // TODO: Display verification email sent after creating a new account
 
     const [hasPermission, setHasPermission] = useState(null);
-    const [bottomBarSelectedButton, setBottomBarSelectedButton] = useState("explore");
     const [requests, setRequests] = useState({ });
     const [loadingLocation, setLoadingLocation] = useState(false);
     const [requestIdToDonate, setRequestIdToDonate] = useState("");
@@ -372,15 +371,8 @@ export default function ExploreScreen(props) {
             />
             
             <BottomBar
-                selected={bottomBarSelectedButton}
-                onExplore={() => {
-                    setBottomBarSelectedButton("explore");
-                    restoreBottomSheet();
-                }}
-                onRequests={() => {
-                    setBottomBarSelectedButton("requests");
-                    maximiseBottomSheet();
-                }}
+                onExplore={() => restoreBottomSheet()}
+                onRequests={() => navigation.navigate("Requests")}
                 onPrimaryButtonPress={() => navigation.navigate("NewRequestForm")}
             />
         </View>
