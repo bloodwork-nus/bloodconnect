@@ -79,6 +79,7 @@ export default function ExploreScreen(props) {
     const [loadingRequests, setLoadingRequests] = useState(true);
 
     const dispatch = useDispatch();
+    const activeRequests = Object.keys(requests).filter((id) => requests[id].status === Requests.Constants.Status.OPEN);
 
     useEffect(() => {
         const requestsRef = firebase.database().ref("requests");
@@ -240,10 +241,8 @@ export default function ExploreScreen(props) {
 
     const getRequestsList = () => {
         if (requests) {
-            const keys = Object.keys(requests).filter((id) => requests[id].status === Requests.Constants.Status.OPEN);
-
             if (searchKeywords === "") {
-                return keys.sort((a, b) => {
+                return activeRequests.sort((a, b) => {
                     const request1 = requests[a];
                     const request2 = requests[b];
 
@@ -259,9 +258,9 @@ export default function ExploreScreen(props) {
                 const keyword = searchKeywords.toLowerCase();
                 const results = new Set();
 
-                keys.forEach((id) => requests[id].payload.bloodType.toLowerCase().includes(keyword) ? results.add(id) : null);
-                keys.forEach((id) => requests[id].requestType.toLowerCase().includes(keyword) ? results.add(id) : null);
-                keys.forEach((id) => requests[id].payload.location.locationName.toLowerCase().includes(keyword) || 
+                activeRequests.forEach((id) => requests[id].payload.bloodType.toLowerCase().includes(keyword) ? results.add(id) : null);
+                activeRequests.forEach((id) => requests[id].requestType.toLowerCase().includes(keyword) ? results.add(id) : null);
+                activeRequests.forEach((id) => requests[id].payload.location.locationName.toLowerCase().includes(keyword) || 
                     requests[id].payload.location.locationAddress.toLowerCase().includes(keyword) ? results.add(id) : null);
                 
                 return Array.from(results);
@@ -339,7 +338,7 @@ export default function ExploreScreen(props) {
                     latitudeDelta: 0.2,
                     longitudeDelta: 0.2
                 }}
-            >{requests ? Object.keys(requests).map(renderMarker) : null}</MapView>
+            >{requests ? activeRequests.map(renderMarker) : null}</MapView>
 
             <SafeAreaView style={{...styles.mapTopOverlay, left: Dimens.bottomSheetPaddingHorizontal}}>
                 <RoundWhiteButton
