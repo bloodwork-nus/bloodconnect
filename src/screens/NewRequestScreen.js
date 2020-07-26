@@ -40,7 +40,7 @@ export default (props) => {
                 <Blobs
                     color={Colors.blue}
                     active={requestType}
-                    onBlobPress={() => props.handleChange("requestType")}
+                    onBlobPress={props.handleChange("requestType")}
                     style={{marginVertical: 20}}
                     blobs={[
                         {
