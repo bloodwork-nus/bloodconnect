@@ -39,7 +39,7 @@ export default () => {
                     ]
                 }
             }),
-            store => next => action => { console.log(store.getState()); return next(action); }
+            // store => next => action => { console.log(store.getState().requests.requests["-MD40o2e4PjLTBoju4Jr"]); return next(action); }
         ]
     });
     
