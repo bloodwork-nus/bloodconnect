@@ -68,6 +68,7 @@ export default {
     returnHome: "Return home",
     thanks: "Thanks!",
     donationMadeText: "We have submitted your availability, and the requester will contact you soon. Thanks!",
+    requestCompleted: "Thank you for using BloodConnect! This request will be closed.",
 
     myRequests: "My requests",
 };

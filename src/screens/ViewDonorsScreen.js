@@ -38,6 +38,19 @@ export default (props) => {
         return () => requestDonorsRef.off("value");
     }, []);
 
+    const handleCompleteRequest = (item) => {
+        Requests.completeRequest(params.requestId, item.payload.contactName, item.payload.contactNumber);
+
+        navigation.navigate("CompletedForm", {
+            configureScreen: {
+                heading: Strings.thanks,
+                subtitle: Strings.requestCompleted,
+                color: Colors.green,
+                backButton: Strings.returnHome
+            }
+        });
+    }
+
     const renderDonorItem = ({ item, index, separators }) => (
         <View style={styles.donorItem}>
             <FontText flavor="bold" size={25} color={Colors.darkBlue} style={{ width: 65 }}>{Requests.Constants.BloodTypesLabel[item.payload.bloodType].short}</FontText>
@@ -48,7 +61,7 @@ export default (props) => {
             </View>
 
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity onPress={() => { Requests.completeRequest(params.requestId, item.payload.contactName, item.payload.contactNumber); navigation.goBack(); }}>
+                <TouchableOpacity onPress={() => handleCompleteRequest(item)}>
                     <Icon name="check" color={Colors.green} size={Dimens.glyphSize} style={{ marginRight: 20 }} />
                 </TouchableOpacity>
 

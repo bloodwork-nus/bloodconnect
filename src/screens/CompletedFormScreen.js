@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableHighlight, Text } from "react-native";
 import { MaterialIcons as Icon } from "@expo/vector-icons";
+import { CommonActions } from "@react-navigation/native";
 
 import Colors from '../constants/colors';
 import Dimens from '../constants/dimens';
@@ -34,7 +35,7 @@ export default (props) => {
 
             <MainOutlineButton
                 caption={configureScreen.backButton} 
-                onPress={() => navigation.navigate("Explore")}
+                onPress={() => navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: "Explore"}]}))}
                 style={{ marginTop: 20 }}
                 color={configureScreen.color}
             />
