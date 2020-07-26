@@ -37,7 +37,7 @@ export default (props) => {
                     onEdit={() => requestAnimationFrame(() => props.jump(1))}
                     content={() => (<>
                         <FontText size={16} color={Colors.darkBlue}>{Strings.requestingFor}</FontText>
-                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{requestType}</FontText>
+                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15, textTransform: "capitalize"}}>{requestType}</FontText>
                         
                         <FontText size={16} color={Colors.darkBlue}>{Strings.bloodType}</FontText>
                         <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{bloodType}</FontText>
