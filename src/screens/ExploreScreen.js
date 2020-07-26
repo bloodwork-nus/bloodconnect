@@ -73,12 +73,14 @@ export default function ExploreScreen(props) {
     const [requestIdToDonate, setRequestIdToDonate] = useState("");
     const [searchKeywords, setSearchKeywords] = useState("");
     const [searchWaiting, setSearchWaiting] = useState(null);
+    const [loadingRequests, setLoadingRequests] = useState(true);
 
     useEffect(() => {
         const requestsRef = firebase.database().ref("requests");
         
         requestsRef.on("value", (snapshot) => {
             setRequests(snapshot.val());
+            setLoadingRequests(false);
         });
 
         return () => requestsRef.off("value");
@@ -292,7 +294,14 @@ export default function ExploreScreen(props) {
                     data={getRequestsList()}
                     ItemSeparatorComponent={({ highlighted, leadingItem }) => <View style={styles.requestsListSeparator} />}
                     bounces={true}
-                    ListEmptyComponent={<FontText flavor="medium" style={{textAlign: "center"}} color={Colors.grey2} size={17}>{Strings.noRequests}</FontText>}
+                    ListEmptyComponent={loadingRequests ?
+                        <>
+                            <ActivityIndicator size="large" color={Colors.darkBlue} style={{ marginTop: 10 }} />
+                            <FontText flavor="medium" align="center" color={Colors.darkBlue} size={17} style={{ marginTop: 15 }}>Fetching requests</FontText>
+                        </>
+                        :
+                        <FontText flavor="medium" align="center" color={Colors.grey2} size={17}>{Strings.noRequests}</FontText>
+                    }
                     ListFooterComponent={<View />}
                     ListFooterComponentStyle={{height: Dimens.bottomBarHeight + 50}}
                     onScroll={maximiseBottomSheet}
