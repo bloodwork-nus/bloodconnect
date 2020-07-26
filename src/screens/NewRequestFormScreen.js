@@ -109,7 +109,7 @@ export default (props) => {
             status: Requests.Constants.Status.OPEN,
             requestType,
             payload: {
-                bloodType,
+                bloodType: bloodType.id,
                 numberOfUnits,
                 contactName,
                 contactNumber,

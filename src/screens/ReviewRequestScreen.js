@@ -40,7 +40,7 @@ export default (props) => {
                         <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15, textTransform: "capitalize"}}>{requestType}</FontText>
                         
                         <FontText size={16} color={Colors.darkBlue}>{Strings.bloodType}</FontText>
-                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{bloodType}</FontText>
+                        <FontText flavor="semibold" size={18} color={Colors.darkBlue} style={{marginBottom: 15}}>{bloodType.value}</FontText>
 
                         <FontText size={16} color={Colors.darkBlue}>{Strings.numberOfUnits}</FontText>
                         <FontText flavor="semibold" size={18} color={Colors.darkBlue}>{numberOfUnits}</FontText>

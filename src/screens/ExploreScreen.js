@@ -208,17 +208,13 @@ export default function ExploreScreen(props) {
         // } else {
         //     distance = item.distance + "m";
         // }
-
-        let renderedBloodType = bloodType;
-        if (bloodType === "Any blood groups") renderedBloodType = "Any";
-        if (bloodType === "Other (specify in description)") renderedBloodType = "*";
-
+        
         const numberOfDonors = requestItem.donors ? Object.values(requestItem.donors).length : 0;
 
         return (
             <TouchableOpacity onPress={() => openRequestDetails(item, requestItem, latitude, longitude)}><View style={styles.requestItem}>
                 <View style={styles.requestItemBloodType}>
-                    <FontText flavor="bold" color={Colors.darkBlue} size={23}>{renderedBloodType}</FontText>
+                    <FontText flavor="bold" color={Colors.darkBlue} size={23}>{Requests.Constants.BloodTypesLabel[bloodType].short}</FontText>
                 </View>
 
                 <View style={styles.requestItemDetails}>

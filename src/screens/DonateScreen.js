@@ -38,7 +38,7 @@ export default (props) => {
             requestId,
             dateCreated: Date.now(),
             payload: {
-                bloodType,
+                bloodType: bloodType.id,
                 contactName,
                 contactNumber
             }
@@ -76,25 +76,16 @@ export default (props) => {
                             >{Strings.chooseBloodType}</FontText>
 
                             <FlatList
-                                data={[
-                                    { id: "ap", label: "A+" },
-                                    { id: "am", label: "A-" },
-                                    { id: "bp", label: "B+" },
-                                    { id: "bm", label: "B-" },
-                                    { id: "abp", label: "AB+" },
-                                    { id: "abm", label: "AB-" },
-                                    { id: "op", label: "O+" },
-                                    { id: "om", label: "O-" }
-                                ]}
+                                data={Requests.Constants.BloodTypes}
                                 renderItem={({ item }) => (
                                     <TouchableRipple
                                         style={{ alignItems: "flex-start", paddingVertical: 10, paddingHorizontal: Dimens.screenPaddingHorizontal }}
                                         onPress={() => requestAnimationFrame(() => {
                                             setIsBloodTypeModalVisible(false);
-                                            setBloodType(item.label)
+                                            setBloodType(item)
                                         })}
                                     >
-                                        <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.label}</FontText>
+                                        <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.value}</FontText>
                                     </TouchableRipple>
                                 )}
                                 ListFooterComponent={<View />}
@@ -129,7 +120,7 @@ export default (props) => {
 
             <Question prompt={Strings.whatsYourBloodType} content={() => (
                     <MainOutlineButton
-                        caption={bloodType || Strings.choose}
+                        caption={bloodType.value || Strings.choose}
                         color={Colors.reddishPurple}
                         onPress={() => setIsBloodTypeModalVisible(true)}
                         {...bloodType ? {flavor: "bold"} : null}

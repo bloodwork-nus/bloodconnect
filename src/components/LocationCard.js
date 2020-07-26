@@ -40,10 +40,6 @@ export default (props) => {
         };
     }
 
-    let finalBloodType = bloodType;
-    if (finalBloodType === "Any blood groups") finalBloodType = "Any";
-    if (finalBloodType === "Other (specify in description)") finalBloodType = "*";
-
     const numberOfDonors = request.donors ? Object.values(request.donors).length : 0;
 
     return (
@@ -61,7 +57,7 @@ export default (props) => {
             : null}
 
             <View style={styles.badges}>
-                <FontText flavor="bold" size={30} color={Colors.darkBlue}>{finalBloodType}</FontText>
+                <FontText flavor="bold" size={30} color={Colors.darkBlue}>{Requests.Constants.BloodTypesLabel[bloodType].short}</FontText>
 
                 {isEmergency ?
                     <FontText flavor="bold" size={15} color={Colors.red}>EMERGENCY</FontText>
@@ -80,7 +76,7 @@ export default (props) => {
                             requestId: requestId,
                             locationName: locationName,
                             locationAddress: locationAddress,
-                            bloodType: finalBloodType,
+                            bloodType: bloodType,
                             isEmergency: isEmergency,
                             dateCreated: request.dateCreated
                         })}

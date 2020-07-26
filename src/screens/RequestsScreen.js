@@ -44,89 +44,83 @@ export default (props) => {
         <FontText flavor="semibold" size={15} style={styles.listSectionHeader} color={Colors.darkBlue}>{title}</FontText>
     );
 
-    const renderRequestItem = ({ item, index, section, separators }) => {
-        let finalBloodType = item.payload.bloodType;
-        if (finalBloodType === "Any blood groups") finalBloodType = "Any";
-        if (finalBloodType === "Other (specify in description)") finalBloodType = "Other";
+    const renderRequestItem = ({ item, index, section, separators }) => (
+        <TouchableHighlight
+            activeOpacity={0.95}
+            underlayColor={Colors.black}
+            onPress={() => requestAnimationFrame(() => {})}
+        ><View style={styles.requestItem}>
+            <FontText flavor="medium" color={Colors.darkBlue} size={17} numberOfLines={1} >{item.payload.location.locationName}</FontText>
+            <FontText color={Colors.lightGrey3} size={15}>{item.payload.location.locationAddress}</FontText>
 
-        return (
-            <TouchableHighlight
-                activeOpacity={0.95}
-                underlayColor={Colors.black}
-                onPress={() => requestAnimationFrame(() => {})}
-            ><View style={styles.requestItem}>
-                <FontText flavor="medium" color={Colors.darkBlue} size={17} numberOfLines={1} >{item.payload.location.locationName}</FontText>
-                <FontText color={Colors.lightGrey3} size={15}>{item.payload.location.locationAddress}</FontText>
+            <View style={styles.badges}>
+                <FontText flavor="bold" size={25} color={Colors.darkBlue}>{Requests.Constants.BloodTypesLabel[item.payload.bloodType].short}</FontText>
 
-                <View style={styles.badges}>
-                    <FontText flavor="bold" size={25} color={Colors.darkBlue}>{finalBloodType}</FontText>
-
-                    {item.payload.isEmergency ?
-                        <FontText flavor="bold" size={15} color={item.status === Requests.Constants.Status.OPEN ? Colors.red : Colors.grey2}>EMERGENCY</FontText>
-                    : null}
-                </View>
-                
-                {item.status === Requests.Constants.Status.CANCELLED ? 
-                    <FontText flavor="bold" size={15} color={Colors.red} style={{ marginBottom: 10 }}>CANCELLED</FontText>
+                {item.payload.isEmergency ?
+                    <FontText flavor="bold" size={15} color={item.status === Requests.Constants.Status.OPEN ? Colors.red : Colors.grey2}>EMERGENCY</FontText>
                 : null}
+            </View>
+            
+            {item.status === Requests.Constants.Status.CANCELLED ? 
+                <FontText flavor="bold" size={15} color={Colors.red} style={{ marginBottom: 10 }}>CANCELLED</FontText>
+            : null}
 
-                {item.status === Requests.Constants.Status.COMPLETED ? 
-                    <FontText flavor="bold" size={15} color={Colors.green} style={{ marginBottom: 10 }}>COMPLETED</FontText>
-                : null}
+            {item.status === Requests.Constants.Status.COMPLETED ? 
+                <FontText flavor="bold" size={15} color={Colors.green} style={{ marginBottom: 10 }}>COMPLETED</FontText>
+            : null}
 
-                <FontText flavor="medium" color={Colors.grey2} size={16}>Made on {moment(item.dateCreated).format("ddd MMM D, YYYY, hh:mm A")}</FontText>
+            <FontText flavor="medium" color={Colors.grey2} size={16}>Made on {moment(item.dateCreated).format("ddd MMM D, YYYY, hh:mm A")}</FontText>
 
-                {item.status === Requests.Constants.Status.COMPLETED ?
-                    <FontText flavor="medium" color={Colors.grey2} size={16} style={{ marginTop: 10 }}>
-                        Completed on {moment(item.dateCompleted).format("ddd MMM D, YYYY, hh:mm A")} with {item.donor.contactName} ({item.donor.contactNumber}) as the donor.
-                    </FontText>
-                : null}
+            {item.status === Requests.Constants.Status.COMPLETED ?
+                <FontText flavor="medium" color={Colors.grey2} size={16} style={{ marginTop: 10 }}>
+                    Completed on {moment(item.dateCompleted).format("ddd MMM D, YYYY, hh:mm A")} with {item.donor.contactName} ({item.donor.contactNumber}) as the donor.
+                </FontText>
+            : null}
 
+            {item.status === Requests.Constants.Status.OPEN && item.donors ? 
+                <FontText flavor="medium" color={Colors.blue} size={16} numberOfLines={1} align="center" style={{ marginTop: 10 }}>{Object.values(item.donors).length} donor{Object.values(item.donors).length > 1 ? "s" : ""}</FontText>
+            : null}
+
+            <View style={styles.requestOptions}>
                 {item.status === Requests.Constants.Status.OPEN && item.donors ? 
-                    <FontText flavor="medium" color={Colors.blue} size={16} numberOfLines={1} align="center" style={{ marginTop: 10 }}>{Object.values(item.donors).length} donor{Object.values(item.donors).length > 1 ? "s" : ""}</FontText>
+                    <Button
+                        color={Colors.blue}
+                        mode="contained"
+                        onPress={() => props.navigation.navigate("ViewDonors", {
+                            requestId: item.id,
+                            locationName: item.payload.location.locationName,
+                            locationAddress: item.payload.location.locationAddress,
+                            bloodType: item.payload.bloodType,
+                            isEmergency: item.payload.isEmergency,
+                            dateCreated: item.dateCreated
+                        })}
+                        style={{ marginBottom: 10, borderRadius: 100 }}
+                        labelStyle={{ fontFamily: "inter-semibold" }}
+                    >View donors</Button>
                 : null}
 
-                <View style={styles.requestOptions}>
-                    {item.status === Requests.Constants.Status.OPEN && item.donors ? 
-                        <Button
-                            color={Colors.blue}
-                            mode="contained"
-                            onPress={() => props.navigation.navigate("ViewDonors", {
-                                requestId: item.id,
-                                locationName: item.payload.location.locationName,
-                                locationAddress: item.payload.location.locationAddress,
-                                bloodType: item.payload.bloodType,
-                                isEmergency: item.payload.isEmergency,
-                                dateCreated: item.dateCreated
-                            })}
-                            style={{ marginBottom: 10, borderRadius: 100 }}
-                            labelStyle={{ fontFamily: "inter-semibold" }}
-                        >View donors</Button>
-                    : null}
+                {item.status === Requests.Constants.Status.OPEN ? 
+                    <Button
+                        color={Colors.red}
+                        mode="outlined"
+                        onPress={() => Requests.closeRequest(item.id)}
+                        style={{ borderRadius: 100 }}
+                        labelStyle={{ fontFamily: "inter-semibold" }}
+                    >Close request</Button>
+                : null}
 
-                    {item.status === Requests.Constants.Status.OPEN ? 
-                        <Button
-                            color={Colors.red}
-                            mode="outlined"
-                            onPress={() => Requests.closeRequest(item.id)}
-                            style={{ borderRadius: 100 }}
-                            labelStyle={{ fontFamily: "inter-semibold" }}
-                        >Close request</Button>
-                    : null}
-
-                    {item.status !== Requests.Constants.Status.OPEN ?
-                        <Button
-                            color={Colors.red}
-                            mode="outlined"
-                            onPress={() => Requests.deleteRequest(item.id)}
-                            style={{ borderRadius: 100 }}
-                            labelStyle={{ fontFamily: "inter-semibold" }}
-                        >Delete request</Button>
-                    : null}
-                </View>
-            </View></TouchableHighlight>
-        );
-    };
+                {item.status !== Requests.Constants.Status.OPEN ?
+                    <Button
+                        color={Colors.red}
+                        mode="outlined"
+                        onPress={() => Requests.deleteRequest(item.id)}
+                        style={{ borderRadius: 100 }}
+                        labelStyle={{ fontFamily: "inter-semibold" }}
+                    >Delete request</Button>
+                : null}
+            </View>
+        </View></TouchableHighlight>
+    );
 
     return (
         <GenericSubScreen>

@@ -60,7 +60,7 @@ export default (props) => {
 
                 <Question prompt={Strings.forWhichBloodType} content={() => (
                     <MainOutlineButton
-                        caption={bloodType || Strings.choose}
+                        caption={bloodType.value || Strings.choose}
                         color={Colors.blue}
                         onPress={() => { Keyboard.dismiss(); setIsBloodTypeModalVisible(true); }}
                         {...bloodType ? {flavor: "bold"} : null}
@@ -144,27 +144,16 @@ export default (props) => {
                         >{Strings.chooseBloodType}</FontText>
 
                         <FlatList
-                            data={[
-                                { id: "ap", label: "A+" },
-                                { id: "am", label: "A-" },
-                                { id: "bp", label: "B+" },
-                                { id: "bm", label: "B-" },
-                                { id: "abp", label: "AB+" },
-                                { id: "abm", label: "AB-" },
-                                { id: "op", label: "O+" },
-                                { id: "om", label: "O-" },
-                                { id: "all", label: "Any blood groups" },
-                                { id: "other", label: "Other (specify in description)" }
-                            ]}
+                            data={Constants.BloodTypes}
                             renderItem={({ item }) => (
                                 <TouchableRipple
                                     style={{ alignItems: "flex-start", paddingVertical: 10, paddingHorizontal: Dimens.screenPaddingHorizontal }}
                                     onPress={() => requestAnimationFrame(() => {
                                         setIsBloodTypeModalVisible(false);
-                                        props.handleChange("bloodType")(item.label)
+                                        props.handleChange("bloodType")(item)
                                     })}
                                 >
-                                    <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.label}</FontText>
+                                    <FontText flavor="medium" size={20} color={Colors.darkBlue}>{item.value}</FontText>
                                 </TouchableRipple>
                             )}
                             ListFooterComponent={<View />}

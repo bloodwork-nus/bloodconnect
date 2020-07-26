@@ -12,6 +12,35 @@ export const Constants = {
         BLOOD: "BLOOD",
         PLATELETS: "PLATELETS",
         PLASMA: "PLASMA"
+    },
+
+    // Remember to update BloodTypes and BloodTypesLabel when adding/changing
+    // blood types values. This splitting is to prevent O(n) operations when
+    // converting blood type ID (from Firebase) to display in Explore.
+    BloodTypes: [
+        { id: "ANEG", value: "A-", short: "A-" },
+        { id: "OPOS", value: "O+", short: "O+" },
+        { id: "APOS", value: "A+", short: "A+" },
+        { id: "ONEG", value: "O-", short: "O-" },
+        { id: "ABPOS", value: "AB+", short: "AB+" },
+        { id: "ABNEG", value: "AB-", short: "AB-" },
+        { id: "BPOS", value: "B+", short: "B+" },
+        { id: "BNEG", value: "B-", short: "B-" },
+        { id: "ANY", value: "Any blood groups", short: "Any" },
+        { id: "OTHER", value: "Other (specify in description)", short: "*" }
+    ],
+
+    BloodTypesLabel: {
+        ANEG: { value: "A-", short: "A-" },
+        OPOS: { value: "O+", short: "O+" },
+        APOS: { value: "A+", short: "A+" },
+        ONEG: { value: "O-", short: "O-" },
+        ABPOS: { value: "AB+", short: "AB+" },
+        ABNEG: { value: "AB-", short: "AB-" },
+        BPOS: { value: "B+", short: "B+" },
+        BNEG: { value: "B-", short: "B-" },
+        ANY: { value: "Any blood groups", short: "Any" },
+        OTHER: { value: "Other (specify in description)", short: "*" }
     }
 };
 

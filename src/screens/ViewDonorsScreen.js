@@ -38,34 +38,28 @@ export default (props) => {
         return () => requestDonorsRef.off("value");
     }, []);
 
-    const renderDonorItem = ({ item, index, separators }) => {
-        let finalBloodType = item.payload.bloodType;
-        if (finalBloodType === "Any blood groups") finalBloodType = "Any";
-        if (finalBloodType === "Other (specify in description)") finalBloodType = "*";
+    const renderDonorItem = ({ item, index, separators }) => (
+        <View style={styles.donorItem}>
+            <View style={{ flexDirection: "row" }}>
+                <FontText flavor="bold" size={25} color={Colors.darkBlue} style={{ width: 65 }}>{Requests.Constants.BloodTypesLabel[item.payload.bloodType].short}</FontText>
 
-        return (
-            <View style={styles.donorItem}>
-                <View style={{ flexDirection: "row" }}>
-                    <FontText flavor="bold" size={25} color={Colors.darkBlue} style={{ width: 65 }}>{finalBloodType}</FontText>
-
-                    <View>
-                        <FontText flavor="medium" color={Colors.darkBlue} size={17} numberOfLines={1} >{item.payload.contactName}</FontText>
-                        <FontText color={Colors.lightGrey3} size={15}>{item.payload.contactNumber}</FontText>
-                    </View>
-                </View>
-
-                <View style={{ flexDirection: "row" }}>
-                    <TouchableOpacity onPress={() => { Requests.completeRequest(params.requestId, item.payload.contactName, item.payload.contactNumber); navigation.goBack(); }}>
-                        <Icon name="check" color={Colors.green} size={Dimens.glyphSize} style={{ marginRight: 20 }} />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => Linking.openURL(`tel://${item.payload.contactNumber}`)}>
-                        <Icon name="call" color={Colors.blue} size={Dimens.glyphSize} />
-                    </TouchableOpacity>
+                <View>
+                    <FontText flavor="medium" color={Colors.darkBlue} size={17} numberOfLines={1} >{item.payload.contactName}</FontText>
+                    <FontText color={Colors.lightGrey3} size={15}>{item.payload.contactNumber}</FontText>
                 </View>
             </View>
-        );
-    };
+
+            <View style={{ flexDirection: "row" }}>
+                <TouchableOpacity onPress={() => { Requests.completeRequest(params.requestId, item.payload.contactName, item.payload.contactNumber); navigation.goBack(); }}>
+                    <Icon name="check" color={Colors.green} size={Dimens.glyphSize} style={{ marginRight: 20 }} />
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => Linking.openURL(`tel://${item.payload.contactNumber}`)}>
+                    <Icon name="call" color={Colors.blue} size={Dimens.glyphSize} />
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
 
     return (
         <GenericSubScreen>
@@ -88,7 +82,7 @@ export default (props) => {
                             <FontText color={Colors.lightGrey3} size={15}>{params.locationAddress}</FontText>
 
                             <View style={styles.badges}>
-                                <FontText flavor="bold" size={25} color={Colors.darkBlue}>{params.bloodType}</FontText>
+                                <FontText flavor="bold" size={25} color={Colors.darkBlue}>{Requests.Constants.BloodTypesLabel[params.bloodType].short}</FontText>
 
                                 {params.isEmergency ?
                                     <FontText flavor="bold" size={15} color={Colors.red}>EMERGENCY</FontText>
