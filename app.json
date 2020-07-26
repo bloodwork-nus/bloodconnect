@@ -29,7 +29,15 @@
     "android": {
       "package": "org.bloodwork.bloodconnect",
       "versionCode": 1,
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "permissions": [
+        "LOCATION"
+      ],
+      "adaptiveIcon": {
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/icon-adaptive-fg.png"
+      },
+      "icon": "./assets/icon-legacy.png"
     },
     "packagerOpts": {
       "config": "metro.config.js",
