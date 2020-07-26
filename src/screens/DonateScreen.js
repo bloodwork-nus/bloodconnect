@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Keyboard } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 
 import Colors from '../constants/colors';
@@ -123,7 +123,7 @@ export default (props) => {
                     <MainOutlineButton
                         caption={bloodType ? Requests.Constants.BloodTypesLabel[bloodType].value : Strings.choose}
                         color={Colors.reddishPurple}
-                        onPress={() => setIsBloodTypeModalVisible(true)}
+                        onPress={() => { Keyboard.dismiss(); setIsBloodTypeModalVisible(true); }}
                         {...bloodType ? {flavor: "bold"} : null}
                     />
                 )} style={{marginVertical: 20}} />
