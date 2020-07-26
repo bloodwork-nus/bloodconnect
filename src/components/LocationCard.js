@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, Platform } from "react-native";
+import { useSelector } from "react-redux";
 
 import Colors from "../constants/colors";
 import Dimens from '../constants/dimens';
@@ -16,8 +17,12 @@ import MainOutlineButton from "./MainOutlineButton";
 import * as Requests from "../../utils/requests";
 import * as Authentication from "../../utils/auth";
 
+import { getRequestById } from "../store/requests";
+
 export default (props) => {
-    const { navigation, request, requestId } = props;
+    const { navigation, requestId } = props;
+
+    const request = useSelector(getRequestById(requestId));
 
     const {
         bloodType,

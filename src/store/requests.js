@@ -30,3 +30,8 @@ export const getMyRequests = (requester) => createSelector(
     state => state.requests,
     requests => Object.values(requests.requests).filter((request) => request.requester === requester)
 );
+
+export const getRequestById = (id) => createSelector(
+    state => state.requests,
+    requests => requests.requests[id]
+);

@@ -69,7 +69,6 @@ export default function ExploreScreen(props) {
     // TODO: Set branch statements for actions for a Guest account
 
     const [hasPermission, setHasPermission] = useState(null);
-    const [requestToShow, setRequestToShow] = useState();
     const [bottomBarSelectedButton, setBottomBarSelectedButton] = useState("explore");
     const [requests, setRequests] = useState({ });
     const [loadingLocation, setLoadingLocation] = useState(false);
@@ -135,7 +134,6 @@ export default function ExploreScreen(props) {
     const openRequestDetails = (requestId, requestItem, latitude, longitude) => {
         Keyboard.dismiss();
         minimiseBottomSheet();
-        setRequestToShow(requestItem);
         setRequestIdToDonate(requestId);
         mapViewRef.current.animateToRegion({
             latitude: latitude - 0.01,
@@ -165,7 +163,7 @@ export default function ExploreScreen(props) {
                 coordinate={{latitude: latitude, longitude: longitude}}
                 onPress={() => openRequestDetails(id, requestItem, latitude, longitude)}
             >
-                <Icon name="location-on" color={requestToShow === requestItem ? Colors.blue : Colors.red} size={Dimens.glyphSize} />
+                <Icon name="location-on" color={requestIdToDonate === id ? Colors.blue : Colors.red} size={Dimens.glyphSize} />
                 <Callout tooltip={true} style={styles.callout}>
                     <FontText flavor="medium" color={Colors.blue} size={15} numberOfLines={1}>{locationName}</FontText>
                 </Callout>
@@ -324,7 +322,7 @@ export default function ExploreScreen(props) {
                 ref={mapViewRef}
                 onPress={({ nativeEvent }) => {
                     // iOS' nativeEvent action has marker-press, Android doesn't trigger
-                    if (nativeEvent.action !== "marker-press") setRequestToShow(null);
+                    if (nativeEvent.action !== "marker-press") setRequestIdToDonate("");
                 }}
                 onPanDrag={minimiseBottomSheet}
                 moveOnMarkerPress={false}
@@ -358,7 +356,7 @@ export default function ExploreScreen(props) {
                 />
             </SafeAreaView>
 
-            {requestToShow ? <LocationCard request={requestToShow} requestId={requestIdToDonate} navigation={navigation} /> : null}
+            {requestIdToDonate ? <LocationCard requestId={requestIdToDonate} navigation={navigation} /> : null}
 
             <BottomSheet
                 snapPoints={[
