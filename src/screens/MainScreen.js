@@ -11,9 +11,12 @@ import FontText from "../components/FontText";
 import firebase from "../../utils/firebase";
 
 const randomLoadingTexts = [
-    "Making you an eggbread",
-    "Searching for cure to COVID-19",
-    "Loading your authentication state"
+    "Making you a simple egg fried rice",
+    "Loading your authentication state",
+    "Preparing shuttlecraft to Mars",
+    "Whipping the Dalgona coffee blend",
+    "Waiting for npm to finish",
+    "Draining cooked rice with a colander"
 ];
 
 export default (props) => {
