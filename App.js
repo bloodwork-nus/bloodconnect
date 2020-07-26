@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {YellowBox } from 'react-native';
+import { YellowBox } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as Font from "expo-font";
@@ -15,6 +15,7 @@ import UserProfileScreen from './src/screens/UserProfileScreen';
 import CompletedFormScreen from './src/screens/CompletedFormScreen';
 import RequestsScreen from "./src/screens/RequestsScreen";
 import ViewDonorsScreen from "./src/screens/ViewDonorsScreen";
+import MainScreen from "./src/screens/MainScreen";
 
 import firebase from "./utils/firebase";
 import * as Authentication from "./utils/auth";
@@ -43,7 +44,8 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={"Login"} headerMode="none">
+            <Stack.Navigator initialRouteName={"Main"} headerMode="none">
+                <Stack.Screen name="Main" component={MainScreen} />
                 <Stack.Screen name="Intro" component={IntroScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
